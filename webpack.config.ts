@@ -25,17 +25,9 @@ const config: WebpackConfig = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/i,
-        include: path.resolve(__dirname, 'src'),
+        test: /\.tsx?$/,
+        use: 'ts-loader',
         exclude: /node_modules/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              cacheDirectory: isDevMode,
-            },
-          },
-        ],
       },
       {
         test: /\.(sa|s?c)ss$/i,
