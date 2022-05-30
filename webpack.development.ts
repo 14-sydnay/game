@@ -3,7 +3,6 @@ import { Configuration as WebpackConfig } from 'webpack'
 import 'webpack-dev-server'
 import { merge } from 'webpack-merge'
 import baseConfig from './webpack.config'
-import ForkTsCheckerNotifierWebpackPlugin from 'fork-ts-checker-notifier-webpack-plugin'
 
 const config: WebpackConfig = merge(baseConfig, {
   mode: 'development',
@@ -18,9 +17,6 @@ const config: WebpackConfig = merge(baseConfig, {
     compress: true,
     historyApiFallback: true,
   },
-  plugins: [
-    new ForkTsCheckerNotifierWebpackPlugin({ title: 'TypeScript', excludeWarnings: false }),
-  ],
 })
 
 export default config
