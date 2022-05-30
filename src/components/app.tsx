@@ -7,9 +7,8 @@ export const App: React.FC<{}> = () => {
   return (
     <div id="App">
       <section>
-        <div className="text-2xl text-center text-pink-900 m-5 font-bold">
-          Скоро здесь будет игра🙂
-        </div>
+        <h1 className="text-primary text-3xl">Скоро здесь будет игра🙂</h1>
+        <button className="btn btn-active btn-accent">Начать</button>
         <Counter />
         <Canvas />
       </section>
