@@ -1,7 +1,8 @@
 import React from 'react'
 
+import { Canvas } from '../components/Canvas'
 import { Counter } from '../features/counter'
-import { Canvas } from './Canvas'
+import { NotFound } from '../pages/404'
 
 export const App: React.FC<{}> = () => {
   return (
@@ -11,6 +12,7 @@ export const App: React.FC<{}> = () => {
         <button className="btn btn-active btn-accent">Начать</button>
         <Counter />
         <Canvas />
+        <NotFound />
       </section>
     </div>
   )
