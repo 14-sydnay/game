@@ -7,7 +7,7 @@ export const App: React.FC<{}> = () => {
   return (
     <div id="App">
       <section>
-        <h1 className="text-primary text-3xl">Скоро здесь будет игра🙂</h1>
+        <h1 className="text-3xl text-primary">Скоро здесь будет игра🙂</h1>
         <button className="btn btn-active btn-accent">Начать</button>
         <Counter />
         <Canvas />
