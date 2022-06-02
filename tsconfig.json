@@ -1,0 +1,38 @@
+{
+  "include": [
+    "./src/**/*.ts",
+    "./src/**/*.tsx"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules"
+  ],
+  "compilerOptions": {
+    "outDir": "dist",
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/types"
+    ],
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": [
+      "DOM",
+      "ESNext"
+    ],
+    "sourceMap": true,
+    "jsx": "react",
+    "declaration": true,
+    "declarationMap": false,
+    "noEmit": true,
+    "moduleResolution": "node",
+    "isolatedModules": true ,
+    "esModuleInterop": true ,
+    "forceConsistentCasingInFileNames": true ,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true ,
+    "noImplicitReturns": true
+  }
+}
