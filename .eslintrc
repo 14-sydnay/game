@@ -115,7 +115,13 @@
       },
       "alias": {
         "map": [
-            [ "Images", "./src/assets/images" ]
+            ["Images", "./src/assets/images"],
+            ["Components",  "./src/components/"],
+            ["Assets",  "./src/assets/"],
+            ["Pages",  "./src/pages/"],
+            ["Modules",  "./src/modules/"],
+            ["Api",  "./src/api/"],
+            ["Services",  ".src/services/"]
         ]
     }
     }

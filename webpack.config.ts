@@ -1,5 +1,5 @@
 import path from 'path'
-import { Configuration as WebpackConfig, WebpackPluginInstance } from 'webpack'
+import { Configuration as WebpackConfig, WebpackPluginInstance, EnvironmentPlugin } from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import CspHtmlWebpackPlugin from 'csp-html-webpack-plugin'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
@@ -23,6 +23,12 @@ const config: WebpackConfig = {
     symlinks: false,
     alias: {
       Images: path.resolve(__dirname, 'src/assets/images'),
+      Components: path.resolve(__dirname, 'src/components'),
+      Pages: path.resolve(__dirname, 'src/pages'),
+      Assets: path.resolve(__dirname, 'src/assets'),
+      Modules: path.resolve(__dirname, 'src/modules'),
+      Api: path.resolve(__dirname, 'src/api'),
+      Services: path.resolve(__dirname, 'src/services'),
     },
   },
   module: {
@@ -121,6 +127,9 @@ const config: WebpackConfig = {
       },
     }),
     new StatoscopeWebpackPlugin(),
+    new EnvironmentPlugin({
+      API_ENDPOINT: 'https://ya-praktikum.tech/api/v2',
+    }),
   ] as WebpackPluginInstance[],
 }
 
