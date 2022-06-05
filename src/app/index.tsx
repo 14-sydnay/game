@@ -1,11 +1,11 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
+import GamePage from 'Pages/Game'
 import { Home } from 'Pages/Home'
 import LoginPage from 'Pages/Login'
-import GamePage from 'Pages/Game'
-import ProfilePage from 'Pages/User/Profile'
 import ChangePasswordPage from 'Pages/User/ChangePassword'
+import ProfilePage from 'Pages/User/Profile'
 
 export const App: React.FC<{}> = () => {
   return (

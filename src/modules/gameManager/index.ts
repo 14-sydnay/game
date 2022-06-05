@@ -1,1 +1,1 @@
-export { useGameManager } from './hooks/useGameManager';
+export { useGameManager } from './hooks/useGameManager'

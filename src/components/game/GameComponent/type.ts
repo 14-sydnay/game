@@ -1,12 +1,12 @@
-import { FC } from 'react';
+import { FC } from 'react'
 
-export type PlayerStatus = 'lose' | 'win';
+export type PlayerStatus = 'lose' | 'win'
 
 export type EndOfGameEvent = {
-  playerStatus: PlayerStatus;
-};
+  playerStatus: PlayerStatus
+}
 
 export type OwnProps = {
-  onEndOfGame: (e: EndOfGameEvent) => void;
-};
-export type Props = FC<OwnProps>;
+  onEndOfGame: (e: EndOfGameEvent) => void
+}
+export type Props = FC<OwnProps>

@@ -1,42 +1,37 @@
-import './ProfileForm.css';
-import React, { FC, useState } from 'react';
-import { ChangeAvatar } from 'Components/ChangeAvatar';
-import { Props } from './type';
+import './ProfileForm.css'
+import React, { FC, useState } from 'react'
+
+import { Props } from './type'
+import { ChangeAvatar } from 'Components/ChangeAvatar'
 
 export const ProfileForm: FC<Props> = ({ user }) => {
-  const [firstName, setFirstName] = useState<string | undefined>(
-    user.firstName
-  );
-  const [secondName, setSecondName] = useState<string | undefined>(
-    user.secondName
-  );
-  const [displayName, setDisplayName] = useState<string | undefined>(
-    user.displayName
-  );
-  const [email, setEmail] = useState<string | undefined>(user.email);
+  const [firstName, setFirstName] = useState<string | undefined>(user.firstName)
+  const [secondName, setSecondName] = useState<string | undefined>(user.secondName)
+  const [displayName, setDisplayName] = useState<string | undefined>(user.displayName)
+  const [email, setEmail] = useState<string | undefined>(user.email)
 
   const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-  };
+    event.preventDefault()
+  }
 
   const handleInputChange = (event: React.FormEvent<HTMLInputElement>) => {
-    const target = event.currentTarget;
-    const name = target.name;
+    const target = event.currentTarget
+    const name = target.name
     switch (name) {
       case 'firstName':
-        setFirstName(target.value);
-        break;
+        setFirstName(target.value)
+        break
       case 'secondName':
-        setSecondName(target.value);
-        break;
+        setSecondName(target.value)
+        break
       case 'displayName':
-        setDisplayName(target.value);
-        break;
+        setDisplayName(target.value)
+        break
       case 'email':
-        setEmail(target.value);
-        break;
+        setEmail(target.value)
+        break
     }
-  };
+  }
   return (
     <>
       <ChangeAvatar url={user.avatar} />
@@ -70,15 +65,10 @@ export const ProfileForm: FC<Props> = ({ user }) => {
         </label>
         <label>
           Почта:
-          <input
-            type="email"
-            value={email}
-            onChange={handleInputChange}
-            name="email"
-          ></input>
+          <input type="email" value={email} onChange={handleInputChange} name="email"></input>
         </label>
         <input type="submit" value="Сохранить" />
       </form>
     </>
-  );
-};
+  )
+}

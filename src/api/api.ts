@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from 'axios'
 
-axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = true
 
 const createApi = (baseURL: string) => {
   return axios.create({
@@ -9,6 +9,6 @@ const createApi = (baseURL: string) => {
       Accepts: 'application/json',
       'Content-Type': 'application/json',
     },
-  });
-};
-export default createApi;
+  })
+}
+export default createApi

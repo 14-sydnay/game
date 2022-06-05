@@ -1,1 +1,1 @@
-export { GameMenu } from './GameMenu';
+export { GameMenu } from './GameMenu'

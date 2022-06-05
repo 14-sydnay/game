@@ -1,27 +1,27 @@
-import { authApi, transformUser } from 'Api/auth';
-import { apiHasError } from 'Api/utils';
+import { authApi, transformUser } from 'Api/auth'
+import { apiHasError } from 'Api/utils'
 
 export const login = async (login: string, password: string) => {
-  const responseLogin = await authApi.login({ login, password });
+  const responseLogin = await authApi.login({ login, password })
 
   if (apiHasError(responseLogin)) {
-    alert(`Ошибка аутентификации: ${responseLogin.reason}`);
-    return;
+    alert(`Ошибка аутентификации: ${responseLogin.reason}`)
+    return
   }
 
-  const responseUser = await authApi.getCurrentUser();
+  const responseUser = await authApi.getCurrentUser()
 
   if (apiHasError(responseUser.data)) {
-    logout();
-    return;
+    logout()
+    return
   }
-  const user = transformUser(responseUser.data);
-  console.log(user);
-};
+  const user = transformUser(responseUser.data)
+  console.log(user)
+}
 
 export const logout = async () => {
-  await authApi.logout();
-};
+  await authApi.logout()
+}
 
 /* export const register = async (data: RegisterDataDto) => {
   await authApi.register(data);
