@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { authService } from 'Services/auth'
 
-const LoginPage: React.FC = () => {
+export const LoginPage: React.FC = () => {
   const [login, setLogin] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const handleSubmit = (event: React.FormEvent) => {
@@ -63,4 +63,3 @@ const LoginPage: React.FC = () => {
     </main>
   )
 }
-export default LoginPage

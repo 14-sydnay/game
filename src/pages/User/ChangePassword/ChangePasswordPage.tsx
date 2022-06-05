@@ -1,7 +1,6 @@
-import './ChangePasswordPage.css'
 import React, { useState } from 'react'
 
-const ChangePasswordPage: React.FC = () => {
+export const ChangePasswordPage: React.FC = () => {
   const [oldPassword, setOldPassword] = useState<string | undefined>(undefined)
   const [newPassword, setNewPassword] = useState<string | undefined>(undefined)
 
@@ -33,7 +32,7 @@ const ChangePasswordPage: React.FC = () => {
             value={oldPassword}
             onChange={handleInputChange}
             name="oldPassword"
-          ></input>
+          />
         </label>
         <label>
           Новый пароль:
@@ -42,11 +41,10 @@ const ChangePasswordPage: React.FC = () => {
             value={newPassword}
             onChange={handleInputChange}
             name="newPassword"
-          ></input>
+          />
         </label>
         <input type="submit" value="Сохранить" />
       </form>
     </main>
   )
 }
-export default ChangePasswordPage

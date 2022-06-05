@@ -1,9 +1,8 @@
-import './ProfilePage.css'
 import React from 'react'
 
 import { ProfileForm } from 'Components/ProfileForm'
 
-const ProfilePage: React.FC = () => {
+export const ProfilePage: React.FC = () => {
   const stubUser = {
     id: 1,
     firstName: 'string',
@@ -16,8 +15,7 @@ const ProfilePage: React.FC = () => {
   }
   return (
     <main>
-      <ProfileForm user={stubUser}></ProfileForm>
+      <ProfileForm user={stubUser} />
     </main>
   )
 }
-export default ProfilePage

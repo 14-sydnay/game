@@ -1,10 +1,9 @@
-import './GamePage.css'
 import React from 'react'
 
 import { GameComponent, GameMenu } from 'Components/game'
 import { useGameManager } from 'Modules/gameManager'
 
-const GamePage: React.FC = () => {
+export const GamePage: React.FC = () => {
   const { isFirstGame, playerStatus, handleStartOfGame, handleEndOfGame } = useGameManager()
   const handleGoBack = () => {
     console.log('go back')
@@ -12,7 +11,7 @@ const GamePage: React.FC = () => {
   const isGameStarted = playerStatus === 'playing'
 
   return (
-    <div className="">
+    <div className="m-0 flex h-screen items-center justify-center overflow-hidden bg-black p-0">
       {isGameStarted ? (
         <GameComponent onEndOfGame={handleEndOfGame} />
       ) : (
@@ -28,4 +27,3 @@ const GamePage: React.FC = () => {
     </div>
   )
 }
-export default GamePage

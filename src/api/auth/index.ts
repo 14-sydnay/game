@@ -1,3 +1,3 @@
-export { transformUser } from '../../services/auth/apiTransformer'
+export { transformUser } from 'Services/auth/apiTransformer'
 export { authApi } from './authApi'
 export * from './types'

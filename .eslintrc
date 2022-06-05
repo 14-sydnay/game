@@ -40,7 +40,7 @@
   ],
   "rules": {
     "strict": "error",
-    "prettier/prettier": ["warn",{"endOfLine":"auto"}],
+    "prettier/prettier": ["warn", { "endOfLine": "auto" }],
     "no-unexpected-multiline": "error",
     "@typescript-eslint/explicit-module-boundary-types": "error",
     "@typescript-eslint/naming-convention": "warn",
