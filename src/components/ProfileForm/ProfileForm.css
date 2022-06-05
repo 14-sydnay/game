@@ -1,0 +1,8 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile__field-label {
+  min-width: 80px;
+}
