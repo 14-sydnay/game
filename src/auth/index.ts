@@ -1,2 +1,2 @@
-export * as authService from './auth';
-export { transformUser } from './apiTransformer';
+export * as authService from './auth'
+export { transformUser } from './apiTransformer'

@@ -1,2 +1,2 @@
-export * from './GameComponent';
-export * from './GameMenu';
+export * from './GameComponent'
+export * from './GameMenu'

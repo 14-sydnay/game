@@ -1,28 +1,28 @@
-import './ChangePasswordPage.css';
-import React, { useState } from 'react';
+import './ChangePasswordPage.css'
+import React, { useState } from 'react'
 
 const ChangePasswordPage: React.FC = () => {
-  const [oldPassword, setOldPassword] = useState<string | undefined>(undefined);
-  const [newPassword, setNewPassword] = useState<string | undefined>(undefined);
+  const [oldPassword, setOldPassword] = useState<string | undefined>(undefined)
+  const [newPassword, setNewPassword] = useState<string | undefined>(undefined)
 
   const handleSubmit = (event: React.FormEvent) => {
-    console.log(oldPassword, newPassword);
+    console.log(oldPassword, newPassword)
 
-    event.preventDefault();
-  };
+    event.preventDefault()
+  }
 
   const handleInputChange = (event: React.FormEvent<HTMLInputElement>) => {
-    const target = event.currentTarget;
-    const name = target.name;
+    const target = event.currentTarget
+    const name = target.name
     switch (name) {
       case 'oldPassword':
-        setOldPassword(target.value);
-        break;
+        setOldPassword(target.value)
+        break
       case 'newPassword':
-        setNewPassword(target.value);
-        break;
+        setNewPassword(target.value)
+        break
     }
-  };
+  }
   return (
     <main>
       <form onSubmit={handleSubmit} className="">
@@ -47,6 +47,6 @@ const ChangePasswordPage: React.FC = () => {
         <input type="submit" value="Сохранить" />
       </form>
     </main>
-  );
-};
-export default ChangePasswordPage;
+  )
+}
+export default ChangePasswordPage

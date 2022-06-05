@@ -1,6 +1,7 @@
-import './ProfilePage.css';
-import React from 'react';
-import { ProfileForm } from 'Components/ProfileForm';
+import './ProfilePage.css'
+import React from 'react'
+
+import { ProfileForm } from 'Components/ProfileForm'
 
 const ProfilePage: React.FC = () => {
   const stubUser = {
@@ -12,11 +13,11 @@ const ProfilePage: React.FC = () => {
     email: 'string',
     phone: 'string',
     avatar: 'string',
-  };
+  }
   return (
     <main>
       <ProfileForm user={stubUser}></ProfileForm>
     </main>
-  );
-};
-export default ProfilePage;
+  )
+}
+export default ProfilePage

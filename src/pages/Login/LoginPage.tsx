@@ -1,26 +1,27 @@
-import React, { useState } from 'react';
-import { authService } from 'Services/auth';
+import React, { useState } from 'react'
+
+import { authService } from 'Services/auth'
 
 const LoginPage: React.FC = () => {
-  const [login, setLogin] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [login, setLogin] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
   const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    authService.login(login, password);
-  };
+    event.preventDefault()
+    authService.login(login, password)
+  }
 
   const handleInputChange = (event: React.FormEvent<HTMLInputElement>) => {
-    const target = event.currentTarget;
-    const name = target.name;
+    const target = event.currentTarget
+    const name = target.name
     switch (name) {
       case 'login':
-        setLogin(target.value);
-        break;
+        setLogin(target.value)
+        break
       case 'password':
-        setPassword(target.value);
-        break;
+        setPassword(target.value)
+        break
     }
-  };
+  }
   return (
     <main>
       {/* <form onSubmit={handleSubmit} className="card-body">
@@ -49,7 +50,7 @@ const LoginPage: React.FC = () => {
 
       <form
         onSubmit={handleSubmit}
-        className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 mt-20 mx-auto"
+        className="card mx-auto mt-20 w-full max-w-sm flex-shrink-0 bg-base-100 shadow-2xl"
       >
         <div className="card-body">
           <div className="form-control">
@@ -84,6 +85,6 @@ const LoginPage: React.FC = () => {
         </div>
       </form>
     </main>
-  );
-};
-export default LoginPage;
+  )
+}
+export default LoginPage

@@ -1,1 +1,1 @@
-export type PlayerStatus = 'idle' | 'playing' | 'lose' | 'win';
+export type PlayerStatus = 'idle' | 'playing' | 'lose' | 'win'

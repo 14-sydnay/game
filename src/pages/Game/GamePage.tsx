@@ -1,16 +1,15 @@
-import './GamePage.css';
-import React from 'react';
-import { GameComponent, GameMenu } from 'Components/game';
+import './GamePage.css'
+import React from 'react'
 
-import { useGameManager } from 'Modules/gameManager';
+import { GameComponent, GameMenu } from 'Components/game'
+import { useGameManager } from 'Modules/gameManager'
 
 const GamePage: React.FC = () => {
-  const { isFirstGame, playerStatus, handleStartOfGame, handleEndOfGame } =
-    useGameManager();
+  const { isFirstGame, playerStatus, handleStartOfGame, handleEndOfGame } = useGameManager()
   const handleGoBack = () => {
-    console.log('go back');
-  };
-  const isGameStarted = playerStatus === 'playing';
+    console.log('go back')
+  }
+  const isGameStarted = playerStatus === 'playing'
 
   return (
     <div className="">
@@ -27,6 +26,6 @@ const GamePage: React.FC = () => {
         </>
       )}
     </div>
-  );
-};
-export default GamePage;
+  )
+}
+export default GamePage

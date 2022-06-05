@@ -1,1 +1,1 @@
-export { ChangeAvatar } from './ChangeAvatar';
+export { ChangeAvatar } from './ChangeAvatar'

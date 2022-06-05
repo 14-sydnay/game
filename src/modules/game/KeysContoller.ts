@@ -10,8 +10,11 @@ export default class KeysContoller {
     MOVE_UP: 'move:up',
     MOVE_DOWN: 'move:down',
   } as const
+
   private _eventBus: EventBus<Events>
+
   private _keys: ControlKeys
+
   constructor(keyUp: KeyCode, keyDown: KeyCode, keyleft: KeyCode, keyRight: KeyCode) {
     this._keys = {
       up: { code: keyUp, pressed: false },

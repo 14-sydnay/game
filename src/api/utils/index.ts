@@ -1,1 +1,1 @@
-export { hasError as apiHasError } from './apiHasError';
+export { hasError as apiHasError } from './apiHasError'
