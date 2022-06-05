@@ -1,15 +1,19 @@
 import React from 'react'
 
-import { Canvas } from '../../components'
-import { Counter } from '../../features/counter'
+import { Hero, Navbar, Footer } from '../../components'
 
 export const Home: React.FC<{}> = () => {
   return (
-    <section>
-      <h1 className="text-3xl text-primary">Скоро здесь будет игра🙂</h1>
-      <button className="btn btn-active btn-accent">Начать</button>
-      <Counter />
-      <Canvas />
-    </section>
+    <div className="flex h-screen w-full flex-col items-center">
+      <div className="item w-full">
+        <Navbar />
+      </div>
+      <div className="item w-full flex-auto">
+        <Hero />
+      </div>
+      <div className="item w-full">
+        <Footer />
+      </div>
+    </div>
   )
 }

@@ -21,6 +21,9 @@ const config: WebpackConfig = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
     symlinks: false,
+    alias: {
+      Images: path.resolve(__dirname, 'src/assets/images'),
+    },
   },
   module: {
     rules: [
@@ -39,6 +42,10 @@ const config: WebpackConfig = {
         generator: {
           filename: 'static/[hash][ext][query]',
         },
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        type: 'asset/resource',
       },
     ],
   },

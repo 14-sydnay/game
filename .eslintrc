@@ -18,6 +18,7 @@
     "@typescript-eslint",
     "eslint-comments",
     "jest",
+    "import",
     "promise",
     "prettier"
   ],
@@ -104,10 +105,19 @@
       "@typescript-eslint/parser": [".ts", ".tsx"]
     },
     "import/resolver": {
-      "node": {},
-      "ts": {
-        "directory": "tsconfigPath"
-      }
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"],
+        "moduleDirectory": ["node_modules", "src/"]
+      },
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "./tsconfig.json"
+      },
+      "alias": {
+        "map": [
+            [ "Images", "./src/assets/images" ]
+        ]
+    }
     }
   }
 }
