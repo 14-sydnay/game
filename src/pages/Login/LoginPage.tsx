@@ -24,30 +24,6 @@ const LoginPage: React.FC = () => {
   }
   return (
     <main>
-      {/* <form onSubmit={handleSubmit} className="card-body">
-        <label>
-          Логин:
-          <input
-            type="text"
-            value={login}
-            onChange={handleInputChange}
-            name="login"
-          ></input>
-        </label>
-        <label>
-          Пароль:
-          <input
-            type="password"
-            value={password}
-            onChange={handleInputChange}
-            name="password"
-          ></input>
-        </label>
-        <button type="submit" className="btn btn-primary">
-          Войти
-        </button>
-      </form> */}
-
       <form
         onSubmit={handleSubmit}
         className="card mx-auto mt-20 w-full max-w-sm flex-shrink-0 bg-base-100 shadow-2xl"
