@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { userService } from 'Services/user'
 
-const ChangePasswordPage: React.FC = () => {
+export const ChangePasswordPage: React.FC = () => {
   const [oldPassword, setOldPassword] = useState<string | undefined>('')
   const [newPassword, setNewPassword] = useState<string | undefined>('')
 
@@ -64,4 +64,3 @@ const ChangePasswordPage: React.FC = () => {
     </main>
   )
 }
-export default ChangePasswordPage

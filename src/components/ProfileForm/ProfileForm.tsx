@@ -1,4 +1,3 @@
-import './ProfileForm.css'
 import React, { FC, useState } from 'react'
 
 import { Props } from './type'
@@ -35,7 +34,7 @@ export const ProfileForm: FC<Props> = ({ user }) => {
   return (
     <>
       <ChangeAvatar url={user.avatar} />
-      <form onSubmit={handleSubmit} className="profile">
+      <form onSubmit={handleSubmit} className="flex flex-col">
         <label>
           Имя:
           <input

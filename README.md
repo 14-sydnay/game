@@ -16,7 +16,7 @@
 - [DaisyUI](https://daisyui.com/) - библиотека компонентов, написанная на Tailwind
 - [Jest](https://jestjs.io/ru/) / [react-testing-library](https://testing-library.com/docs/react-testing-library/intro/) - библиотека для модульного тестирования компонентов
 - [Prettier](https://prettier.io/) / [ESLint (Airbnb)](https://github.com/airbnb/javascript) / [.editorconfig](https://editorconfig.org/) - описывают правила стиля кода
-- [Webpack](https://webpack.js.org/) - собирает и оптимизирует сборку для релиза
+- [Webpack](https://webpack.js.org/) - собирает и оптимизирует сборку для релиза и разработки
 
 ## Игровые ресурсы
 

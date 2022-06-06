@@ -1,6 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-import background from 'Images/background.png'
+import background from 'Images/landing-background.png'
 
 export const Hero: React.FC<{}> = () => {
   return (
@@ -19,7 +20,9 @@ export const Hero: React.FC<{}> = () => {
             представляет собой простейший виртуальный мир, в котором вы можете управлять персонажем,
             собирая клад.
           </p>
-          <button className="btn btn-primary">НАЧАТЬ ИГРАТЬ!</button>
+          <Link to="game">
+            <button className="btn btn-primary">НАЧАТЬ ИГРАТЬ!</button>
+          </Link>
         </div>
       </div>
     </section>
