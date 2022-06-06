@@ -22,8 +22,3 @@ export const login = async (login: string, password: string) => {
 export const logout = async () => {
   await authApi.logout()
 }
-
-/* export const register = async (data: RegisterDataDto) => {
-  await authApi.register(data);
-  const responseUser = await authApi.getCurrentUser();
-}; */
