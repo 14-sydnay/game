@@ -1,6 +1,5 @@
-import { UserDto } from './types'
 import createApi from 'Api/api'
-import { ApiError } from 'Api/types'
+import { ApiError, UserDto } from 'Api/types'
 
 type LoginRequestData = {
   login: string

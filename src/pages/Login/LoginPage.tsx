@@ -7,7 +7,7 @@ export const LoginPage: React.FC = () => {
   const [password, setPassword] = useState<string>('')
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
-    authService.login(login, password)
+    authService.signin(login, password)
   }
 
   const handleInputChange = (event: React.FormEvent<HTMLInputElement>) => {

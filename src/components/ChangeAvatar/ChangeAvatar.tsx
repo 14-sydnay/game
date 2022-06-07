@@ -2,15 +2,28 @@ import React, { FC } from 'react'
 
 import { Props } from './type'
 import { Avatar } from 'Components/Avatar'
+import { userService } from 'Services/user'
 
 export const ChangeAvatar: FC<Props> = ({ url }) => {
-  const handleClick = () => {
-    alert('еще не готово')
+  const handleFileChange = async (e: React.FormEvent) => {
+    const target = e.target as HTMLInputElement
+    if (target && target.files?.length) {
+      await userService.changeAvatar(target.files[0])
+    }
   }
+
   return (
-    <>
+    <div className="w-26 mt-10 flex flex-col">
       <Avatar url={url}></Avatar>
-      <button onClick={handleClick}>Изменить</button>
-    </>
+      <div className="mt-5 flex items-center justify-center">
+        <input
+          name="avatar"
+          type="file"
+          accept=".png"
+          className="btn btn-link"
+          onChange={handleFileChange}
+        ></input>
+      </div>
+    </div>
   )
 }

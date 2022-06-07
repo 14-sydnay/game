@@ -1,10 +1,17 @@
 import createApi from '../api'
-//import { ApiError } from '../types'
-import { ChangePasswordRequest } from './types'
+import { ChangePasswordRequest, ChangeAvatarRequest, ChangeAvatarResponse } from './types'
 
 const apiInstance = createApi('user')
 
 export const userApi = {
   changePassword: (data: ChangePasswordRequest) =>
     apiInstance.put<ChangePasswordRequest>('password', { ...data }),
+
+  changeAvatar: (data: ChangeAvatarRequest) =>
+    apiInstance.put<ChangeAvatarRequest, ChangeAvatarResponse>('profile/avatar', data),
+
+  changeProfile: (data: ChangeProfileRequest) =>
+    apiInstance.put<ChangeProfileRequest, ChangeProfileResponse>('profile', {
+      ...data,
+    }),
 }

@@ -29,6 +29,7 @@ const config: WebpackConfig = {
       Modules: path.resolve(__dirname, 'src/modules'),
       Api: path.resolve(__dirname, 'src/api'),
       Services: path.resolve(__dirname, 'src/services'),
+      Hooks: path.resolve(__dirname, 'src/hooks'),
     },
   },
   module: {

@@ -1,22 +1,30 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useCallback } from 'react'
 
 import { Props } from './type'
 import { ChangeAvatar } from 'Components/ChangeAvatar'
+import { userService } from 'Services/user'
 
 export const ProfileForm: FC<Props> = ({ user }) => {
+  const [login, setLogin] = useState<string | undefined>(user.login)
   const [firstName, setFirstName] = useState<string | undefined>(user.firstName)
   const [secondName, setSecondName] = useState<string | undefined>(user.secondName)
   const [displayName, setDisplayName] = useState<string | undefined>(user.displayName)
   const [email, setEmail] = useState<string | undefined>(user.email)
+  const [phone, setPhone] = useState<string | undefined>(user.phone)
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
+    await userService.chaneProfile({ login, firstName, secondName, displayName, email, phone })
   }
 
-  const handleInputChange = (event: React.FormEvent<HTMLInputElement>) => {
+  const handleInputChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
     const target = event.currentTarget
     const name = target.name
+
     switch (name) {
+      case 'login':
+        setLogin(target.value)
+        break
       case 'firstName':
         setFirstName(target.value)
         break
@@ -29,44 +37,97 @@ export const ProfileForm: FC<Props> = ({ user }) => {
       case 'email':
         setEmail(target.value)
         break
+      case 'phone':
+        setPhone(target.value)
+        break
     }
-  }
+  }, [])
   return (
     <>
-      <ChangeAvatar url={user.avatar} />
-      <form onSubmit={handleSubmit} className="flex flex-col">
-        <label>
-          Имя:
-          <input
-            type="text"
-            value={firstName}
-            onChange={handleInputChange}
-            name="first_name"
-          ></input>
-        </label>
-        <label>
-          Фамилия:
-          <input
-            type="text"
-            value={secondName}
-            onChange={handleInputChange}
-            name="second_name"
-          ></input>
-        </label>
-        <label>
-          Имя в игре:
-          <input
-            type="text"
-            value={displayName}
-            onChange={handleInputChange}
-            name="display_name"
-          ></input>
-        </label>
-        <label>
-          Почта:
-          <input type="email" value={email} onChange={handleInputChange} name="email"></input>
-        </label>
-        <input type="submit" value="Сохранить" />
+      <form
+        onSubmit={handleSubmit}
+        className="card mx-auto mt-20 w-full max-w-sm flex-shrink-0 bg-base-100 shadow-2xl"
+      >
+        <ChangeAvatar url={user.avatar} />
+        <div className="card-body">
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Логин</span>
+            </label>
+            <input
+              type="text"
+              className="input input-bordered"
+              value={login}
+              onChange={handleInputChange}
+              name="login"
+            ></input>
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Имя</span>
+            </label>
+            <input
+              type="text"
+              className="input input-bordered"
+              value={firstName}
+              onChange={handleInputChange}
+              name="firstName"
+            ></input>
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Фамилия</span>
+            </label>
+            <input
+              type="text"
+              className="input input-bordered"
+              value={secondName}
+              onChange={handleInputChange}
+              name="secondName"
+            ></input>
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Имя в игре</span>
+            </label>
+            <input
+              type="text"
+              className="input input-bordered"
+              value={displayName}
+              onChange={handleInputChange}
+              name="displayName"
+            ></input>
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Почта</span>
+            </label>
+            <input
+              type="email"
+              className="input input-bordered"
+              value={email}
+              onChange={handleInputChange}
+              name="email"
+            ></input>
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Телефон</span>
+            </label>
+            <input
+              type="tel"
+              className="input input-bordered"
+              value={phone}
+              onChange={handleInputChange}
+              name="phone"
+            ></input>
+          </div>
+          <div className="form-control mt-6">
+            <button type="submit" className="btn btn-primary">
+              Сохранить
+            </button>
+          </div>
+        </div>
       </form>
     </>
   )

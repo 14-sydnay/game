@@ -40,7 +40,12 @@
   ],
   "rules": {
     "strict": "error",
-    "prettier/prettier": ["warn", { "endOfLine": "auto" }],
+    "prettier/prettier": [
+      "warn",
+      {
+        "endOfLine": "auto"
+      }
+    ],
     "no-unexpected-multiline": "error",
     "@typescript-eslint/explicit-module-boundary-types": "error",
     "@typescript-eslint/naming-convention": "warn",
@@ -49,12 +54,20 @@
     "@typescript-eslint/no-unused-vars": "warn",
     "eslint-comments/no-unlimited-disable": "off",
     "no-unreachable": "off",
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true
+      }
+    ],
     "import/order": [
       "error",
       {
         "groups": [
-          ["builtin", "external"]
+          [
+            "builtin",
+            "external"
+          ]
         ],
         "newlines-between": "always",
         "alphabetize": {
@@ -102,12 +115,23 @@
       "version": "detect"
     },
     "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"]
+      "@typescript-eslint/parser": [
+        ".ts",
+        ".tsx"
+      ]
     },
     "import/resolver": {
       "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"],
-        "moduleDirectory": ["node_modules", "src/"]
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ],
+        "moduleDirectory": [
+          "node_modules",
+          "src/"
+        ]
       },
       "typescript": {
         "alwaysTryTypes": true,
@@ -115,15 +139,40 @@
       },
       "alias": {
         "map": [
-            ["Images", "./src/assets/images"],
-            ["Components",  "./src/components/"],
-            ["Assets",  "./src/assets/"],
-            ["Pages",  "./src/pages/"],
-            ["Modules",  "./src/modules/"],
-            ["Api",  "./src/api/"],
-            ["Services",  ".src/services/"]
+          [
+            "Images",
+            "./src/assets/images"
+          ],
+          [
+            "Components",
+            "./src/components/"
+          ],
+          [
+            "Assets",
+            "./src/assets/"
+          ],
+          [
+            "Pages",
+            "./src/pages/"
+          ],
+          [
+            "Modules",
+            "./src/modules/"
+          ],
+          [
+            "Api",
+            "./src/api/"
+          ],
+          [
+            "Services",
+            ".src/services/"
+          ],
+          [
+            "Hooks",
+            "./src/hooks"
+          ]
         ]
-    }
+      }
     }
   }
 }

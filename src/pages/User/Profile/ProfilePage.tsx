@@ -1,21 +1,13 @@
 import React from 'react'
 
 import { ProfileForm } from 'Components/ProfileForm'
+import { useAuth } from 'Hooks/auth'
 
 export const ProfilePage: React.FC = () => {
-  const stubUser = {
-    id: 1,
-    firstName: 'string',
-    secondName: 'string',
-    displayName: 'string',
-    login: 'string',
-    email: 'string',
-    phone: 'string',
-    avatar: 'string',
+  const auth = useAuth()
+
+  if (!auth.user) {
+    return 'Вы не авторизованы'
   }
-  return (
-    <main>
-      <ProfileForm user={stubUser} />
-    </main>
-  )
+  return <main>{auth.user && <ProfileForm user={auth.user} />}</main>
 }
