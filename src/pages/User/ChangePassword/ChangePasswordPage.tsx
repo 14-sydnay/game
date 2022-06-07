@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState } from 'react'
 
 import { userService } from 'Services/user'
 
@@ -6,10 +6,10 @@ export const ChangePasswordPage: React.FC = () => {
   const [oldPassword, setOldPassword] = useState<string>('')
   const [newPassword, setNewPassword] = useState<string>('')
 
-  const handleSubmit = useCallback(async (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
     await userService.changePassword(oldPassword, newPassword)
-  }, [])
+  }
 
   const handleInputChange = (event: React.FormEvent<HTMLInputElement>) => {
     const target = event.currentTarget
