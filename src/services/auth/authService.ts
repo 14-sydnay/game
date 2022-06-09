@@ -1,4 +1,6 @@
-import { authApi, transformUser } from 'Api/auth'
+import { transformToRegisterRequest, transformToUser } from './apiTransformer'
+import { RegisterData } from './types'
+import { authApi } from 'Api/auth'
 import { apiHasError } from 'Api/utils'
 
 export const logout = async () => {
@@ -12,7 +14,7 @@ export const getCurrentUser = async (): Promise<Nullable<User>> => {
     await logout()
     return null
   }
-  return transformUser(userDto.data)
+  return transformToUser(userDto.data)
 }
 
 export const signin = async (login: string, password: string): Promise<Nullable<User>> => {
@@ -25,4 +27,17 @@ export const signin = async (login: string, password: string): Promise<Nullable<
 
   const user = await getCurrentUser()
   return user
+}
+
+export const register = async (data: RegisterData): Promise<boolean> => {
+  const registerRequest = transformToRegisterRequest(data)
+
+  const response = await authApi.register(registerRequest)
+
+  if (apiHasError(response)) {
+    alert(`Ошибка регистрации: ${response.reason}`) //todo временно тут
+    return false
+  }
+
+  return true
 }

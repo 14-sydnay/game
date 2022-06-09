@@ -9,5 +9,14 @@ export const ProfilePage: React.FC = () => {
   if (!auth.user) {
     return 'Вы не авторизованы'
   }
-  return <main>{auth.user && <ProfileForm user={auth.user} />}</main>
+  return (
+    <main className="mx-auto mt-10">
+      {auth.user && (
+        <>
+          <h1 className="text-color-primary mb-6 text-center text-4xl text-primary">Профиль</h1>
+          <ProfileForm user={auth.user} />
+        </>
+      )}
+    </main>
+  )
 }

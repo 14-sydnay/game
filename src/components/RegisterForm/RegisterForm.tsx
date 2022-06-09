@@ -1,54 +1,35 @@
-import React, { FC, useState, useCallback } from 'react'
+import React, { FC, useState } from 'react'
 
 import { Props } from './type'
-import { ChangeAvatar } from 'Components/ChangeAvatar'
-import { userService } from 'Services/user'
+import { authService } from 'Services/auth'
 
-export const ProfileForm: FC<Props> = ({ user }) => {
-  const [login, setLogin] = useState<string | undefined>(user.login)
-  const [firstName, setFirstName] = useState<string | undefined>(user.firstName)
-  const [secondName, setSecondName] = useState<string | undefined>(user.secondName)
-  const [displayName, setDisplayName] = useState<string | undefined>(user.displayName)
-  const [email, setEmail] = useState<string | undefined>(user.email)
-  const [phone, setPhone] = useState<string | undefined>(user.phone)
+export const RegisterForm: FC<Props> = () => {
+  const [login, setLogin] = useState<string>('')
+  const [firstName, setFirstName] = useState<string>('')
+  const [secondName, setSecondName] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const [passwordConfirm, setPasswordConfirm] = useState<string>('')
+  const [email, setEmail] = useState<string>('')
+  const [phone, setPhone] = useState<string>('')
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
-    await userService.chaneProfile({ login, firstName, secondName, displayName, email, phone })
+    await authService.register({
+      login,
+      firstName,
+      secondName,
+      email,
+      phone,
+      password,
+    })
   }
 
-  const handleInputChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
-    const target = event.currentTarget
-    const name = target.name
-
-    switch (name) {
-      case 'login':
-        setLogin(target.value)
-        break
-      case 'firstName':
-        setFirstName(target.value)
-        break
-      case 'secondName':
-        setSecondName(target.value)
-        break
-      case 'displayName':
-        setDisplayName(target.value)
-        break
-      case 'email':
-        setEmail(target.value)
-        break
-      case 'phone':
-        setPhone(target.value)
-        break
-    }
-  }, [])
   return (
     <>
       <form
         onSubmit={handleSubmit}
         className="card mx-auto  w-full max-w-sm flex-shrink-0 bg-base-100 shadow-2xl"
       >
-        <ChangeAvatar url={user.avatar} />
         <div className="card-body">
           <div className="form-control">
             <label className="label">
@@ -58,7 +39,7 @@ export const ProfileForm: FC<Props> = ({ user }) => {
               type="text"
               className="input input-bordered"
               value={login}
-              onChange={handleInputChange}
+              onChange={(event) => setLogin(event.currentTarget.value)}
               name="login"
             ></input>
           </div>
@@ -70,7 +51,7 @@ export const ProfileForm: FC<Props> = ({ user }) => {
               type="text"
               className="input input-bordered"
               value={firstName}
-              onChange={handleInputChange}
+              onChange={(event) => setFirstName(event.currentTarget.value)}
               name="firstName"
             ></input>
           </div>
@@ -82,22 +63,11 @@ export const ProfileForm: FC<Props> = ({ user }) => {
               type="text"
               className="input input-bordered"
               value={secondName}
-              onChange={handleInputChange}
+              onChange={(event) => setSecondName(event.currentTarget.value)}
               name="secondName"
             ></input>
           </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Имя в игре</span>
-            </label>
-            <input
-              type="text"
-              className="input input-bordered"
-              value={displayName}
-              onChange={handleInputChange}
-              name="displayName"
-            ></input>
-          </div>
+
           <div className="form-control">
             <label className="label">
               <span className="label-text">Почта</span>
@@ -106,7 +76,7 @@ export const ProfileForm: FC<Props> = ({ user }) => {
               type="email"
               className="input input-bordered"
               value={email}
-              onChange={handleInputChange}
+              onChange={(event) => setEmail(event.currentTarget.value)}
               name="email"
             ></input>
           </div>
@@ -118,13 +88,37 @@ export const ProfileForm: FC<Props> = ({ user }) => {
               type="tel"
               className="input input-bordered"
               value={phone}
-              onChange={handleInputChange}
+              onChange={(event) => setPhone(event.currentTarget.value)}
               name="phone"
+            ></input>
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Пароль</span>
+            </label>
+            <input
+              type="password"
+              className="input input-bordered"
+              value={password}
+              onChange={(event) => setPassword(event.currentTarget.value)}
+              name="password"
+            ></input>
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Пароль (еще раз)</span>
+            </label>
+            <input
+              type="password"
+              className="input input-bordered"
+              value={passwordConfirm}
+              onChange={(event) => setPasswordConfirm(event.currentTarget.value)}
+              name="password"
             ></input>
           </div>
           <div className="form-control mt-6">
             <button type="submit" className="btn btn-primary">
-              Сохранить
+              Зарегистрироваться
             </button>
           </div>
         </div>
