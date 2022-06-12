@@ -170,6 +170,10 @@
           [
             "Hooks",
             "./src/hooks"
+          ],
+          [
+            "Utils",
+            "./src/utils"
           ]
         ]
       }

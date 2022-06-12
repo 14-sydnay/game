@@ -21,12 +21,14 @@
     "baseUrl": "./",
     "paths": {
       "Images/*": ["src/assets/images/*"],
-      "Components/*": ["./src/components/*"],
-      "Assets/*": ["./src/assets/*"],
-      "Pages/*": ["./src/pages/*"],
-      "Modules/*": ["./src/modules/*"],
-      "Api/*": ["./src/api/*"],
-      "Services/*": ["./src/services/*"]
+      "Components/*": ["src/components/*"],
+      "Assets/*": ["src/assets/*"],
+      "Pages/*": ["src/pages/*"],
+      "Modules/*": ["src/modules/*"],
+      "Api/*": ["src/api/*"],
+      "Services/*": ["src/services/*"],
+      "Hooks/*": ["src/hooks/*"],
+      "Utils/*": ["src/utils/*"]
     },
     "sourceMap": true,
     "jsx": "react",

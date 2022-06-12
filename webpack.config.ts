@@ -12,7 +12,7 @@ const isDevMode = process.env.NODE_ENV !== 'production'
 const config: WebpackConfig = {
   target: 'web',
   context: __dirname,
-  entry: './src/index.tsx',
+  entry: ['regenerator-runtime/runtime', './src/index.tsx'],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.[contenthash].js',
@@ -30,6 +30,7 @@ const config: WebpackConfig = {
       Api: path.resolve(__dirname, 'src/api'),
       Services: path.resolve(__dirname, 'src/services'),
       Hooks: path.resolve(__dirname, 'src/hooks'),
+      Utils: path.resolve(__dirname, 'src/utils'),
     },
   },
   module: {

@@ -21,7 +21,9 @@ export const Hero: React.FC<{}> = () => {
             собирая клад.
           </p>
           <Link to="game">
-            <button className="btn btn-primary">НАЧАТЬ ИГРАТЬ!</button>
+            <button type="button" className="btn btn-primary">
+              НАЧАТЬ ИГРАТЬ!
+            </button>
           </Link>
         </div>
       </div>

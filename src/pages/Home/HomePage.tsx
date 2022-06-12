@@ -1,4 +1,5 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom'
 
 import { Footer } from 'Components/Footer'
 import { Hero } from 'Components/Hero'
@@ -16,6 +17,7 @@ export const HomePage: React.FC<{}> = () => {
       <div className="item w-full">
         <Footer />
       </div>
+      <Outlet />
     </div>
   )
 }

@@ -14,4 +14,8 @@ declare global {
     phone: string
     avatar: string
   }
+
+  export type Props = {
+    children: React.ReactNode
+  }
 }
