@@ -6,6 +6,7 @@ import { ForumPage } from 'Pages/Forum'
 import { GamePage } from 'Pages/Game'
 import { HomePage } from 'Pages/Home'
 import { LoginPage } from 'Pages/Login'
+import { RegisterPage as RegistrationPage } from 'Pages/Register'
 import { ChangePasswordPage } from 'Pages/User/ChangePassword'
 import { ProfilePage } from 'Pages/User/Profile'
 
@@ -21,7 +22,12 @@ export const App: React.FC<{}> = () => {
             <Route path="forum" element={<ForumPage />} />
             <Route path="profile" element={<ProfilePage />} />
             <Route path="changepassword" element={<ChangePasswordPage />} />
+            <Route path="registration" element={<RegistrationPage />} />
           </Route>
+          {/* <Route path="/user">
+            <Route path="profile" element={<ProfilePage />} />
+            <Route path="changepassword" element={<ChangePasswordPage />} />
+          </Route> */}
         </Routes>
       </Router>
     </ProvideAuth>

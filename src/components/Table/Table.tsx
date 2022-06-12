@@ -76,8 +76,6 @@ export function Table({ columns, data }) {
     usePagination
   )
 
-  console.log('headerGroups', headerGroups)
-
   return (
     <>
       <div className="self-end sm:flex sm:gap-x-2">

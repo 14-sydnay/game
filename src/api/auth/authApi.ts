@@ -1,21 +1,11 @@
+import {
+  LoginRequestData,
+  LoginResponseData,
+  RegisterRequestData,
+  RegisterResponseData,
+} from './types'
 import createApi from 'Api/api'
 import { ApiError, UserDto } from 'Api/types'
-
-type LoginRequestData = {
-  login: string
-  password: string
-}
-
-type LoginResponseData = Record<string, unknown> | ApiError
-
-type RegisterRequestData = {
-  first_name: string
-  second_name: string
-  login: string
-  email: string
-  password: string
-  phone: string
-}
 
 const apiInstance = createApi('auth')
 
@@ -26,5 +16,6 @@ export const authApi = {
 
   logout: () => apiInstance.post('logout'),
 
-  register: (data: RegisterRequestData) => apiInstance.post('signup', { data }),
+  register: (data: RegisterRequestData) =>
+    apiInstance.post<RegisterResponseData>('signup', { ...data }),
 }
