@@ -1,9 +1,13 @@
 import React from 'react'
 
-import { Props } from './type'
-import { classNames } from 'Utils/classNames'
+import { PaginationButtonProps } from './type'
+import { classNames } from 'utils/classNames'
 
-export const MobilePagination: React.FC<Props> = ({ children, className, ...rest }) => {
+export const MobilePaginationButton: React.FC<PaginationButtonProps> = ({
+  children,
+  className,
+  ...rest
+}) => {
   return (
     <button
       type="button"
@@ -18,7 +22,11 @@ export const MobilePagination: React.FC<Props> = ({ children, className, ...rest
   )
 }
 
-export const Pagination: React.FC<Props> = ({ children, className, ...rest }) => {
+export const PaginationButton: React.FC<PaginationButtonProps> = ({
+  children,
+  className,
+  ...rest
+}) => {
   return (
     <button
       type="button"

@@ -1,10 +1,10 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import dayjs from 'dayjs'
-import React, { ReactElement } from 'react'
+import React from 'react'
 import { Cell } from 'react-table'
 
-export function AvatarCell({ value, column, row }: Cell): ReactElement {
+export const AvatarCell: React.FC<any> = ({ value, column, row }: Cell) => {
   const src: string = row.original[column.imgAccessor]
   const date: string = row.original[column.threadDateTimeAccessor]
   const name: string = row.original[column.nameAccessor]
@@ -26,7 +26,7 @@ export function AvatarCell({ value, column, row }: Cell): ReactElement {
   )
 }
 
-export function LastMessageCell({ value, column, row }: Cell): ReactElement {
+export const LastMessageCell: React.FC<any> = ({ value, column, row }: Cell) => {
   const name: string = row.original[column.nameAccessor]
   const date: string = value
   return (

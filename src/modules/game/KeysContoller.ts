@@ -1,5 +1,5 @@
-import { EventBus } from 'Modules/eventBus'
-import { Listener } from 'Modules/eventBus/types'
+import { EventBus } from 'modules/eventBus'
+import { Listener } from 'modules/eventBus/types'
 
 type Events = Values<typeof KeysContoller.EVENTS>
 

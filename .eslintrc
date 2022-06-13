@@ -140,39 +140,39 @@
       "alias": {
         "map": [
           [
-            "Images",
+            "images",
             "./src/assets/images"
           ],
           [
-            "Components",
+            "components",
             "./src/components/"
           ],
           [
-            "Assets",
+            "assets",
             "./src/assets/"
           ],
           [
-            "Pages",
+            "pages",
             "./src/pages/"
           ],
           [
-            "Modules",
+            "modules",
             "./src/modules/"
           ],
           [
-            "Api",
+            "api",
             "./src/api/"
           ],
           [
-            "Services",
+            "services",
             ".src/services/"
           ],
           [
-            "Hooks",
+            "hooks",
             "./src/hooks"
           ],
           [
-            "Utils",
+            "utils",
             "./src/utils"
           ]
         ]

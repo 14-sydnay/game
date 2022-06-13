@@ -9,45 +9,13 @@ import {
   ArrowSmDownIcon,
   SwitchVerticalIcon,
 } from '@heroicons/react/solid'
-import React, { useState } from 'react'
-import {
-  useTable,
-  useFilters,
-  useGlobalFilter,
-  useAsyncDebounce,
-  useSortBy,
-  usePagination,
-} from 'react-table'
+import React from 'react'
+import { useTable, useFilters, useGlobalFilter, useSortBy, usePagination } from 'react-table'
+import { GlobalFilter } from './GlobalFilter'
 
-import { MobilePagination, Pagination } from 'Components/Pagination'
+import { MobilePaginationButton, PaginationButton } from 'components/PaginationButtons'
 
-function GlobalFilter({ preGlobalFilteredRows, globalFilter, setGlobalFilter }) {
-  const [value, setValue] = useState(globalFilter)
-
-  const threadsCount = preGlobalFilteredRows.length
-
-  const onChange = useAsyncDebounce((data) => {
-    setGlobalFilter(data || undefined)
-  }, 200)
-
-  return (
-    <label className="flex items-baseline gap-x-2">
-      <span className="text-gray-700">Поиск: </span>
-      <input
-        type="text"
-        className="rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-        value={value || ''}
-        onChange={(e) => {
-          setValue(e.target.value)
-          onChange(e.target.value)
-        }}
-        placeholder={`Всего постов: ${threadsCount}`}
-      />
-    </label>
-  )
-}
-
-export function Table({ columns, data }) {
+export const Table: React.FC<any> = ({ columns, data }) => {
   const {
     getTableProps,
     getTableBodyProps,
@@ -101,13 +69,13 @@ export function Table({ columns, data }) {
               <table {...getTableProps()} className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   {headerGroups.map((headerGroup, index) => (
-                    <tr key={index} {...headerGroup.getHeaderGroupProps()}>
+                    <tr {...headerGroup.getHeaderGroupProps()} key={index}>
                       {headerGroup.headers.map((column) => (
                         <th
                           scope="col"
-                          key={column.id}
                           className="group px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
                           {...column.getHeaderProps(column.getSortByToggleProps())}
+                          key={column.id}
                         >
                           <div className="flex items-center justify-between">
                             {column.render('Header')}
@@ -132,12 +100,12 @@ export function Table({ columns, data }) {
                   {page.map((row) => {
                     prepareRow(row)
                     return (
-                      <tr key={row.id} {...row.getRowProps()}>
+                      <tr {...row.getRowProps()} key={row.id}>
                         {row.cells.map((cell, index) => {
                           return (
                             <td
-                              key={index}
                               {...cell.getCellProps()}
+                              key={index}
                               className="whitespace-nowrap px-6 py-4"
                               role="cell"
                             >
@@ -160,12 +128,12 @@ export function Table({ columns, data }) {
       </div>
       <div className="flex items-center justify-between py-3">
         <div className="flex flex-1 justify-between sm:hidden">
-          <MobilePagination onClick={() => previousPage()} disabled={!canPreviousPage}>
+          <MobilePaginationButton onClick={() => previousPage()} disabled={!canPreviousPage}>
             Назад
-          </MobilePagination>
-          <MobilePagination onClick={() => nextPage()} disabled={!canNextPage}>
+          </MobilePaginationButton>
+          <MobilePaginationButton onClick={() => nextPage()} disabled={!canNextPage}>
             Вперед
-          </MobilePagination>
+          </MobilePaginationButton>
         </div>
         <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
           <div className="flex items-baseline gap-x-2">
@@ -195,30 +163,30 @@ export function Table({ columns, data }) {
               className="relative z-0 inline-flex -space-x-px rounded-md shadow-sm"
               aria-label="Pagination"
             >
-              <Pagination
+              <PaginationButton
                 className="rounded-l-md"
                 onClick={() => gotoPage(0)}
                 disabled={!canPreviousPage}
               >
                 <span className="sr-only">Первая страница</span>
                 <ChevronDoubleLeftIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-              </Pagination>
-              <Pagination onClick={() => previousPage()} disabled={!canPreviousPage}>
+              </PaginationButton>
+              <PaginationButton onClick={() => previousPage()} disabled={!canPreviousPage}>
                 <span className="sr-only">Предыдущая страница</span>
                 <ChevronLeftIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-              </Pagination>
-              <Pagination onClick={() => nextPage()} disabled={!canNextPage}>
+              </PaginationButton>
+              <PaginationButton onClick={() => nextPage()} disabled={!canNextPage}>
                 <span className="sr-only">Следущая страница</span>
                 <ChevronRightIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-              </Pagination>
-              <Pagination
+              </PaginationButton>
+              <PaginationButton
                 className="rounded-r-md"
                 onClick={() => gotoPage(pageCount - 1)}
                 disabled={!canNextPage}
               >
                 <span className="sr-only">Последняя страница</span>
                 <ChevronDoubleRightIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-              </Pagination>
+              </PaginationButton>
             </nav>
           </div>
         </div>

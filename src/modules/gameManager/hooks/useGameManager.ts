@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { PlayerStatus } from '../type'
-import { EndOfGameEvent } from 'Components/game/GameComponent/type'
+import { EndOfGameEvent } from 'components/game/GameComponent/type'
 
 export const useGameManager = () => {
   const [playerStatus, setPlayerStatus] = useState<PlayerStatus>('idle')

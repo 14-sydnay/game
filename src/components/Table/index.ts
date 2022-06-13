@@ -1,2 +1,2 @@
 export { Table } from './Table'
-export { AvatarCell, LastMessageCell } from './cells'
+export { AvatarCell, LastMessageCell } from '../../pages/Forum/cells'

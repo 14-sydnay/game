@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 
 import { Props } from './type'
-import { authService } from 'Services/auth'
+import { authService } from 'services/auth'
 
 export const RegisterForm: FC<Props> = () => {
   const [login, setLogin] = useState<string>('')

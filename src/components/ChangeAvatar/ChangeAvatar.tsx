@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
 
 import { Props } from './type'
-import { Avatar } from 'Components/Avatar'
-import { userService } from 'Services/user'
+import { Avatar } from 'components/Avatar'
+import { userService } from 'services/user'
 
 export const ChangeAvatar: FC<Props> = ({ url }) => {
   const handleFileChange = async (e: React.FormEvent) => {

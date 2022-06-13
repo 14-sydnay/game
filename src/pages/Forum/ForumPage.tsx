@@ -1,9 +1,10 @@
 import { PlusIcon } from '@heroicons/react/solid'
 import React, { useState, useMemo } from 'react'
 
-import { Footer } from 'Components/Footer'
-import { Navbar } from 'Components/Navbar'
-import { Table, AvatarCell, LastMessageCell } from 'Components/Table'
+import { AvatarCell, LastMessageCell } from './cells'
+import { Footer } from 'components/Footer'
+import { Navbar } from 'components/Navbar'
+import { Table } from 'components/Table'
 
 export const ForumPage: React.FC<{}> = () => {
   const [data, setData] = useState([

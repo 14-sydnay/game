@@ -1,8 +1,8 @@
 import React, { FC, useState, useCallback } from 'react'
 
 import { Props } from './type'
-import { ChangeAvatar } from 'Components/ChangeAvatar'
-import { userService } from 'Services/user'
+import { ChangeAvatar } from 'components/ChangeAvatar'
+import { userService } from 'services/user'
 
 export const ProfileForm: FC<Props> = ({ user }) => {
   const [login, setLogin] = useState<string | undefined>(user.login)

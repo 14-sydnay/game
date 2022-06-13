@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { authService } from 'Services/auth'
+import { authService } from 'services/auth'
 
 export const LoginPage: React.FC = () => {
   const [login, setLogin] = useState<string>('')

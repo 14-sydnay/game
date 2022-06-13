@@ -1,20 +1,10 @@
 import { MenuIcon } from '@heroicons/react/solid'
-import React, { ReactElement } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 
+import { NavLinks } from './NavLinks'
+
 export const Navbar: React.FC<{}> = () => {
-  const navLinks: ReactElement = (
-    <>
-      <li>
-        <a>Лидерборд</a>
-      </li>
-      <li>
-        <Link to="/forum">
-          <span>Форум</span>
-        </Link>
-      </li>
-    </>
-  )
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -26,7 +16,7 @@ export const Navbar: React.FC<{}> = () => {
             tabIndex={0}
             className="dropdown-content menu rounded-box menu-compact mt-3 w-52 bg-base-100 p-2 shadow"
           >
-            {navLinks}
+            <NavLinks />
           </ul>
         </div>
         <Link to="/">
@@ -34,7 +24,9 @@ export const Navbar: React.FC<{}> = () => {
         </Link>
       </div>
       <nav className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal p-0">{navLinks}</ul>
+        <ul className="menu menu-horizontal p-0">
+          <NavLinks />
+        </ul>
       </nav>
       <div className="navbar-end">
         <a className="btn btn-secondary">Войти</a>
