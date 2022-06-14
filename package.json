@@ -27,6 +27,7 @@
     "@types/react-dom": "18.0.5",
     "@types/react-router": "5.1.18",
     "@types/react-router-dom": "5.3.3",
+    "@types/react-table": "7.7.12",
     "@types/tailwindcss": "3.0.10",
     "@types/webpack": "5.28.0",
     "@typescript-eslint/eslint-plugin": "5.26.0",
@@ -76,9 +77,11 @@
     "webpack-dev-server": "4.9.0"
   },
   "dependencies": {
+    "@heroicons/react": "1.0.6",
     "@reduxjs/toolkit": "1.8.2",
     "axios": "0.27.2",
     "daisyui": "2.15.1",
+    "dayjs": "1.11.3",
     "react": "18.1.0",
     "react-cookie": "4.1.1",
     "react-dom": "18.1.0",
@@ -88,6 +91,7 @@
     "react-router-dom": "6.3.0",
     "react-table": "7.8.0",
     "redux": "4.2.0",
+    "regenerator-runtime": "0.13.9",
     "yup": "0.32.11"
   }
 }

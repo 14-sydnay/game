@@ -1,4 +1,5 @@
-import { UserDto } from 'Api/auth/types'
+import { UserDto } from 'api/types'
+import { User } from 'src/models/user'
 
 export const transformUser = (data: UserDto): User => {
   return {

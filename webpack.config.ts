@@ -12,7 +12,7 @@ const isDevMode = process.env.NODE_ENV !== 'production'
 const config: WebpackConfig = {
   target: 'web',
   context: __dirname,
-  entry: './src/index.tsx',
+  entry: ['regenerator-runtime/runtime', './src/index.tsx'],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.[contenthash].js',
@@ -22,14 +22,15 @@ const config: WebpackConfig = {
     extensions: ['.tsx', '.ts', '.js'],
     symlinks: false,
     alias: {
-      Images: path.resolve(__dirname, 'src/assets/images'),
-      Components: path.resolve(__dirname, 'src/components'),
-      Pages: path.resolve(__dirname, 'src/pages'),
-      Assets: path.resolve(__dirname, 'src/assets'),
-      Modules: path.resolve(__dirname, 'src/modules'),
-      Api: path.resolve(__dirname, 'src/api'),
-      Services: path.resolve(__dirname, 'src/services'),
-      Hooks: path.resolve(__dirname, 'src/hooks'),
+      images: path.resolve(__dirname, 'src/assets/images'),
+      components: path.resolve(__dirname, 'src/components'),
+      pages: path.resolve(__dirname, 'src/pages'),
+      assets: path.resolve(__dirname, 'src/assets'),
+      modules: path.resolve(__dirname, 'src/modules'),
+      api: path.resolve(__dirname, 'src/api'),
+      services: path.resolve(__dirname, 'src/services'),
+      hooks: path.resolve(__dirname, 'src/hooks'),
+      utils: path.resolve(__dirname, 'src/utils'),
     },
   },
   module: {

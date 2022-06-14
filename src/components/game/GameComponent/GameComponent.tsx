@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 
 import { Props } from './type'
-import { Game, KeysContoller, Scene } from 'Modules/game'
+import { Game, KeysContoller, Scene } from 'modules/game'
 
 export const GameComponent: Props = ({ onEndOfGame: onEndOfGame }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)

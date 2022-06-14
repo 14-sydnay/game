@@ -2,7 +2,8 @@
   "include": [
     "./src/**/*.ts",
     "./src/**/*.tsx",
-    "./src/types/**/*.d.ts",
+    "types/**/*.d.ts",
+    "./src/models/**/*.d.ts",
     "./node_modules/@types"
   ],
   "exclude": [
@@ -10,23 +11,26 @@
     "node_modules"
   ],
   "compilerOptions": {
+    "composite": true,
     "outDir": "dist",
     "typeRoots": [
       "./node_modules/@types",
-      "./src/types"
+      "types"
     ],
     "target": "ESNext",
     "module": "ESNext",
     "lib": ["DOM", "ESNext"],
     "baseUrl": "./",
     "paths": {
-      "Images/*": ["src/assets/images/*"],
-      "Components/*": ["./src/components/*"],
-      "Assets/*": ["./src/assets/*"],
-      "Pages/*": ["./src/pages/*"],
-      "Modules/*": ["./src/modules/*"],
-      "Api/*": ["./src/api/*"],
-      "Services/*": ["./src/services/*"]
+      "images/*": ["src/assets/images/*"],
+      "components/*": ["src/components/*"],
+      "assets/*": ["src/assets/*"],
+      "pages/*": ["src/pages/*"],
+      "modules/*": ["src/modules/*"],
+      "api/*": ["src/api/*"],
+      "services/*": ["src/services/*"],
+      "hooks/*": ["src/hooks/*"],
+      "utils/*": ["src/utils/*"]
     },
     "sourceMap": true,
     "jsx": "react",

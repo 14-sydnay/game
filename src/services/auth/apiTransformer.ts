@@ -1,6 +1,7 @@
 import { RegisterData } from './types'
-import { RegisterRequestData } from 'Api/auth/types'
-import { UserDto } from 'Api/types'
+import { RegisterRequestData } from 'api/auth/types'
+import { UserDto } from 'api/types'
+import { User } from 'src/models/user'
 
 export const transformToUser = (data: UserDto): User => {
   return {
