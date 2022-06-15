@@ -15,7 +15,7 @@ import hillsSrc from 'Assets/images/background/hills.png'
 import skySrc from 'Assets/images/background/sky.png'
 import spriteCharacterIdleSrc from 'Assets/images/character/spriteIdleBlink.png'
 import spriteCharacterRunSrc from 'Assets/images/character/spriteRun.png'
-import spriteCharacterJumpSrc from 'Assets/images/character/spriteJump.png'
+//import spriteCharacterJumpSrc from 'Assets/images/character/spriteJump.png'
 import platformSrc from 'Assets/images/platform/dirt.png'
 import groundSrc from 'Assets/images/platform/grassMid.png'
 import { EndOfGameEvent, PlayerStatus } from 'Components/game/GameComponent/type'
@@ -119,9 +119,9 @@ export default class Game {
 
     const runSkin = new PlayerRunSpriteSkin(
       createImage(spriteCharacterRunSrc),
-      47,
-      40,
-      86,
+      54,
+      37,
+      85,
       80,
       173,
       147

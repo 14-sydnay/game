@@ -1,3 +1,4 @@
+import { boolean } from 'yup'
 import KeysContoller from './KeysContoller'
 import { ISkin } from './types'
 
@@ -18,9 +19,9 @@ export class SpriteSkin {
 
   protected _cropHeight: number
 
-  private _width: number
+  protected _width: number
 
-  private _height: number
+  protected _height: number
 
   constructor(
     image: HTMLImageElement,
@@ -84,10 +85,154 @@ export class PlayerIdleSpriteSkin extends SpriteSkin {
 
 export class PlayerRunSpriteSkin extends SpriteSkin {
   override tick(): void {
+    switch (this._frames) {
+      case 0: {
+        this._shiftX = 61
+        this._shiftY = 40
+        this._cropWidth = 67
+        this._cropHeight = 80
+        this._width = 106
+        break
+      }
+      case 1: {
+        this._shiftX = 146
+        this._shiftY = 40
+        this._cropWidth = 67
+        this._cropHeight = 80
+        this._width = 106
+        break
+      }
+      case 2: {
+        this._shiftX = 231
+        this._shiftY = 40
+        this._cropWidth = 67
+        this._cropHeight = 80
+        this._width = 106
+        break
+      }
+      case 3: {
+        this._shiftX = 316
+        this._shiftY = 40
+        this._cropWidth = 67
+        this._cropHeight = 80
+        this._width = 106
+        break
+      }
+      case 4: {
+        this._shiftX = 400
+        this._shiftY = 37
+        this._cropWidth = 67
+        this._cropHeight = 80
+        this._width = 106
+        break
+      }
+      case 5: {
+        this._shiftX = 486
+        this._shiftY = 37
+        this._cropWidth = 67
+        this._cropHeight = 80
+        this._width = 106
+        break
+      }
+      case 6: {
+        this._shiftX = 570
+        this._shiftY = 37
+        this._cropWidth = 67
+        this._cropHeight = 80
+        this._width = 106
+        break
+      }
+      case 7: {
+        this._shiftX = 658
+        this._shiftY = 37
+        this._cropWidth = 81
+        this._cropHeight = 80
+        this._width = 119
+        break
+      }
+      case 8: {
+        this._shiftX = 758
+        this._shiftY = 37
+        this._cropWidth = 88
+        this._cropHeight = 80
+        this._width = 129
+        break
+      }
+      case 9: {
+        this._shiftX = 866
+        this._shiftY = 37
+        this._cropWidth = 97
+        this._cropHeight = 80
+        this._width = 143
+        break
+      }
+      case 10: {
+        this._shiftX = 125
+        this._shiftY = 136
+        this._cropWidth = 100
+        this._cropHeight = 80
+        this._width = 147
+        break
+      }
+      case 11: {
+        this._shiftX = 243
+        this._shiftY = 136
+        this._cropWidth = 96
+        this._cropHeight = 80
+        this._width = 141
+        break
+      }
+      case 12: {
+        this._shiftX = 358
+        this._shiftY = 136
+        this._cropWidth = 88
+        this._cropHeight = 80
+        this._width = 129
+        break
+      }
+      case 13: {
+        this._shiftX = 466
+        this._shiftY = 136
+        this._cropWidth = 80
+        this._cropHeight = 80
+        this._width = 118
+        break
+      }
+      case 14: {
+        this._shiftX = 564
+        this._shiftY = 136
+        this._cropWidth = 67
+        this._cropHeight = 80
+        this._width = 98
+        break
+      }
+      case 15: {
+        this._shiftX = 650
+        this._shiftY = 136
+        this._cropWidth = 66
+        this._cropHeight = 80
+        this._width = 97
+        break
+      }
+      case 16: {
+        this._shiftX = 736
+        this._shiftY = 136
+        this._cropWidth = 68
+        this._cropHeight = 80
+        this._width = 100
+        break
+      }
+      case 17: {
+        this._shiftX = 819
+        this._shiftY = 136
+        this._cropWidth = 66
+        this._cropHeight = 80
+        this._width = 97
+        break
+      }
+    }
     this._frames++
-    if (this._frames > 10) this._frames = 0
-    this._shiftX = this._startShiftX + this._cropWidth * this._frames
-    this._shiftY = this._startShiftY
+    if (this._frames > 17) this._frames = 0
   }
 }
 
@@ -137,10 +282,11 @@ export default class PlayerSkin {
   }
 
   registerListeners(keysController: KeysContoller): void {
-    keysController.on(KeysContoller.EVENTS.MOVE_RIGHT, () => {
-      this._currentSkin = this._runSkin
+    keysController.on(KeysContoller.EVENTS.MOVE_RIGHT, (eventArg) => {
+      const flag = eventArg as boolean
+      if (flag) this._currentSkin = this._runSkin
+      else this._currentSkin = this._idleSkin
     })
-
     keysController.on(KeysContoller.EVENTS.MOVE_UP, () => {
       this._currentSkin = this._idleSkin
     })
