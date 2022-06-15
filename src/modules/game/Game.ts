@@ -6,13 +6,16 @@ import Platform from './Platform'
 import Player from './Player'
 import Scene from './Scene'
 import SimpleMotionStrategy from './SimpleMotionStrategy'
+import PlayerSkin, { PlayerIdleSpriteSkin, PlayerRunSpriteSkin } from './Skin'
 import smallCloud1Src from 'Assets/images/background/clouds/128x128/cloud_1.png'
 import smallCloud2Src from 'Assets/images/background/clouds/128x128/cloud_2.png'
 import bigCloud1Src from 'Assets/images/background/clouds/256x256/cloud_1.png'
 import bigCloud2Src from 'Assets/images/background/clouds/256x256/cloud_2.png'
 import hillsSrc from 'Assets/images/background/hills.png'
 import skySrc from 'Assets/images/background/sky.png'
-import characterSrc from 'Assets/images/character/character.png'
+import spriteCharacterIdleSrc from 'Assets/images/character/spriteIdleBlink.png'
+import spriteCharacterRunSrc from 'Assets/images/character/spriteRun.png'
+import spriteCharacterJumpSrc from 'Assets/images/character/spriteJump.png'
 import platformSrc from 'Assets/images/platform/dirt.png'
 import groundSrc from 'Assets/images/platform/grassMid.png'
 import { EndOfGameEvent, PlayerStatus } from 'Components/game/GameComponent/type'
@@ -52,6 +55,8 @@ export default class Game {
 
   private _handleEndOfGame: (e: EndOfGameEvent) => void // todo временно тут
 
+  private _keysController: KeysContoller
+
   constructor(
     scene: Scene,
     render: CanvasRenderingContext2D,
@@ -60,17 +65,18 @@ export default class Game {
   ) {
     this._render = render
     this._scene = scene
+    this._keysController = keysController
     this._handleEndOfGame = handleEndOfGame
-    this._registerListeners(keysController)
     this.init()
   }
 
-  init() {
+  init(): void {
+    this._registerListeners(this._keysController)
     this.makeBackground()
     this.makeClouds()
     this.makeGround()
     this.makePlatforms()
-    this.makePlayer()
+    this.makePlayer(this._keysController)
   }
 
   private _registerListeners(keysController: KeysContoller) {
@@ -93,7 +99,7 @@ export default class Game {
     this._hills = new GameElement({ x: 0, y: 0 }, createImage(hillsSrc))
   }
 
-  private makePlayer() {
+  private makePlayer(keysController: KeysContoller) {
     const playerMotionStrategy = new MotionStrategy(
       this._scene,
       this._gravity,
@@ -101,12 +107,33 @@ export default class Game {
       15
     )
 
+    const idleSkin = new PlayerIdleSpriteSkin(
+      createImage(spriteCharacterIdleSrc),
+      72,
+      56,
+      173,
+      147,
+      173,
+      147
+    )
+
+    const runSkin = new PlayerRunSpriteSkin(
+      createImage(spriteCharacterRunSrc),
+      47,
+      40,
+      86,
+      80,
+      173,
+      147
+    )
+    const skin = new PlayerSkin(idleSkin, runSkin)
+    skin.registerListeners(keysController)
     this._player = new Player(
       {
         x: 100,
         y: 100,
       },
-      createImage(characterSrc),
+      skin, //createImage(spriteCharacterIdleSrc),
       playerMotionStrategy
     )
   }
@@ -199,16 +226,17 @@ export default class Game {
     ]
   }
 
-  start() {
+  start(): void {
     this.animate()
   }
 
-  stop(playerStatus: PlayerStatus) {
+  stop(playerStatus: PlayerStatus): void {
     this._handleEndOfGame({ playerStatus })
     this.restart()
   }
 
-  restart() {
+  restart(): void {
+    this._keysController.reset()
     this.init()
   }
 
