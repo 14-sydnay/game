@@ -1,4 +1,4 @@
-import { createImage, KeysContoller } from '.'
+import { createImageAsync, KeysContoller } from '.'
 import GameElement from './GameElement'
 import MotionStrategy from './MotionStrategy'
 import MovableGameElement from './MovableGameElement'
@@ -67,16 +67,16 @@ export default class Game {
     this._scene = scene
     this._keysController = keysController
     this._handleEndOfGame = handleEndOfGame
-    this.init()
+    this._registerListeners(this._keysController)
+    //this.init()
   }
 
-  init(): void {
-    this._registerListeners(this._keysController)
-    this.makeBackground()
-    this.makeClouds()
-    this.makeGround()
-    this.makePlatforms()
-    this.makePlayer(this._keysController)
+  async init(): Promise<void> {
+    await this.makeBackground()
+    await this.makeClouds()
+    await this.makeGround()
+    await this.makePlatforms()
+    await this.makePlayer(this._keysController)
   }
 
   private _registerListeners(keysController: KeysContoller) {
@@ -94,12 +94,12 @@ export default class Game {
     })
   }
 
-  private makeBackground() {
-    this._sky = new GameElement({ x: 0, y: 0 }, createImage(skySrc))
-    this._hills = new GameElement({ x: 0, y: 0 }, createImage(hillsSrc))
+  private async makeBackground() {
+    this._sky = new GameElement({ x: 0, y: 0 }, await createImageAsync(skySrc as string))
+    this._hills = new GameElement({ x: 0, y: 0 }, await createImageAsync(hillsSrc as string))
   }
 
-  private makePlayer(keysController: KeysContoller) {
+  private async makePlayer(keysController: KeysContoller) {
     const playerMotionStrategy = new MotionStrategy(
       this._scene,
       this._gravity,
@@ -108,7 +108,7 @@ export default class Game {
     )
 
     const idleSkin = new PlayerIdleSpriteSkin(
-      createImage(spriteCharacterIdleSrc),
+      await createImageAsync(spriteCharacterIdleSrc as string),
       72,
       56,
       173,
@@ -118,7 +118,7 @@ export default class Game {
     )
 
     const runSkin = new PlayerRunSpriteSkin(
-      createImage(spriteCharacterRunSrc),
+      await createImageAsync(spriteCharacterRunSrc as string),
       54,
       37,
       85,
@@ -133,29 +133,29 @@ export default class Game {
         x: 100,
         y: 100,
       },
-      skin, //createImage(spriteCharacterIdleSrc),
+      skin,
       playerMotionStrategy
     )
   }
 
-  private makeClouds() {
+  private async makeClouds() {
     const frontCloudMotionStrategy = new SimpleMotionStrategy(this._playerSpeed * 0.33, 0)
     const backCloudMotionStrategy = new SimpleMotionStrategy(this._playerSpeed * 0.66, 0)
-    this._sky = new GameElement({ x: 0, y: 0 }, createImage(skySrc))
+
     this._frontClouds = [
       new MovableGameElement(
         { x: 100, y: 100 },
-        createImage(bigCloud1Src),
+        await createImageAsync(bigCloud1Src as string),
         frontCloudMotionStrategy
       ),
       new MovableGameElement(
         { x: 850, y: 30 },
-        createImage(bigCloud2Src),
+        await createImageAsync(bigCloud2Src as string),
         frontCloudMotionStrategy
       ),
       new MovableGameElement(
         { x: 1500, y: 120 },
-        createImage(bigCloud1Src),
+        await createImageAsync(bigCloud1Src as string),
         frontCloudMotionStrategy
       ),
     ]
@@ -163,20 +163,20 @@ export default class Game {
     this._backClouds = [
       new MovableGameElement(
         { x: 550, y: 70 },
-        createImage(smallCloud1Src),
+        await createImageAsync(smallCloud1Src as string),
         backCloudMotionStrategy
       ),
       new MovableGameElement(
         { x: 1250, y: 30 },
-        createImage(smallCloud2Src),
+        await createImageAsync(smallCloud2Src as string),
         backCloudMotionStrategy
       ),
     ]
   }
 
-  private makeGround() {
+  private async makeGround() {
     const motionStrategy = new SimpleMotionStrategy(3, 0)
-    const groundTileImg = createImage(groundSrc)
+    const groundTileImg = await createImageAsync(groundSrc as string)
 
     for (let i = -3; i < 10; i++) {
       if (i == 5 || i == 8) continue // создаем колодцы
@@ -194,9 +194,9 @@ export default class Game {
     }
   }
 
-  private makePlatforms() {
+  private async makePlatforms() {
     const motionStrategy = new SimpleMotionStrategy(this._playerSpeed, 0)
-    const platformImg = createImage(platformSrc)
+    const platformImg = await createImageAsync(platformSrc as string)
 
     this._platforms = [
       new MovableGameElement(
@@ -226,18 +226,19 @@ export default class Game {
     ]
   }
 
-  start(): void {
+  async start(): Promise<void> {
+    await this.init()
     this.animate()
   }
 
-  stop(playerStatus: PlayerStatus): void {
+  async stop(playerStatus: PlayerStatus): Promise<void> {
     this._handleEndOfGame({ playerStatus })
-    this.restart()
+    await this.restart()
   }
 
-  restart(): void {
+  async restart(): Promise<void> {
     this._keysController.reset()
-    this.init()
+    await this.init()
   }
 
   private drawBackground() {

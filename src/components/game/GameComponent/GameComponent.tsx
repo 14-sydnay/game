@@ -1,9 +1,20 @@
 import React, { useRef, useEffect } from 'react'
 
 import { Props } from './type'
+import { useFullscreenTrigger } from 'Hooks'
 import { Game, KeysContoller, Scene } from 'Modules/game'
 
 export const GameComponent: Props = ({ onEndOfGame: onEndOfGame }) => {
+  const toggleFullscreen = async () => {
+    if (!document.fullscreenElement) {
+      await document.documentElement.requestFullscreen()
+    } else {
+      if (document.exitFullscreen) {
+        await document.exitFullscreen()
+      }
+    }
+  }
+  useFullscreenTrigger(toggleFullscreen)
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const keyController = new KeysContoller('ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight')
   useEffect(() => {

@@ -1,4 +1,3 @@
-import { boolean } from 'yup'
 import KeysContoller from './KeysContoller'
 import { ISkin } from './types'
 
@@ -236,7 +235,7 @@ export class PlayerRunSpriteSkin extends SpriteSkin {
   }
 }
 
-export default class PlayerSkin {
+export default class PlayerSkin implements ISkin {
   private _idleSkin: ISkin
 
   private _runSkin: ISkin
@@ -283,8 +282,8 @@ export default class PlayerSkin {
 
   registerListeners(keysController: KeysContoller): void {
     keysController.on(KeysContoller.EVENTS.MOVE_RIGHT, (eventArg) => {
-      const flag = eventArg as boolean
-      if (flag) this._currentSkin = this._runSkin
+      const isPlayerRun = eventArg as boolean
+      if (isPlayerRun) this._currentSkin = this._runSkin
       else this._currentSkin = this._idleSkin
     })
     keysController.on(KeysContoller.EVENTS.MOVE_UP, () => {
