@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 
 import { Props } from './type'
-import splashscreen from 'Assets/images/splashscreen.png'
+import splashscreenSrc from 'Assets/images/splashscreen.png'
 
 export const GameMenu: FC<Props> = ({
   isFirstGame,
@@ -26,7 +26,7 @@ export const GameMenu: FC<Props> = ({
   return (
     <div className="card card-side bg-base-100 shadow-xl">
       <figure>
-        <img src={splashscreen as string} />
+        <img src={splashscreenSrc} />
       </figure>
       <div className="card-body">
         <h2 className="card-title justify-center">Элементы управления</h2>

@@ -95,8 +95,8 @@ export default class Game {
   }
 
   private async makeBackground() {
-    this._sky = new GameElement({ x: 0, y: 0 }, await createImageAsync(skySrc as string))
-    this._hills = new GameElement({ x: 0, y: 0 }, await createImageAsync(hillsSrc as string))
+    this._sky = new GameElement({ x: 0, y: 0 }, await createImageAsync(skySrc))
+    this._hills = new GameElement({ x: 0, y: 0 }, await createImageAsync(hillsSrc))
   }
 
   private async makePlayer(keysController: KeysContoller) {
@@ -108,7 +108,7 @@ export default class Game {
     )
 
     const idleSkin = new PlayerIdleSpriteSkin(
-      await createImageAsync(spriteCharacterIdleSrc as string),
+      await createImageAsync(spriteCharacterIdleSrc),
       72,
       56,
       173,
@@ -118,7 +118,7 @@ export default class Game {
     )
 
     const runSkin = new PlayerRunSpriteSkin(
-      await createImageAsync(spriteCharacterRunSrc as string),
+      await createImageAsync(spriteCharacterRunSrc),
       54,
       37,
       85,
@@ -145,17 +145,17 @@ export default class Game {
     this._frontClouds = [
       new MovableGameElement(
         { x: 100, y: 100 },
-        await createImageAsync(bigCloud1Src as string),
+        await createImageAsync(bigCloud1Src),
         frontCloudMotionStrategy
       ),
       new MovableGameElement(
         { x: 850, y: 30 },
-        await createImageAsync(bigCloud2Src as string),
+        await createImageAsync(bigCloud2Src),
         frontCloudMotionStrategy
       ),
       new MovableGameElement(
         { x: 1500, y: 120 },
-        await createImageAsync(bigCloud1Src as string),
+        await createImageAsync(bigCloud1Src),
         frontCloudMotionStrategy
       ),
     ]
@@ -163,12 +163,12 @@ export default class Game {
     this._backClouds = [
       new MovableGameElement(
         { x: 550, y: 70 },
-        await createImageAsync(smallCloud1Src as string),
+        await createImageAsync(smallCloud1Src),
         backCloudMotionStrategy
       ),
       new MovableGameElement(
         { x: 1250, y: 30 },
-        await createImageAsync(smallCloud2Src as string),
+        await createImageAsync(smallCloud2Src),
         backCloudMotionStrategy
       ),
     ]
@@ -176,7 +176,7 @@ export default class Game {
 
   private async makeGround() {
     const motionStrategy = new SimpleMotionStrategy(3, 0)
-    const groundTileImg = await createImageAsync(groundSrc as string)
+    const groundTileImg = await createImageAsync(groundSrc)
 
     for (let i = -3; i < 10; i++) {
       if (i == 5 || i == 8) continue // создаем колодцы
