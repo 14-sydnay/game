@@ -26,7 +26,8 @@
       "Pages/*": ["./src/pages/*"],
       "Modules/*": ["./src/modules/*"],
       "Api/*": ["./src/api/*"],
-      "Services/*": ["./src/services/*"]
+      "Services/*": ["./src/services/*"],
+      "Hooks/*": ["./src/hooks/*"]
     },
     "sourceMap": true,
     "jsx": "react",

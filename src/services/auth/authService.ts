@@ -3,16 +3,15 @@ import { RegisterData } from './types'
 import { authApi } from 'Api/auth'
 import { apiHasError } from 'Api/utils'
 
-export const logout = async () => {
+export const logout = async (): Promise<void> => {
   await authApi.logout()
 }
 
-export const getCurrentUser = async (): Promise<Nullable<User>> => {
+export const getCurrentUser = async (): Promise<User> => {
   const userDto = await authApi.getCurrentUser()
 
   if (apiHasError(userDto.data)) {
-    await logout()
-    return null
+    throw new Error('User not found')
   }
   return transformToUser(userDto.data)
 }

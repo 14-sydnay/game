@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 
-import { AuthContext } from './types'
+import { AuthContextType } from './types'
 import { authService } from 'Services/auth'
 
-export const useProviderAuth = (): AuthContext => {
+export const useAuthProvider = (): AuthContextType => {
   const [user, setUser] = useState<Nullable<User>>(null)
-  const isAuthtorization = user !== null
+  const isAuthenticated = user !== null
 
   useEffect(() => {
     authService.getCurrentUser().then((user) => {
@@ -24,7 +24,7 @@ export const useProviderAuth = (): AuthContext => {
 
   return {
     user,
-    isAuthtorization,
+    isAuthenticated: isAuthenticated,
     signin,
   }
 }

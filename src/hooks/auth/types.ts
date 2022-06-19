@@ -1,5 +1,5 @@
-export type AuthContext = {
+export type AuthContextType = {
   user: Nullable<User>
-  isAuthtorization: boolean
+  isAuthenticated: boolean
   signin: (login: string, password: string) => Promise<Nullable<User>>
 }

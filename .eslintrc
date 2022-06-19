@@ -169,7 +169,7 @@
           ],
           [
             "Hooks",
-            "./src/hooks"
+            "./src/hooks/"
           ]
         ]
       }
