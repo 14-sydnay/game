@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom'
 export const NotFound: React.FC<{}> = () => {
   return (
     <main className="flex h-screen w-full flex-col items-center justify-center bg-[#1A2238]">
-      <h1 className="text-9xl font-extrabold tracking-widest text-white">404</h1>
+      <h1 className="text-9xl font-extrabold tracking-widest text-white">
+        404
+      </h1>
       <div className="absolute rotate-12 rounded bg-[#FF6A3D] px-2 text-sm">
         Страница не найдена
       </div>

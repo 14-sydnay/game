@@ -19,7 +19,10 @@ export const getCurrentUser = async (): Promise<Nullable<User>> => {
   return transformToUser(userDto.data)
 }
 
-export const signin = async (login: string, password: string): Promise<Nullable<User>> => {
+export const signin = async (
+  login: string,
+  password: string
+): Promise<Nullable<User>> => {
   const responseLogin = await authApi.login({ login, password })
 
   if (apiHasError(responseLogin)) {

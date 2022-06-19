@@ -7,7 +7,9 @@ export const NavLinks: React.FC<{}> = () => {
       <li>
         <NavLink
           to="/leaderboard"
-          className={({ isActive }) => (isActive ? 'btn btn-primary' : undefined)}
+          className={({ isActive }) =>
+            isActive ? 'btn btn-primary' : undefined
+          }
         >
           Лидерборд
         </NavLink>
@@ -15,7 +17,9 @@ export const NavLinks: React.FC<{}> = () => {
       <li>
         <NavLink
           to="/forum"
-          className={({ isActive }) => (isActive ? 'btn btn-primary' : undefined)}
+          className={({ isActive }) =>
+            isActive ? 'btn btn-primary' : undefined
+          }
         >
           Форум
         </NavLink>

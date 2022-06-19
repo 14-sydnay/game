@@ -2,7 +2,10 @@ import { transformProfileToDto } from './apiTransformer'
 import { ProfileData } from './types'
 import { userApi } from 'api/user'
 
-export const changePassword = async (oldPassword: string, newPassword: string) => {
+export const changePassword = async (
+  oldPassword: string,
+  newPassword: string
+) => {
   await userApi.changePassword({ oldPassword, newPassword })
 }
 

@@ -4,7 +4,8 @@ import { GameComponent, GameMenu } from 'components/game'
 import { useGameManager } from 'modules/gameManager'
 
 export const GamePage: React.FC = () => {
-  const { isFirstGame, playerStatus, handleStartOfGame, handleEndOfGame } = useGameManager()
+  const { isFirstGame, playerStatus, handleStartOfGame, handleEndOfGame } =
+    useGameManager()
   const handleGoBack = () => {
     console.log('go back')
   }

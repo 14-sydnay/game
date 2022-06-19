@@ -16,7 +16,9 @@ export const transformToUser = (data: UserDto): User => {
   }
 }
 
-export const transformToRegisterRequest = (data: RegisterData): RegisterRequestData => {
+export const transformToRegisterRequest = (
+  data: RegisterData
+): RegisterRequestData => {
   return {
     login: data.login,
     first_name: data.firstName,

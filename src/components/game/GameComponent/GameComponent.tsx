@@ -5,7 +5,12 @@ import { Game, KeysContoller, Scene } from 'modules/game'
 
 export const GameComponent: Props = ({ onEndOfGame: onEndOfGame }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
-  const keyController = new KeysContoller('ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight')
+  const keyController = new KeysContoller(
+    'ArrowUp',
+    'ArrowDown',
+    'ArrowLeft',
+    'ArrowRight'
+  )
   useEffect(() => {
     if (canvasRef.current) {
       const scene = new Scene(canvasRef.current.width, canvasRef.current.height)

@@ -15,7 +15,10 @@ import skySrc from 'assets/images/background/sky.png'
 import characterSrc from 'assets/images/character/character.png'
 import platformSrc from 'assets/images/platform/dirt.png'
 import groundSrc from 'assets/images/platform/grassMid.png'
-import { EndOfGameEvent, PlayerStatus } from 'components/game/GameComponent/type'
+import {
+  EndOfGameEvent,
+  PlayerStatus,
+} from 'components/game/GameComponent/type'
 
 export default class Game {
   private _render: CanvasRenderingContext2D
@@ -112,8 +115,14 @@ export default class Game {
   }
 
   private makeClouds() {
-    const frontCloudMotionStrategy = new SimpleMotionStrategy(this._playerSpeed * 0.33, 0)
-    const backCloudMotionStrategy = new SimpleMotionStrategy(this._playerSpeed * 0.66, 0)
+    const frontCloudMotionStrategy = new SimpleMotionStrategy(
+      this._playerSpeed * 0.33,
+      0
+    )
+    const backCloudMotionStrategy = new SimpleMotionStrategy(
+      this._playerSpeed * 0.66,
+      0
+    )
     this._sky = new GameElement({ x: 0, y: 0 }, createImage(skySrc))
     this._frontClouds = [
       new MovableGameElement(
@@ -271,10 +280,14 @@ export default class Game {
   private updatePlatformsPosition() {
     if (this._moveRight) {
       this._scrollOffset += this._playerSpeed
-      this._platforms.forEach((platform) => (platform.position.x -= this._playerSpeed))
+      this._platforms.forEach(
+        (platform) => (platform.position.x -= this._playerSpeed)
+      )
     } else if (this._moveLeft) {
       this._scrollOffset -= this._playerSpeed
-      this._platforms.forEach((platform) => (platform.position.x += this._playerSpeed))
+      this._platforms.forEach(
+        (platform) => (platform.position.x += this._playerSpeed)
+      )
     }
   }
 

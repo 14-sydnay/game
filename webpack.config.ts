@@ -1,5 +1,9 @@
 import path from 'path'
-import { Configuration as WebpackConfig, WebpackPluginInstance, EnvironmentPlugin } from 'webpack'
+import {
+  Configuration as WebpackConfig,
+  WebpackPluginInstance,
+  EnvironmentPlugin,
+} from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import CspHtmlWebpackPlugin from 'csp-html-webpack-plugin'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
@@ -42,7 +46,12 @@ const config: WebpackConfig = {
       },
       {
         test: /\.(sa|s?c)ss$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          'sass-loader',
+        ],
       },
       {
         test: /\.(eot|woff2?|ttf|svg|png|jpe?g|gifv?|webp)$/i,
@@ -98,36 +107,7 @@ const config: WebpackConfig = {
         },
       ],
     }),
-    new ForkTsCheckerWebpackPlugin({
-      typescript: {
-        mode: 'write-references',
-        diagnosticOptions: {
-          semantic: isDevMode,
-          syntactic: true,
-        },
-      },
-      eslint: {
-        files: './src/**/*.{ts,tsx,js,jsx}',
-      },
-      issue: {
-        include: {
-          file: './src/**/*',
-        },
-        exclude: [
-          {
-            origin: 'eslint',
-            severity: 'warning', // don't report eslint warnings.
-          },
-          {
-            origin: 'eslint',
-            file: '**/__tests__/**/*', // exclude eslint issues from jest test files.
-          },
-          {
-            file: './*.ts', // exclude config files.
-          },
-        ],
-      },
-    }),
+    new ForkTsCheckerWebpackPlugin(),
     new StatoscopeWebpackPlugin(),
     new EnvironmentPlugin({
       API_ENDPOINT: 'https://ya-praktikum.tech/api/v2',

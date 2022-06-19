@@ -10,10 +10,19 @@ import {
   SwitchVerticalIcon,
 } from '@heroicons/react/solid'
 import React from 'react'
-import { useTable, useFilters, useGlobalFilter, useSortBy, usePagination } from 'react-table'
+import {
+  useTable,
+  useFilters,
+  useGlobalFilter,
+  useSortBy,
+  usePagination,
+} from 'react-table'
 import { GlobalFilter } from './GlobalFilter'
 
-import { MobilePaginationButton, PaginationButton } from 'components/PaginationButtons'
+import {
+  MobilePaginationButton,
+  PaginationButton,
+} from 'components/PaginationButtons'
 
 export const Table: React.FC<any> = ({ columns, data }) => {
   const {
@@ -66,7 +75,10 @@ export const Table: React.FC<any> = ({ columns, data }) => {
         <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
             <div className="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
-              <table {...getTableProps()} className="min-w-full divide-y divide-gray-200">
+              <table
+                {...getTableProps()}
+                className="min-w-full divide-y divide-gray-200"
+              >
                 <thead className="bg-gray-50">
                   {headerGroups.map((headerGroup, index) => (
                     <tr {...headerGroup.getHeaderGroupProps()} key={index}>
@@ -74,7 +86,9 @@ export const Table: React.FC<any> = ({ columns, data }) => {
                         <th
                           scope="col"
                           className="group px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
-                          {...column.getHeaderProps(column.getSortByToggleProps())}
+                          {...column.getHeaderProps(
+                            column.getSortByToggleProps()
+                          )}
                           key={column.id}
                         >
                           <div className="flex items-center justify-between">
@@ -96,7 +110,10 @@ export const Table: React.FC<any> = ({ columns, data }) => {
                     </tr>
                   ))}
                 </thead>
-                <tbody {...getTableBodyProps()} className="divide-y divide-gray-200 bg-white">
+                <tbody
+                  {...getTableBodyProps()}
+                  className="divide-y divide-gray-200 bg-white"
+                >
                   {page.map((row) => {
                     prepareRow(row)
                     return (
@@ -110,7 +127,9 @@ export const Table: React.FC<any> = ({ columns, data }) => {
                               role="cell"
                             >
                               {cell.column.Cell.name === 'defaultRenderer' ? (
-                                <div className="text-sm text-gray-500">{cell.render('Cell')}</div>
+                                <div className="text-sm text-gray-500">
+                                  {cell.render('Cell')}
+                                </div>
                               ) : (
                                 cell.render('Cell')
                               )}
@@ -128,17 +147,24 @@ export const Table: React.FC<any> = ({ columns, data }) => {
       </div>
       <div className="flex items-center justify-between py-3">
         <div className="flex flex-1 justify-between sm:hidden">
-          <MobilePaginationButton onClick={() => previousPage()} disabled={!canPreviousPage}>
+          <MobilePaginationButton
+            onClick={() => previousPage()}
+            disabled={!canPreviousPage}
+          >
             Назад
           </MobilePaginationButton>
-          <MobilePaginationButton onClick={() => nextPage()} disabled={!canNextPage}>
+          <MobilePaginationButton
+            onClick={() => nextPage()}
+            disabled={!canNextPage}
+          >
             Вперед
           </MobilePaginationButton>
         </div>
         <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
           <div className="flex items-baseline gap-x-2">
             <span className="text-sm text-gray-700">
-              Страница <span className="font-medium">{state.pageIndex + 1}</span> из{' '}
+              Страница{' '}
+              <span className="font-medium">{state.pageIndex + 1}</span> из{' '}
               <span className="font-medium">{pageOptions.length}</span>
             </span>
             <label>
@@ -169,15 +195,30 @@ export const Table: React.FC<any> = ({ columns, data }) => {
                 disabled={!canPreviousPage}
               >
                 <span className="sr-only">Первая страница</span>
-                <ChevronDoubleLeftIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                <ChevronDoubleLeftIcon
+                  className="h-5 w-5 text-gray-400"
+                  aria-hidden="true"
+                />
               </PaginationButton>
-              <PaginationButton onClick={() => previousPage()} disabled={!canPreviousPage}>
+              <PaginationButton
+                onClick={() => previousPage()}
+                disabled={!canPreviousPage}
+              >
                 <span className="sr-only">Предыдущая страница</span>
-                <ChevronLeftIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                <ChevronLeftIcon
+                  className="h-5 w-5 text-gray-400"
+                  aria-hidden="true"
+                />
               </PaginationButton>
-              <PaginationButton onClick={() => nextPage()} disabled={!canNextPage}>
+              <PaginationButton
+                onClick={() => nextPage()}
+                disabled={!canNextPage}
+              >
                 <span className="sr-only">Следущая страница</span>
-                <ChevronRightIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                <ChevronRightIcon
+                  className="h-5 w-5 text-gray-400"
+                  aria-hidden="true"
+                />
               </PaginationButton>
               <PaginationButton
                 className="rounded-r-md"
@@ -185,7 +226,10 @@ export const Table: React.FC<any> = ({ columns, data }) => {
                 disabled={!canNextPage}
               >
                 <span className="sr-only">Последняя страница</span>
-                <ChevronDoubleRightIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                <ChevronDoubleRightIcon
+                  className="h-5 w-5 text-gray-400"
+                  aria-hidden="true"
+                />
               </PaginationButton>
             </nav>
           </div>

@@ -4,7 +4,11 @@ import MotionStrategy from './MotionStrategy'
 export default class Player extends GameElement {
   private _motionStrategy: MotionStrategy
 
-  constructor(initPosition: Position, image: HTMLImageElement, motionStrategy: MotionStrategy) {
+  constructor(
+    initPosition: Position,
+    image: HTMLImageElement,
+    motionStrategy: MotionStrategy
+  ) {
     super(initPosition, image)
     this._motionStrategy = motionStrategy
   }

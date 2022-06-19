@@ -1,8 +1,9 @@
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 
 import { ProvideAuth } from 'hooks/auth'
 import { ForumPage } from 'pages/Forum'
+import { ThreadPage } from 'pages/Forum/Thread'
 import { GamePage } from 'pages/Game'
 import { HomePage } from 'pages/Home'
 import { LoginPage } from 'pages/Login'
@@ -19,7 +20,10 @@ export const App: React.FC<{}> = () => {
             <Route index element={<HomePage />} />
             <Route path="login" element={<LoginPage />} />
             <Route path="game" element={<GamePage />} />
-            <Route path="forum" element={<ForumPage />} />
+            <Route path="forum">
+              <Route index element={<ForumPage />} />
+              <Route path=":id" element={<ThreadPage />} />
+            </Route>
             <Route path="profile" element={<ProfilePage />} />
             <Route path="changepassword" element={<ChangePasswordPage />} />
             <Route path="registration" element={<RegistrationPage />} />

@@ -112,7 +112,9 @@ export const RegisterForm: FC<Props> = () => {
               type="password"
               className="input input-bordered"
               value={passwordConfirm}
-              onChange={(event) => setPasswordConfirm(event.currentTarget.value)}
+              onChange={(event) =>
+                setPasswordConfirm(event.currentTarget.value)
+              }
               name="password"
             ></input>
           </div>
