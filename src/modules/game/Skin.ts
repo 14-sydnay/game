@@ -1,5 +1,7 @@
 import KeysContoller from './KeysContoller'
 import { ISkin } from './types'
+import { Stack } from 'utils/stack'
+import { IStack } from 'utils/stack/types'
 
 export class SpriteSkin {
   protected _frames = 0
@@ -240,54 +242,85 @@ export default class PlayerSkin implements ISkin {
 
   private _runSkin: ISkin
 
-  private _currentSkin: ISkin
+  private _skinStack: IStack<ISkin>
 
   constructor(idle: ISkin, run: ISkin) {
     this._idleSkin = idle
     this._runSkin = run
-    this._currentSkin = this._idleSkin
+    //this._currentSkin = this._idleSkin
+    this._skinStack = new Stack<ISkin>()
   }
 
   get image(): HTMLImageElement {
-    return this._currentSkin.image
+    return this.currentSkin.image
   }
 
   get shiftX(): number {
-    return this._currentSkin.shiftX
+    return this.currentSkin.shiftX
   }
 
   get shiftY(): number {
-    return this._currentSkin.shiftY
+    return this.currentSkin.shiftY
   }
 
   get cropWidth(): number {
-    return this._currentSkin.cropWidth
+    return this.currentSkin.cropWidth
   }
 
   get cropHeight(): number {
-    return this._currentSkin.cropHeight
+    return this.currentSkin.cropHeight
   }
 
   get width(): number {
-    return this._currentSkin.width
+    return this.currentSkin.width
   }
 
   get height(): number {
-    return this._currentSkin.height
+    return this.currentSkin.height
+  }
+
+  get currentSkin(): ISkin {
+    const skin = this._skinStack.peek()
+    if (skin) {
+      return skin
+    }
+    return this._idleSkin
   }
 
   tick(): void {
-    this._currentSkin.tick()
+    this.currentSkin.tick()
   }
 
-  registerListeners(keysController: KeysContoller): void {
+  /* registerListeners(keysController: KeysContoller): void {
     keysController.on(KeysContoller.EVENTS.MOVE_RIGHT, (eventArg) => {
       const isPlayerRun = eventArg as boolean
-      if (isPlayerRun) this._currentSkin = this._runSkin
-      else this._currentSkin = this._idleSkin
+      if (isPlayerRun) {
+        this._skinStack.push(this._runSkin)
+        this._currentSkin = this._runSkin
+      } else {
+        this._skinStack.pop()
+        this._currentSkin = this._idleSkin}
     })
     keysController.on(KeysContoller.EVENTS.MOVE_UP, () => {
       this._currentSkin = this._idleSkin
+    })
+  } */
+  registerListeners(keysController: KeysContoller): void {
+    keysController.on(KeysContoller.EVENTS.MOVE_RIGHT, (eventArg) => {
+      const isPlayerRun = eventArg as boolean
+      if (isPlayerRun) {
+        if (this._skinStack.peek() != this._runSkin) this._skinStack.push(this._runSkin)
+      } else {
+        this._skinStack.pop()
+      }
+    })
+    keysController.on(KeysContoller.EVENTS.MOVE_UP, (eventArg) => {
+      const isPlayerJump = eventArg as boolean
+      if (isPlayerJump) {
+        if (this._skinStack.peek() != this._idleSkin) this._skinStack.push(this._idleSkin)
+      } else {
+        this._skinStack.pop()
+      }
     })
   }
 }
