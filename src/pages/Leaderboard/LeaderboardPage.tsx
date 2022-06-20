@@ -1,12 +1,12 @@
+import axios from 'axios'
 import React, { useState, useMemo, useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 
-import { Footer } from 'components/Footer'
-import { Table } from 'components/Table'
-import { Navbar } from 'components/Navbar'
 import { AvatarCell } from './AvatarCell'
-import axios from 'axios'
 import { FetchedData, LeaderboardData } from './type'
+import { Footer } from 'components/Footer'
+import { Navbar } from 'components/Navbar'
+import { Table } from 'components/Table'
 
 export const LeaderboardPage: React.FC<{}> = () => {
   const [data, setData] = useState<LeaderboardData[]>([])
@@ -16,15 +16,19 @@ export const LeaderboardPage: React.FC<{}> = () => {
       .post('https://ya-praktikum.tech/api/v2/leaderboard/sydney', {
         ratingFieldName: 'score',
         cursor: 0,
-        limit: 3,
+        limit: 10,
       })
-      .then((res) => {
-        const data: LeaderboardData[] = []
+      .then((res: { data: FetchedData[] }) => {
+        const leaders: LeaderboardData[] = []
         res.data.map((item: FetchedData) => {
-          data.push(item.data)
+          leaders.push(item.data)
         })
-        setData(data)
+        return setData(leaders)
       })
+      .catch((err) => {
+        console.log(err)
+      })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const columns = useMemo(

@@ -99,7 +99,10 @@ export default class Game {
 
   private async makeBackground() {
     this._sky = new GameElement({ x: 0, y: 0 }, await createImageAsync(skySrc))
-    this._hills = new GameElement({ x: 0, y: 0 }, await createImageAsync(hillsSrc))
+    this._hills = new GameElement(
+      { x: 0, y: 0 },
+      await createImageAsync(hillsSrc)
+    )
   }
 
   private async makePlayer(keysController: KeysContoller) {
@@ -142,8 +145,14 @@ export default class Game {
   }
 
   private async makeClouds() {
-    const frontCloudMotionStrategy = new SimpleMotionStrategy(this._playerSpeed * 0.33, 0)
-    const backCloudMotionStrategy = new SimpleMotionStrategy(this._playerSpeed * 0.66, 0)
+    const frontCloudMotionStrategy = new SimpleMotionStrategy(
+      this._playerSpeed * 0.33,
+      0
+    )
+    const backCloudMotionStrategy = new SimpleMotionStrategy(
+      this._playerSpeed * 0.66,
+      0
+    )
 
     this._frontClouds = [
       new MovableGameElement(
@@ -199,7 +208,7 @@ export default class Game {
 
   private async makePlatforms() {
     const motionStrategy = new SimpleMotionStrategy(this._playerSpeed, 0)
-    const platformImg = await createImageAsync(platformSrc as string)
+    const platformImg = await createImageAsync(platformSrc)
 
     this._platforms = [
       new MovableGameElement(

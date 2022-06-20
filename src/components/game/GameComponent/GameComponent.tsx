@@ -20,7 +20,12 @@ export const GameComponent: Props = ({ onEndOfGame: onEndOfGame }) => {
   //
 
   useEffect(() => {
-    const keyController = new KeysContoller('ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight')
+    const keyController = new KeysContoller(
+      'ArrowUp',
+      'ArrowDown',
+      'ArrowLeft',
+      'ArrowRight'
+    )
     if (canvasRef.current) {
       const scene = new Scene(canvasRef.current.width, canvasRef.current.height)
       const ctx = canvasRef.current.getContext('2d')!
