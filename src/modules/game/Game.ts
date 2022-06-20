@@ -1,4 +1,4 @@
-import { createImage, KeysContoller } from '.'
+import { createImageAsync, KeysContoller } from '.'
 import GameElement from './GameElement'
 import MotionStrategy from './MotionStrategy'
 import MovableGameElement from './MovableGameElement'
@@ -6,13 +6,16 @@ import Platform from './Platform'
 import Player from './Player'
 import Scene from './Scene'
 import SimpleMotionStrategy from './SimpleMotionStrategy'
+import PlayerSkin, { PlayerIdleSpriteSkin, PlayerRunSpriteSkin } from './Skin'
+//import spriteCharacterJumpSrc from 'Assets/images/character/spriteJump.png'
 import smallCloud1Src from 'assets/images/background/clouds/128x128/cloud_1.png'
 import smallCloud2Src from 'assets/images/background/clouds/128x128/cloud_2.png'
 import bigCloud1Src from 'assets/images/background/clouds/256x256/cloud_1.png'
 import bigCloud2Src from 'assets/images/background/clouds/256x256/cloud_2.png'
 import hillsSrc from 'assets/images/background/hills.png'
 import skySrc from 'assets/images/background/sky.png'
-import characterSrc from 'assets/images/character/character.png'
+import spriteCharacterIdleSrc from 'assets/images/character/spriteIdleBlink.png'
+import spriteCharacterRunSrc from 'assets/images/character/spriteRun.png'
 import platformSrc from 'assets/images/platform/dirt.png'
 import groundSrc from 'assets/images/platform/grassMid.png'
 import {
@@ -55,6 +58,8 @@ export default class Game {
 
   private _handleEndOfGame: (e: EndOfGameEvent) => void // todo временно тут
 
+  private _keysController: KeysContoller
+
   constructor(
     scene: Scene,
     render: CanvasRenderingContext2D,
@@ -63,17 +68,18 @@ export default class Game {
   ) {
     this._render = render
     this._scene = scene
+    this._keysController = keysController
     this._handleEndOfGame = handleEndOfGame
-    this._registerListeners(keysController)
-    this.init()
+    this._registerListeners(this._keysController)
+    //this.init()
   }
 
-  init() {
-    this.makeBackground()
-    this.makeClouds()
-    this.makeGround()
-    this.makePlatforms()
-    this.makePlayer()
+  async init(): Promise<void> {
+    await this.makeBackground()
+    await this.makeClouds()
+    await this.makeGround()
+    await this.makePlatforms()
+    await this.makePlayer(this._keysController)
   }
 
   private _registerListeners(keysController: KeysContoller) {
@@ -91,12 +97,12 @@ export default class Game {
     })
   }
 
-  private makeBackground() {
-    this._sky = new GameElement({ x: 0, y: 0 }, createImage(skySrc))
-    this._hills = new GameElement({ x: 0, y: 0 }, createImage(hillsSrc))
+  private async makeBackground() {
+    this._sky = new GameElement({ x: 0, y: 0 }, await createImageAsync(skySrc))
+    this._hills = new GameElement({ x: 0, y: 0 }, await createImageAsync(hillsSrc))
   }
 
-  private makePlayer() {
+  private async makePlayer(keysController: KeysContoller) {
     const playerMotionStrategy = new MotionStrategy(
       this._scene,
       this._gravity,
@@ -104,40 +110,55 @@ export default class Game {
       15
     )
 
+    const idleSkin = new PlayerIdleSpriteSkin(
+      await createImageAsync(spriteCharacterIdleSrc),
+      72,
+      56,
+      173,
+      147,
+      173,
+      147
+    )
+
+    const runSkin = new PlayerRunSpriteSkin(
+      await createImageAsync(spriteCharacterRunSrc),
+      54,
+      37,
+      85,
+      80,
+      173,
+      147
+    )
+    const skin = new PlayerSkin(idleSkin, runSkin)
+    skin.registerListeners(keysController)
     this._player = new Player(
       {
         x: 100,
         y: 100,
       },
-      createImage(characterSrc),
+      skin,
       playerMotionStrategy
     )
   }
 
-  private makeClouds() {
-    const frontCloudMotionStrategy = new SimpleMotionStrategy(
-      this._playerSpeed * 0.33,
-      0
-    )
-    const backCloudMotionStrategy = new SimpleMotionStrategy(
-      this._playerSpeed * 0.66,
-      0
-    )
-    this._sky = new GameElement({ x: 0, y: 0 }, createImage(skySrc))
+  private async makeClouds() {
+    const frontCloudMotionStrategy = new SimpleMotionStrategy(this._playerSpeed * 0.33, 0)
+    const backCloudMotionStrategy = new SimpleMotionStrategy(this._playerSpeed * 0.66, 0)
+
     this._frontClouds = [
       new MovableGameElement(
         { x: 100, y: 100 },
-        createImage(bigCloud1Src),
+        await createImageAsync(bigCloud1Src),
         frontCloudMotionStrategy
       ),
       new MovableGameElement(
         { x: 850, y: 30 },
-        createImage(bigCloud2Src),
+        await createImageAsync(bigCloud2Src),
         frontCloudMotionStrategy
       ),
       new MovableGameElement(
         { x: 1500, y: 120 },
-        createImage(bigCloud1Src),
+        await createImageAsync(bigCloud1Src),
         frontCloudMotionStrategy
       ),
     ]
@@ -145,20 +166,20 @@ export default class Game {
     this._backClouds = [
       new MovableGameElement(
         { x: 550, y: 70 },
-        createImage(smallCloud1Src),
+        await createImageAsync(smallCloud1Src),
         backCloudMotionStrategy
       ),
       new MovableGameElement(
         { x: 1250, y: 30 },
-        createImage(smallCloud2Src),
+        await createImageAsync(smallCloud2Src),
         backCloudMotionStrategy
       ),
     ]
   }
 
-  private makeGround() {
+  private async makeGround() {
     const motionStrategy = new SimpleMotionStrategy(3, 0)
-    const groundTileImg = createImage(groundSrc)
+    const groundTileImg = await createImageAsync(groundSrc)
 
     for (let i = -3; i < 10; i++) {
       if (i == 5 || i == 8) continue // создаем колодцы
@@ -176,9 +197,9 @@ export default class Game {
     }
   }
 
-  private makePlatforms() {
+  private async makePlatforms() {
     const motionStrategy = new SimpleMotionStrategy(this._playerSpeed, 0)
-    const platformImg = createImage(platformSrc)
+    const platformImg = await createImageAsync(platformSrc as string)
 
     this._platforms = [
       new MovableGameElement(
@@ -208,17 +229,19 @@ export default class Game {
     ]
   }
 
-  start() {
+  async start(): Promise<void> {
+    await this.init()
     this.animate()
   }
 
-  stop(playerStatus: PlayerStatus) {
+  async stop(playerStatus: PlayerStatus): Promise<void> {
     this._handleEndOfGame({ playerStatus })
-    this.restart()
+    await this.restart()
   }
 
-  restart() {
-    this.init()
+  async restart(): Promise<void> {
+    this._keysController.reset()
+    await this.init()
   }
 
   private drawBackground() {

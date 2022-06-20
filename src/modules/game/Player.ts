@@ -1,39 +1,55 @@
 import GameElement from './GameElement'
 import MotionStrategy from './MotionStrategy'
+import { ISkin, Position } from './types'
 
 export default class Player extends GameElement {
   private _motionStrategy: MotionStrategy
 
-  constructor(
-    initPosition: Position,
-    image: HTMLImageElement,
-    motionStrategy: MotionStrategy
-  ) {
-    super(initPosition, image)
+  private _skin: ISkin
+
+  constructor(initPosition: Position, skin: ISkin, motionStrategy: MotionStrategy) {
+    super(initPosition, skin.image)
+    this.bbox = { width: 170, height: 147 }
     this._motionStrategy = motionStrategy
+    this._skin = skin
   }
 
-  moveUp() {
+  moveUp(): void {
     this._motionStrategy.moveUp(this)
   }
 
-  moveDown() {
+  moveDown(): void {
     this._motionStrategy.moveDown(this)
   }
 
-  moveForward() {
+  moveForward(): void {
     this._motionStrategy.moveForward(this)
   }
 
-  moveBack() {
+  moveBack(): void {
     this._motionStrategy.moveBack(this)
   }
 
-  stop() {
+  stop(): void {
     this._motionStrategy.stop(this)
   }
 
-  update(ctx: CanvasRenderingContext2D) {
+  override draw(ctx: CanvasRenderingContext2D): void {
+    ctx.drawImage(
+      this._skin.image,
+      this._skin.shiftX,
+      this._skin.shiftY,
+      this._skin.cropWidth,
+      this._skin.cropHeight,
+      this.left,
+      this.top,
+      this._skin.width,
+      this._skin.height
+    )
+  }
+
+  update(ctx: CanvasRenderingContext2D): void {
+    this._skin.tick()
     this.draw(ctx)
     this._motionStrategy.tick(this)
   }

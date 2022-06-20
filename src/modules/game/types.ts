@@ -1,33 +1,44 @@
-type Position = {
+export type Position = {
   x: number
   y: number
 }
 
-type BBox = {
+export type BBox = {
   width: number
   height: number
 }
 
-type Velocity = {
+export type Velocity = {
   x: number
   y: number
 }
 
-type Physics = {
+export type Physics = {
   velocity: Velocity
   gravity: number
 }
 
-type KeyCode = string
+export type KeyCode = string
 
-type ControlKey = {
+export type ControlKey = {
   pressed: boolean
   code: KeyCode
 }
 
-type ControlKeys = {
+export type ControlKeys = {
   up: ControlKey
   down: ControlKey
   left: ControlKey
   right: ControlKey
+}
+
+export interface ISkin {
+  image: HTMLImageElement
+  shiftX: number
+  shiftY: number
+  cropWidth: number
+  cropHeight: number
+  width: number
+  height: number
+  tick: () => void
 }
