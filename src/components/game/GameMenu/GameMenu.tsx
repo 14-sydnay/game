@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 
 import { Props } from './type'
-import splashscreenSrc from 'Assets/images/splashscreen.png'
+import splashscreenSrc from 'assets/images/splashscreen.png'
 
 export const GameMenu: FC<Props> = ({
   isFirstGame,
