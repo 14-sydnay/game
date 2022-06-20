@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useCallback } from 'react'
 
 import { Props } from './type'
-import { useFullscreenTrigger } from 'hooks'
+import { useFullscreenTrigger } from 'hooks/fullScreen'
 import { Game, KeysContoller, Scene } from 'modules/game'
 
 export const GameComponent: Props = ({ onEndOfGame: onEndOfGame }) => {
