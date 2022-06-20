@@ -247,7 +247,6 @@ export default class PlayerSkin implements ISkin {
   constructor(idle: ISkin, run: ISkin) {
     this._idleSkin = idle
     this._runSkin = run
-    //this._currentSkin = this._idleSkin
     this._skinStack = new Stack<ISkin>()
   }
 
@@ -291,20 +290,6 @@ export default class PlayerSkin implements ISkin {
     this.currentSkin.tick()
   }
 
-  /* registerListeners(keysController: KeysContoller): void {
-    keysController.on(KeysContoller.EVENTS.MOVE_RIGHT, (eventArg) => {
-      const isPlayerRun = eventArg as boolean
-      if (isPlayerRun) {
-        this._skinStack.push(this._runSkin)
-        this._currentSkin = this._runSkin
-      } else {
-        this._skinStack.pop()
-        this._currentSkin = this._idleSkin}
-    })
-    keysController.on(KeysContoller.EVENTS.MOVE_UP, () => {
-      this._currentSkin = this._idleSkin
-    })
-  } */
   registerListeners(keysController: KeysContoller): void {
     keysController.on(KeysContoller.EVENTS.MOVE_RIGHT, (eventArg) => {
       const isPlayerRun = eventArg as boolean
