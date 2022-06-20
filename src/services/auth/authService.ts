@@ -1,7 +1,9 @@
 import { transformToRegisterRequest, transformToUser } from './apiTransformer'
 import { RegisterData } from './types'
-import { authApi } from 'Api/auth'
-import { apiHasError } from 'Api/utils'
+import { authApi } from 'api/auth'
+import { apiHasError } from 'api/utils'
+import { User } from 'src/models/user'
+import { Nullable } from 'types/nullable'
 
 export const logout = async () => {
   await authApi.logout()

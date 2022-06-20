@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { userService } from 'Services/user'
+import { userService } from 'services/user'
 
 export const ChangePasswordPage: React.FC = () => {
   const [oldPassword, setOldPassword] = useState<string>('')

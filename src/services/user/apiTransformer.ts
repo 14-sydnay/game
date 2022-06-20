@@ -1,5 +1,5 @@
 import { ProfileData } from './types'
-import { ProfileDto } from 'Api/types'
+import { ProfileDto } from 'api/types'
 
 export const transformProfileToDto = (data: ProfileData): ProfileDto => {
   return {

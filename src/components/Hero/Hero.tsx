@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import background from 'Images/landing-background.png'
+import background from 'images/landing-background.png'
 
 export const Hero: React.FC<{}> = () => {
   return (
@@ -21,7 +21,9 @@ export const Hero: React.FC<{}> = () => {
             собирая клад.
           </p>
           <Link to="game">
-            <button className="btn btn-primary">НАЧАТЬ ИГРАТЬ!</button>
+            <button type="button" className="btn btn-primary">
+              НАЧАТЬ ИГРАТЬ!
+            </button>
           </Link>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { ProfileForm } from 'Components/ProfileForm'
-import { useAuth } from 'Hooks/auth'
+import { ProfileForm } from 'components/ProfileForm'
+import { useAuth } from 'hooks/auth'
 
 export const ProfilePage: React.FC = () => {
   const auth = useAuth()

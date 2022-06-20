@@ -11,11 +11,11 @@ export const Counter: React.FC<{}> = () => {
   return (
     <div>
       <div>
-        <button aria-label="Decrement value" onClick={() => dispatch(decrement())}>
+        <button type="button" aria-label="Decrement value" onClick={() => dispatch(decrement())}>
           Увеличить
         </button>
         <span>{count}</span>
-        <button aria-label="Increment value" onClick={() => dispatch(increment())}>
+        <button type="button" aria-label="Increment value" onClick={() => dispatch(increment())}>
           Уменьшить
         </button>
       </div>

@@ -4,8 +4,8 @@ import {
   RegisterRequestData,
   RegisterResponseData,
 } from './types'
-import createApi from 'Api/api'
-import { ApiError, UserDto } from 'Api/types'
+import createApi from 'api/api'
+import { ApiError, UserDto } from 'api/types'
 
 const apiInstance = createApi('auth')
 

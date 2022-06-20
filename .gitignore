@@ -3,6 +3,8 @@
 dist/
 !dist/index.html
 node_modules/
+.idea/
+.vscode/
 *.log
 
 # OS generated files

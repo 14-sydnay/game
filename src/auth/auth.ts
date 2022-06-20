@@ -1,5 +1,6 @@
-import { authApi, transformUser } from 'Api/auth'
-import { apiHasError } from 'Api/utils'
+import { transformUser } from './apiTransformer'
+import { authApi } from 'api/auth'
+import { apiHasError } from 'api/utils'
 
 export const login = async (login: string, password: string) => {
   const responseLogin = await authApi.login({ login, password })

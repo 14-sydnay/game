@@ -1,5 +1,11 @@
 import createApi from '../api'
-import { ChangePasswordRequest, ChangeAvatarRequest, ChangeAvatarResponse } from './types'
+import {
+  ChangePasswordRequest,
+  ChangeAvatarRequest,
+  ChangeAvatarResponse,
+  ChangeProfileRequest,
+  ChangeProfileResponse,
+} from './types'
 
 const apiInstance = createApi('user')
 

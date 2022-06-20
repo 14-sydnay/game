@@ -1,4 +1,4 @@
-import { ApiError, UserDto } from 'Api/types'
+import { ApiError, UserDto } from 'api/types'
 export type ChangePasswordRequest = {
   oldPassword: string
   newPassword: string

@@ -1,4 +1,4 @@
-import { ApiError } from 'Api/types'
+import { ApiError } from 'api/types'
 
 export type LoginRequestData = {
   login: string

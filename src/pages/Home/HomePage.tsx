@@ -1,8 +1,9 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom'
 
-import { Footer } from 'Components/Footer'
-import { Hero } from 'Components/Hero'
-import { Navbar } from 'Components/Navbar'
+import { Footer } from 'components/Footer'
+import { Hero } from 'components/Hero'
+import { Navbar } from 'components/Navbar'
 
 export const HomePage: React.FC<{}> = () => {
   return (
@@ -16,6 +17,7 @@ export const HomePage: React.FC<{}> = () => {
       <div className="item w-full">
         <Footer />
       </div>
+      <Outlet />
     </div>
   )
 }

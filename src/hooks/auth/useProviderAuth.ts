@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
 
 import { AuthContext } from './types'
-import { authService } from 'Services/auth'
+import { authService } from 'services/auth'
+import { User } from 'src/models/user'
+import { Nullable } from 'types/nullable'
 
 export const useProviderAuth = (): AuthContext => {
   const [user, setUser] = useState<Nullable<User>>(null)
