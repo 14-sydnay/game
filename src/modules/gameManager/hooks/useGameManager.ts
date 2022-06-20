@@ -11,8 +11,8 @@ export const useGameManager = () => {
     setPlayerStatus('playing')
   }
   const handleEndOfGame = (e: EndOfGameEvent) => {
-    const playerStatus = e.playerStatus === 'win' ? 'win' : 'lose'
-    setPlayerStatus(playerStatus)
+    const pStatus = e.playerStatus === 'win' ? 'win' : 'lose'
+    setPlayerStatus(pStatus)
   }
   return {
     isFirstGame: numberOfAttempts === 0,

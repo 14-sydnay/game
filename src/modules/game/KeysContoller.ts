@@ -1,3 +1,4 @@
+import { ControlKeys, KeyCode } from './types'
 import { EventBus } from 'modules/eventBus'
 import { Listener } from 'modules/eventBus/types'
 
@@ -27,8 +28,18 @@ export default class KeysContoller {
     this._eventBus = new EventBus<Events>()
   }
 
-  on(event: Events, callback: Listener<unknown[]>) {
+  on(event: Events, callback: Listener<unknown[]>): void {
     this._eventBus.on(event, callback)
+  }
+
+  reset(): void {
+    this._eventBus.destroy()
+  }
+
+  destroy(): void {
+    removeEventListener('keydown', this._handleKeyDown)
+    removeEventListener('keyup', this._handleKeyUp)
+    this._eventBus.destroy()
   }
 
   private _handleKeyUp = (e: KeyboardEvent) => {

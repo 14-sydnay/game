@@ -1,3 +1,5 @@
+import { BBox, Position, Velocity } from './types'
+
 export default class GameElement {
   position: Position
 
@@ -25,31 +27,31 @@ export default class GameElement {
     }
   }
 
-  get height() {
+  get height(): number {
     return this.bbox.height
   }
 
-  get width() {
+  get width(): number {
     return this.bbox.width
   }
 
-  get top() {
+  get top(): number {
     return this.position.y
   }
 
-  get bottom() {
+  get bottom(): number {
     return this.position.y + this.height
   }
 
-  get left() {
+  get left(): number {
     return this.position.x
   }
 
-  get right() {
+  get right(): number {
     return this.position.x + this.width
   }
 
-  draw(ctx: CanvasRenderingContext2D) {
+  draw(ctx: CanvasRenderingContext2D): void {
     ctx.drawImage(this.image, this.left, this.top)
   }
 }
