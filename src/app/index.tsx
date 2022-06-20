@@ -10,6 +10,7 @@ import { LoginPage } from 'pages/Login'
 import { RegisterPage as RegistrationPage } from 'pages/Register'
 import { ChangePasswordPage } from 'pages/User/ChangePassword'
 import { ProfilePage } from 'pages/User/Profile'
+import { LeaderboardPage } from 'pages/Leaderboard'
 
 export const App: React.FC<{}> = () => {
   return (
@@ -20,6 +21,7 @@ export const App: React.FC<{}> = () => {
             <Route index element={<HomePage />} />
             <Route path="login" element={<LoginPage />} />
             <Route path="game" element={<GamePage />} />
+            <Route path="leaderboard" element={<LeaderboardPage />} />
             <Route path="forum">
               <Route index element={<ForumPage />} />
               <Route path=":id" element={<ThreadPage />} />

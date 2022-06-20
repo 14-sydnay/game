@@ -116,7 +116,7 @@ export const ForumPage: React.FC<{}> = () => {
               Новый пост
             </label>
             <div>
-              <h1 className="text-center text-xl font-semibold">Посты</h1>
+              <h1 className="text-center text-2xl font-medium">Посты</h1>
             </div>
             <div className="mt-6 flex flex-col">
               <Table columns={columns} data={data} />
