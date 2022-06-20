@@ -1,6 +1,7 @@
 import GameElement from './GameElement'
 import MotionStrategy from './MotionStrategy'
 import SimpleMotionStrategy from './SimpleMotionStrategy'
+import { Position, Velocity } from './types'
 
 export default class MovableGameElement extends GameElement {
   private _motionStrategy: MotionStrategy | SimpleMotionStrategy

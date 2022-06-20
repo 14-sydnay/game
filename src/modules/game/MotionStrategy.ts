@@ -1,4 +1,5 @@
 import GameElement from './GameElement'
+import { BBox } from './types'
 
 export default class MotionStrategy {
   private _scene: BBox
