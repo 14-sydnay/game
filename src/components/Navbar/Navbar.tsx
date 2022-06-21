@@ -29,7 +29,9 @@ export const Navbar: React.FC<{}> = () => {
         </ul>
       </nav>
       <div className="navbar-end">
-        <a className="btn btn-secondary">Войти</a>
+        <Link to="/login" className="btn btn-secondary">
+          Войти
+        </Link>
       </div>
     </div>
   )
