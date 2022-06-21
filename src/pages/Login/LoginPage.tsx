@@ -1,13 +1,24 @@
 import React, { useState } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 
-import { authService } from 'services/auth'
+import { useAuth } from 'hooks/auth'
 
 export const LoginPage: React.FC = () => {
+  const auth = useAuth()
+
   const [login, setLogin] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+  const navigate = useNavigate()
+  const location = useLocation()
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  const from = (location.state?.from?.pathname || '/') as string
+
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
-    authService.signin(login, password)
+    void auth.signin(login, password).then(() => {
+      navigate(from, { replace: true })
+      return
+    })
   }
 
   const handleInputChange = (event: React.FormEvent<HTMLInputElement>) => {

@@ -5,16 +5,15 @@ import { apiHasError } from 'api/utils'
 import { User } from 'src/models/user'
 import { Nullable } from 'types/nullable'
 
-export const logout = async () => {
+export const logout = async (): Promise<void> => {
   await authApi.logout()
 }
 
-export const getCurrentUser = async (): Promise<Nullable<User>> => {
+export const getCurrentUser = async (): Promise<User> => {
   const userDto = await authApi.getCurrentUser()
 
   if (apiHasError(userDto.data)) {
-    await logout()
-    return null
+    throw new Error('User not found')
   }
   return transformToUser(userDto.data)
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 
-import { ProvideAuth } from 'hooks/auth'
+import { AuthProvider, RequireAuth } from 'hooks/auth'
 import { ForumPage } from 'pages/Forum'
 import { ThreadPage } from 'pages/Forum/Thread'
 import { GamePage } from 'pages/Game'
@@ -35,28 +35,57 @@ export const App: React.FC<{}> = withErrorBoundary(() => {
   }
 
   return (
-    <ProvideAuth>
+    <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/">
-            <Route index element={<HomePage />} />
-            <Route path="login" element={<LoginPage />} />
-            <Route path="game" element={<GamePage />} />
-            <Route path="leaderboard" element={<LeaderboardPage />} />
-            <Route path="forum">
-              <Route index element={<ForumPage />} />
-              <Route path=":id" element={<ThreadPage />} />
-            </Route>
-            <Route path="profile" element={<ProfilePage />} />
-            <Route path="changepassword" element={<ChangePasswordPage />} />
-            <Route path="registration" element={<RegistrationPage />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="login" element={<LoginPage />} />
+          <Route path="/registration" element={<RegistrationPage />} />
+          <Route
+            path="/game"
+            element={
+              <RequireAuth>
+                <GamePage />
+              </RequireAuth>
+            }
+          />
+          <Route path="/leaderboard" element={<LeaderboardPage />} />
+          <Route path="/forum">
+            <Route
+              index
+              element={
+                <RequireAuth>
+                  <ForumPage />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/:id"
+              element={
+                <RequireAuth>
+                  <ThreadPage />
+                </RequireAuth>
+              }
+            />
           </Route>
-          {/* <Route path="/user">
-            <Route path="profile" element={<ProfilePage />} />
-            <Route path="changepassword" element={<ChangePasswordPage />} />
-          </Route> */}
+          <Route
+            path="/profile"
+            element={
+              <RequireAuth>
+                <ProfilePage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/changepassword"
+            element={
+              <RequireAuth>
+                <ChangePasswordPage />
+              </RequireAuth>
+            }
+          />
         </Routes>
       </Router>
-    </ProvideAuth>
+    </AuthProvider>
   )
 })
