@@ -16,9 +16,9 @@ import hillsSrc from 'assets/images/background/hills.png'
 import skySrc from 'assets/images/background/sky.png'
 import spriteCharacterIdleSrc from 'assets/images/character/spriteIdleBlink.png'
 import spriteCharacterRunSrc from 'assets/images/character/spriteRun.png'
+import spriteChestSrc from 'assets/images/chest/spriteChest.png'
 import platformSrc from 'assets/images/platform/dirt.png'
 import groundSrc from 'assets/images/platform/grassMid.png'
-import spriteChestSrc from 'assets/images/chest/spriteChest.png'
 import { EndOfGameEvent, PlayerStatus } from 'components/game/GameComponent/type'
 
 export default class Game {
@@ -99,7 +99,15 @@ export default class Game {
   }
 
   private async makeChest() {
-    this._chest = new GameElement({ x: 0, y: 0 }, await createImageAsync(spriteChestSrc))
+    const motionStrategy = new SimpleMotionStrategy(this._playerSpeed, 0)
+    this._chest = new MovableGameElement(
+      {
+        x: 500,
+        y: this._scene.height - 500,
+      },
+      await createImageAsync(spriteChestSrc),
+      motionStrategy
+    )
   }
 
   private async makeBackground() {
