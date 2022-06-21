@@ -1,10 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
+
+const ThrowError: React.FC = () => {
+  throw new Error('ДУДОС удался, хацкер👨🏻‍💻 - похвастайся друзьям!')
+}
 
 export const Footer: React.FC<{}> = () => {
+  const [shouldThrow, setShouldThrow] = useState(false)
+
   return (
     <footer className="footer items-center p-4">
       <div className="grid-flow-col items-center">
         <p>Copyright © 2022 - Sydney Team</p>
+      </div>
+      <div className="m-auto grid-flow-col items-center">
+        {shouldThrow && <ThrowError />}
+        <button
+          className="btn btn-ghost"
+          onClick={() => {
+            setShouldThrow(true)
+          }}
+        >
+          заДУДОСить сайт 💣
+        </button>
       </div>
       <div className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
         <a

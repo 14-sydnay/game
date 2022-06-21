@@ -294,7 +294,8 @@ export default class PlayerSkin implements ISkin {
     keysController.on(KeysContoller.EVENTS.MOVE_RIGHT, (eventArg) => {
       const isPlayerRun = eventArg as boolean
       if (isPlayerRun) {
-        if (this._skinStack.peek() != this._runSkin) this._skinStack.push(this._runSkin)
+        if (this._skinStack.peek() != this._runSkin)
+          this._skinStack.push(this._runSkin)
       } else {
         this._skinStack.pop()
       }
@@ -302,7 +303,8 @@ export default class PlayerSkin implements ISkin {
     keysController.on(KeysContoller.EVENTS.MOVE_UP, (eventArg) => {
       const isPlayerJump = eventArg as boolean
       if (isPlayerJump) {
-        if (this._skinStack.peek() != this._idleSkin) this._skinStack.push(this._idleSkin)
+        if (this._skinStack.peek() != this._idleSkin)
+          this._skinStack.push(this._idleSkin)
       } else {
         this._skinStack.pop()
       }

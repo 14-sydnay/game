@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
 import { useAuth } from 'hooks/auth'
+import { LocationState } from './type'
 
 export const LoginPage: React.FC = () => {
   const auth = useAuth()
@@ -11,7 +12,8 @@ export const LoginPage: React.FC = () => {
   const navigate = useNavigate()
   const location = useLocation()
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  const from = (location.state?.from?.pathname || '/') as string
+  const from = ((location.state as LocationState)?.from?.pathname ||
+    '/') as string
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
