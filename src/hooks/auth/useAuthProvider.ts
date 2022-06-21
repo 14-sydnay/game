@@ -5,26 +5,30 @@ import { authService } from 'Services/auth'
 
 export const useAuthProvider = (): AuthContextType => {
   const [user, setUser] = useState<Nullable<User>>(null)
-  const isAuthenticated = user !== null
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
   useEffect(() => {
-    authService.getCurrentUser().then((user) => {
-      setUser(user)
-    })
+    authService
+      .getCurrentUser()
+      .then((userData) => setUser(userData))
+      .catch(() => setUser(null))
+      .finally(() => setIsLoading(false))
   }, [])
 
   const signin = (login: string, password: string) => {
-    return authService.signin(login, password).then((response) => {
-      if (response) {
-        setUser(response)
-      }
-      return user
-    })
+    setIsLoading(true)
+    return authService
+      .signin(login, password)
+      .then((userData) => setUser(userData))
+      .finally(() => setIsLoading(false))
   }
 
   return {
+    isLoading,
     user,
-    isAuthenticated: isAuthenticated,
+    get isAuthenticated() {
+      return this.user !== null
+    },
     signin,
   }
 }

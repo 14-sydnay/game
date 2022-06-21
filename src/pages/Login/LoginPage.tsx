@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
 import { useAuth } from 'Hooks/auth'
-import { authService } from 'Services/auth'
 
 export const LoginPage: React.FC = () => {
   const auth = useAuth()
@@ -16,17 +15,11 @@ export const LoginPage: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
-    void authService.signin(login, password).then(() => {
+    void auth.signin(login, password).then(() => {
       navigate(from, { replace: true })
       return
     })
   }
-
-  useEffect(() => {
-    if (auth.user) {
-      navigate(from, { replace: true })
-    }
-  }, [auth.user])
 
   const handleInputChange = (event: React.FormEvent<HTMLInputElement>) => {
     const target = event.currentTarget

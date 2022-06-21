@@ -1,4 +1,4 @@
-import { UserDto } from 'Api/auth/types'
+/* import { UserDto } from 'Api/auth/types'
 
 export const transformUser = (data: UserDto): User => {
   return {
@@ -12,3 +12,4 @@ export const transformUser = (data: UserDto): User => {
     avatar: `${process.env.API_ENDPOINT}/resources/${data.avatar}`,
   }
 }
+ */
