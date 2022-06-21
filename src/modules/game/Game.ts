@@ -231,9 +231,9 @@ export default class Game {
     this.animate()
   }
 
-  async stop(playerStatus: PlayerStatus): Promise<void> {
+  stop(playerStatus: PlayerStatus): void {
     this._handleEndOfGame({ playerStatus })
-    await this.restart()
+    //await this.restart()
   }
 
   async restart(): Promise<void> {
@@ -332,7 +332,7 @@ export default class Game {
   }
 
   private animate = () => {
-    requestAnimationFrame(this.animate)
+    const requestId = requestAnimationFrame(this.animate)
     this.drawBackground()
     this.drawGroundTiles()
     this.drawPlatforms()
@@ -348,11 +348,13 @@ export default class Game {
 
     this.collisionDetectWithGround()
 
-    if (this._scrollOffset > 3500) {
+    if (this._scrollOffset > 6500) {
       this.stop('win')
+      cancelAnimationFrame(requestId)
     }
     if (this._player.top > this._scene.height) {
       this.stop('lose')
+      cancelAnimationFrame(requestId)
     }
   }
 }
