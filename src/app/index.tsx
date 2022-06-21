@@ -11,8 +11,29 @@ import { LoginPage } from 'pages/Login'
 import { RegisterPage as RegistrationPage } from 'pages/Register'
 import { ChangePasswordPage } from 'pages/User/ChangePassword'
 import { ProfilePage } from 'pages/User/Profile'
+import { withErrorBoundary, useErrorBoundary } from 'react-use-error-boundary'
 
-export const App: React.FC<{}> = () => {
+export const App: React.FC<{}> = withErrorBoundary(() => {
+  const [error, resetError] = useErrorBoundary((error, errorInfo) => {
+    console.error(errorInfo)
+  })
+
+  if (error) {
+    return (
+      <div className="flex h-screen w-screen flex-col items-center justify-center">
+        <div>Возникла ошибка: {error.message}</div>
+        <button
+          className="btn btn-primary mt-4"
+          onClick={() => {
+            resetError()
+          }}
+        >
+          Сбросить ошибку
+        </button>
+      </div>
+    )
+  }
+
   return (
     <ProvideAuth>
       <Router>
@@ -38,4 +59,4 @@ export const App: React.FC<{}> = () => {
       </Router>
     </ProvideAuth>
   )
-}
+})
