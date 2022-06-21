@@ -18,6 +18,7 @@ import spriteCharacterIdleSrc from 'assets/images/character/spriteIdleBlink.png'
 import spriteCharacterRunSrc from 'assets/images/character/spriteRun.png'
 import platformSrc from 'assets/images/platform/dirt.png'
 import groundSrc from 'assets/images/platform/grassMid.png'
+import spriteChestSrc from 'assets/images/chest/spriteChest.png'
 import { EndOfGameEvent, PlayerStatus } from 'components/game/GameComponent/type'
 
 export default class Game {
@@ -40,6 +41,8 @@ export default class Game {
   private _frontClouds: MovableGameElement[] = []
 
   private _backClouds: MovableGameElement[] = []
+
+  private _chest!: GameElement
 
   private _playerSpeed = 10
 
@@ -76,6 +79,7 @@ export default class Game {
     await this.makeClouds()
     await this.makeGround()
     await this.makePlatforms()
+    await this.makeChest()
     await this.makePlayer(this._keysController)
   }
 
@@ -92,6 +96,10 @@ export default class Game {
     keysController.on(KeysContoller.EVENTS.MOVE_UP, (eventArg) => {
       this._moveUp = eventArg as boolean
     })
+  }
+
+  private async makeChest() {
+    this._chest = new GameElement({ x: 0, y: 0 }, await createImageAsync(spriteChestSrc))
   }
 
   private async makeBackground() {
