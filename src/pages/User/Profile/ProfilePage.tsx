@@ -13,7 +13,7 @@ export const ProfilePage: React.FC = () => {
           <h1 className="text-color-primary mb-6 text-center text-4xl text-primary">
             Профиль
           </h1>
-          <ProfileForm user={auth.user} />
+          <ProfileForm user={auth.user!} />
         </>
       }
     </main>

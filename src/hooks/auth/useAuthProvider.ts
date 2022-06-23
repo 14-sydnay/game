@@ -21,7 +21,10 @@ export const useAuthProvider = (): AuthContextType => {
     setIsLoading(true)
     return authService
       .signin(login, password)
-      .then((userData) => setUser(userData))
+      .then((userData) => {
+        setUser(userData)
+        return userData
+      })
       .finally(() => setIsLoading(false))
   }
 
