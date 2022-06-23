@@ -187,7 +187,7 @@ export default class Game {
   }
 
   private async makeGround() {
-    const motionStrategy = new SimpleMotionStrategy(3, 0)
+    const motionStrategy = new SimpleMotionStrategy(10, 0)
     const groundTileImg = await createImageAsync(groundSrc)
 
     for (let i = -3; i < 10; i++) {
@@ -364,7 +364,7 @@ export default class Game {
 
     this.collisionDetectWithGround()
 
-    if (this._scrollOffset > 6500) {
+    if (this._scrollOffset > 2000) {
       this.stop('win')
       cancelAnimationFrame(requestId)
     }

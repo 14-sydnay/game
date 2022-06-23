@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation, Link } from 'react-router-dom'
 
 import { useAuth } from 'hooks/auth'
 import { LocationState } from './type'
@@ -71,6 +71,11 @@ export const LoginPage: React.FC = () => {
               Войти
             </button>
           </div>
+          <Link to="/registration">
+            <button type="button" className="btn btn-link w-full">
+              Регистрация
+            </button>
+          </Link>
         </div>
       </form>
     </main>

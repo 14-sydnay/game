@@ -28,6 +28,13 @@ export const useAuthProvider = (): AuthContextType => {
       .finally(() => setIsLoading(false))
   }
 
+  const logout = (cb: VoidFunction) => {
+    authService
+      .logout()
+      .then(() => setUser(null))
+      .then(() => cb())
+  }
+
   return {
     isLoading,
     user,
@@ -35,5 +42,6 @@ export const useAuthProvider = (): AuthContextType => {
       return this.user !== null
     },
     signin,
+    logout,
   }
 }
