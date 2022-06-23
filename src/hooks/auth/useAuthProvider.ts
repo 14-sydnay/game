@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react'
 
 import { AuthContextType } from './types'
 import { authService } from 'services/auth'
-import { Nullable } from 'types/nullable'
 import { User } from 'src/models/user'
+import { Nullable } from 'types/nullable'
 
 export const useAuthProvider = (): AuthContextType => {
   const [user, setUser] = useState<Nullable<User>>(null)
@@ -28,11 +28,8 @@ export const useAuthProvider = (): AuthContextType => {
       .finally(() => setIsLoading(false))
   }
 
-  const logout = (cb: VoidFunction) => {
-    authService
-      .logout()
-      .then(() => setUser(null))
-      .then(() => cb())
+  const logout = () => {
+    return authService.logout().then(() => setUser(null))
   }
 
   return {

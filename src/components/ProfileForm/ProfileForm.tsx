@@ -4,7 +4,7 @@ import { Props } from './type'
 import { ChangeAvatar } from 'components/ChangeAvatar'
 import { userService } from 'services/user'
 
-export const ProfileForm: FC<Props> = ({ user }) => {
+export const ProfileForm: FC<Props> = ({ user, children }) => {
   const [login, setLogin] = useState<string>(user.login)
   const [firstName, setFirstName] = useState<string>(user.firstName)
   const [secondName, setSecondName] = useState<string>(user.secondName)
@@ -136,6 +136,7 @@ export const ProfileForm: FC<Props> = ({ user }) => {
             <button type="submit" className="btn btn-primary">
               Сохранить
             </button>
+            {children}
           </div>
         </div>
       </form>
