@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { Footer } from 'components/Footer'
 import { Navbar } from 'components/Navbar'
 import { TextArea } from 'components/TextArea'
+import { Avatar } from 'components/Avatar'
 
 export const ThreadPage: React.FC<{}> = () => {
   const [data, setData] = useState({
@@ -53,13 +54,7 @@ export const ThreadPage: React.FC<{}> = () => {
         <div className="bg-gray-100 text-gray-900">
           <main className="mx-auto max-w-5xl px-4 pt-4 sm:px-6 lg:px-8">
             <div className="mt-10 flex items-center">
-              <div className="h-16 w-16 flex-shrink-0">
-                <img
-                  className="h-16 w-16 rounded-full"
-                  src={data.authorImg}
-                  alt=""
-                />
-              </div>
+              <Avatar url={data.authorImg} size="medium" />
               <div className="ml-4">
                 <h1 className="text-lg font-medium text-gray-900">
                   {data.threadTitle}
@@ -84,9 +79,7 @@ export const ThreadPage: React.FC<{}> = () => {
                   <div className="flex w-full items-center justify-between border-b pb-3">
                     <div className="flex items-center space-x-3">
                       <div className="avatar">
-                        <div className="h-12 w-12 rounded-full">
-                          <img src={message.imgUrl} />
-                        </div>
+                        <Avatar url={message.imgUrl} size="small" />
                       </div>
                       <div className="font-bold text-slate-700">
                         {message.name}

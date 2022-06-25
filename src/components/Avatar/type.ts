@@ -1,1 +1,1 @@
-export type AvatarSize = 'small' | 'normal'
+export type AvatarSize = 'small' | 'medium' | 'large'

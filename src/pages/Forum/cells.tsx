@@ -4,6 +4,7 @@ import dayjs from 'dayjs'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Cell } from 'react-table'
+import { Avatar } from 'components/Avatar'
 
 export const AvatarCell: React.FC<any> = ({ value, column, row }: Cell) => {
   const src: string = row.original[column.imgAccessor]
@@ -12,9 +13,7 @@ export const AvatarCell: React.FC<any> = ({ value, column, row }: Cell) => {
   const title: string = value
   return (
     <div className="flex items-center">
-      <div className="h-10 w-10 flex-shrink-0">
-        <img className="h-10 w-10 rounded-full" src={src} alt="" />
-      </div>
+      <Avatar url={src} size="small" />
       <div className="ml-4">
         <Link to={row.id} className="text-sm font-medium text-gray-900">
           {title}
