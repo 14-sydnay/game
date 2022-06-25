@@ -3,9 +3,21 @@ import React, { FC } from 'react'
 import { Props } from './type'
 import { AvatarPlaceholder } from 'components/Avatar'
 
-export const Avatar: FC<Props> = ({ url, size = 'normal' }) => {
+export const Avatar: FC<Props> = ({ url, size = 'large' }) => {
   if (!url) return <AvatarPlaceholder size={size} />
-  const style = size === 'normal' ? 'w-24' : 'w-12'
+  let style = ''
+  switch (size) {
+    case 'small':
+      style = 'w-12'
+      break
+    case 'medium':
+      style = 'w-16'
+      break
+    case 'large':
+      style = 'w-24'
+      break
+  }
+
   return (
     <figure className="avatar">
       <div className={`${style} rounded-full`}>

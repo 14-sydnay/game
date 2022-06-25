@@ -2,8 +2,8 @@ import React, { FC } from 'react'
 
 import { Props } from './type'
 
-export const AvatarPlaceholder: FC<Props> = ({ size = 'normal' }) => {
-  const style = size === 'normal' ? 'w-24' : 'w-12'
+export const AvatarPlaceholder: FC<Props> = ({ size = 'large' }) => {
+  const style = size === 'large' ? 'w-24' : 'w-12'
   return (
     <figure className="avatar placeholder ">
       <div
