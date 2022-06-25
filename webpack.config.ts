@@ -31,6 +31,7 @@ const config: WebpackConfig = {
       pages: path.resolve(__dirname, 'src/pages'),
       assets: path.resolve(__dirname, 'src/assets'),
       modules: path.resolve(__dirname, 'src/modules'),
+      models: path.resolve(__dirname, 'src/models'),
       api: path.resolve(__dirname, 'src/api'),
       services: path.resolve(__dirname, 'src/services'),
       hooks: path.resolve(__dirname, 'src/hooks'),

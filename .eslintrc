@@ -160,6 +160,10 @@
             "./src/modules/"
           ],
           [
+            "models",
+            "./src/models/"
+          ],
+          [
             "api",
             "./src/api/"
           ],
