@@ -1,34 +1,25 @@
-import axios from 'axios'
 import React, { useState, useMemo, useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 
 import { AvatarCell } from './AvatarCell'
-import { FetchedData, LeaderboardData } from './type'
 import { Footer } from 'components/Footer'
 import { Navbar } from 'components/Navbar'
 import { Table } from 'components/Table'
+import { forumService } from 'services/forum'
+import { LeaderData } from 'models/forum'
 
 export const LeaderboardPage: React.FC<{}> = () => {
-  const [data, setData] = useState<LeaderboardData[]>([])
+  const [leaders, setLeaders] = useState<LeaderData[]>([])
 
   useEffect(() => {
-    axios
-      .post('https://ya-praktikum.tech/api/v2/leaderboard/sydney', {
+    forumService
+      .getLeaders('sydney', {
         ratingFieldName: 'score',
         cursor: 0,
         limit: 10,
       })
-      .then((res: { data: FetchedData[] }) => {
-        const leaders: LeaderboardData[] = []
-        res.data.map((item: FetchedData) => {
-          leaders.push(item.data)
-        })
-        return setData(leaders)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+      .then((leadersData) => setLeaders(leadersData))
+      .catch((err) => console.log(err.message))
   }, [])
 
   const columns = useMemo(
@@ -55,7 +46,7 @@ export const LeaderboardPage: React.FC<{}> = () => {
       </div>
       <div className="item w-3/4 flex-auto">
         <h1 className="my-4 text-center text-2xl font-medium">Лидерборд</h1>
-        <Table columns={columns} data={data} />
+        <Table columns={columns} data={leaders} />
       </div>
       <div className="item w-full">
         <Footer />
