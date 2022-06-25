@@ -4,6 +4,7 @@ import './assets/style/index.css'
 import { Provider } from 'react-redux'
 
 import { App } from './app'
+import { startServiceWorker } from './serviceWorker'
 import { store } from './store'
 
 const container = document.getElementById('root')
@@ -16,3 +17,4 @@ root.render(
     </Provider>
   </React.StrictMode>
 )
+startServiceWorker()
