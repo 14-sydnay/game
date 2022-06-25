@@ -1,10 +1,27 @@
 import { PlusIcon } from '@heroicons/react/solid'
+import { yupResolver } from '@hookform/resolvers/yup'
 import React, { useState, useMemo } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import * as yup from 'yup'
 
 import { AvatarCell, LastMessageCell } from './cells'
+import { FormValues } from './type'
 import { Footer } from 'components/Footer'
 import { Navbar } from 'components/Navbar'
 import { Table } from 'components/Table'
+
+yup.setLocale({
+  mixed: {
+    default: 'Введите корректные данные',
+  },
+  string: {
+    min: 'Введите название темы',
+  },
+})
+
+const schema = yup.object().shape({
+  title: yup.string().min(1),
+})
 
 export const ForumPage: React.FC<{}> = () => {
   const [data, setData] = useState([
@@ -43,6 +60,21 @@ export const ForumPage: React.FC<{}> = () => {
     },
   ])
 
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<FormValues>({
+    resolver: yupResolver(schema),
+  })
+
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
+    console.log(data)
+    document.getElementById('new-post')?.click()
+    reset()
+  }
+
   const columns = useMemo(
     () => [
       {
@@ -76,12 +108,15 @@ export const ForumPage: React.FC<{}> = () => {
       <div className="item w-full flex-auto">
         <div className="bg-gray-100 text-gray-900">
           <main className="mx-auto max-w-5xl px-4 pt-4 sm:px-6 lg:px-8">
-            <button type="button" className="btn btn-outline btn-success gap-2">
+            <label
+              htmlFor="new-post"
+              className="modal-button btn btn-outline btn-success gap-2"
+            >
               <PlusIcon className="h-6 w-6" />
               Новый пост
-            </button>
+            </label>
             <div>
-              <h1 className="text-center text-xl font-semibold">Посты</h1>
+              <h1 className="text-center text-2xl font-medium">Посты</h1>
             </div>
             <div className="mt-6 flex flex-col">
               <Table columns={columns} data={data} />
@@ -92,6 +127,30 @@ export const ForumPage: React.FC<{}> = () => {
       <div className="item w-full">
         <Footer />
       </div>
+      <input type="checkbox" id="new-post" className="modal-toggle" />
+      <label htmlFor="new-post" className="modal cursor-pointer">
+        <label className="modal-box relative" htmlFor="">
+          <label
+            htmlFor="new-post"
+            className="absolute right-4 top-2 cursor-pointer"
+          >
+            ✕
+          </label>
+          <h3 className="text-center text-lg font-bold">Новый пост</h3>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <input
+              type="text"
+              placeholder="Введите тему"
+              className="input input-bordered mt-4 w-full"
+              {...register('title')}
+            />
+            <p className="h-4 text-error">{errors.title?.message}</p>
+            <button type="submit" className="btn btn-primary float-right">
+              Создать
+            </button>
+          </form>
+        </label>
+      </label>
     </div>
   )
 }

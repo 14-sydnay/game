@@ -18,7 +18,10 @@ import spriteCharacterIdleSrc from 'assets/images/character/spriteIdleBlink.png'
 import spriteCharacterRunSrc from 'assets/images/character/spriteRun.png'
 import platformSrc from 'assets/images/platform/dirt.png'
 import groundSrc from 'assets/images/platform/grassMid.png'
-import { EndOfGameEvent, PlayerStatus } from 'components/game/GameComponent/type'
+import {
+  EndOfGameEvent,
+  PlayerStatus,
+} from 'components/game/GameComponent/type'
 
 export default class Game {
   private _render: CanvasRenderingContext2D
@@ -96,7 +99,10 @@ export default class Game {
 
   private async makeBackground() {
     this._sky = new GameElement({ x: 0, y: 0 }, await createImageAsync(skySrc))
-    this._hills = new GameElement({ x: 0, y: 0 }, await createImageAsync(hillsSrc))
+    this._hills = new GameElement(
+      { x: 0, y: 0 },
+      await createImageAsync(hillsSrc)
+    )
   }
 
   private async makePlayer(keysController: KeysContoller) {
@@ -139,8 +145,14 @@ export default class Game {
   }
 
   private async makeClouds() {
-    const frontCloudMotionStrategy = new SimpleMotionStrategy(this._playerSpeed * 0.33, 0)
-    const backCloudMotionStrategy = new SimpleMotionStrategy(this._playerSpeed * 0.66, 0)
+    const frontCloudMotionStrategy = new SimpleMotionStrategy(
+      this._playerSpeed * 0.33,
+      0
+    )
+    const backCloudMotionStrategy = new SimpleMotionStrategy(
+      this._playerSpeed * 0.66,
+      0
+    )
 
     this._frontClouds = [
       new MovableGameElement(
@@ -175,7 +187,7 @@ export default class Game {
   }
 
   private async makeGround() {
-    const motionStrategy = new SimpleMotionStrategy(3, 0)
+    const motionStrategy = new SimpleMotionStrategy(10, 0)
     const groundTileImg = await createImageAsync(groundSrc)
 
     for (let i = -3; i < 10; i++) {
@@ -196,7 +208,7 @@ export default class Game {
 
   private async makePlatforms() {
     const motionStrategy = new SimpleMotionStrategy(this._playerSpeed, 0)
-    const platformImg = await createImageAsync(platformSrc as string)
+    const platformImg = await createImageAsync(platformSrc)
 
     this._platforms = [
       new MovableGameElement(
@@ -231,9 +243,9 @@ export default class Game {
     this.animate()
   }
 
-  async stop(playerStatus: PlayerStatus): Promise<void> {
+  stop(playerStatus: PlayerStatus): void {
     this._handleEndOfGame({ playerStatus })
-    await this.restart()
+    //await this.restart()
   }
 
   async restart(): Promise<void> {
@@ -300,10 +312,14 @@ export default class Game {
   private updatePlatformsPosition() {
     if (this._moveRight) {
       this._scrollOffset += this._playerSpeed
-      this._platforms.forEach((platform) => (platform.position.x -= this._playerSpeed))
+      this._platforms.forEach(
+        (platform) => (platform.position.x -= this._playerSpeed)
+      )
     } else if (this._moveLeft) {
       this._scrollOffset -= this._playerSpeed
-      this._platforms.forEach((platform) => (platform.position.x += this._playerSpeed))
+      this._platforms.forEach(
+        (platform) => (platform.position.x += this._playerSpeed)
+      )
     }
   }
 
@@ -332,7 +348,7 @@ export default class Game {
   }
 
   private animate = () => {
-    requestAnimationFrame(this.animate)
+    const requestId = requestAnimationFrame(this.animate)
     this.drawBackground()
     this.drawGroundTiles()
     this.drawPlatforms()
@@ -348,11 +364,13 @@ export default class Game {
 
     this.collisionDetectWithGround()
 
-    if (this._scrollOffset > 3500) {
+    if (this._scrollOffset > 2000) {
       this.stop('win')
+      cancelAnimationFrame(requestId)
     }
     if (this._player.top > this._scene.height) {
       this.stop('lose')
+      cancelAnimationFrame(requestId)
     }
   }
 }

@@ -1,4 +1,1 @@
-export type OwnProps = {
-  url: string
-}
-export type Props = OwnProps
+export type AvatarSize = 'small' | 'normal'

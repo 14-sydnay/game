@@ -12,11 +12,15 @@ export const transformToUser = (data: UserDto): User => {
     displayName: data.display_name,
     email: data.email,
     phone: data.phone,
-    avatar: `${process.env.API_ENDPOINT}/resources/${data.avatar}`,
+    avatar: data.avatar
+      ? `${process.env.API_ENDPOINT}/resources/${data.avatar}`
+      : '',
   }
 }
 
-export const transformToRegisterRequest = (data: RegisterData): RegisterRequestData => {
+export const transformToRegisterRequest = (
+  data: RegisterData
+): RegisterRequestData => {
   return {
     login: data.login,
     first_name: data.firstName,

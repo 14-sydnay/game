@@ -4,44 +4,54 @@ import { Props } from './type'
 import { ChangeAvatar } from 'components/ChangeAvatar'
 import { userService } from 'services/user'
 
-export const ProfileForm: FC<Props> = ({ user }) => {
-  const [login, setLogin] = useState<string | undefined>(user.login)
-  const [firstName, setFirstName] = useState<string | undefined>(user.firstName)
-  const [secondName, setSecondName] = useState<string | undefined>(user.secondName)
-  const [displayName, setDisplayName] = useState<string | undefined>(user.displayName)
-  const [email, setEmail] = useState<string | undefined>(user.email)
-  const [phone, setPhone] = useState<string | undefined>(user.phone)
+export const ProfileForm: FC<Props> = ({ user, children }) => {
+  const [login, setLogin] = useState<string>(user.login)
+  const [firstName, setFirstName] = useState<string>(user.firstName)
+  const [secondName, setSecondName] = useState<string>(user.secondName)
+  const [displayName, setDisplayName] = useState<string>(user.displayName)
+  const [email, setEmail] = useState<string>(user.email)
+  const [phone, setPhone] = useState<string>(user.phone)
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
-    await userService.chaneProfile({ login, firstName, secondName, displayName, email, phone })
+    await userService.chaneProfile({
+      login,
+      firstName,
+      secondName,
+      displayName,
+      email,
+      phone,
+    })
   }
 
-  const handleInputChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
-    const target = event.currentTarget
-    const name = target.name
+  const handleInputChange = useCallback(
+    (event: React.FormEvent<HTMLInputElement>) => {
+      const target = event.currentTarget
+      const name = target.name
 
-    switch (name) {
-      case 'login':
-        setLogin(target.value)
-        break
-      case 'firstName':
-        setFirstName(target.value)
-        break
-      case 'secondName':
-        setSecondName(target.value)
-        break
-      case 'displayName':
-        setDisplayName(target.value)
-        break
-      case 'email':
-        setEmail(target.value)
-        break
-      case 'phone':
-        setPhone(target.value)
-        break
-    }
-  }, [])
+      switch (name) {
+        case 'login':
+          setLogin(target.value)
+          break
+        case 'firstName':
+          setFirstName(target.value)
+          break
+        case 'secondName':
+          setSecondName(target.value)
+          break
+        case 'displayName':
+          setDisplayName(target.value)
+          break
+        case 'email':
+          setEmail(target.value)
+          break
+        case 'phone':
+          setPhone(target.value)
+          break
+      }
+    },
+    []
+  )
   return (
     <>
       <form
@@ -126,6 +136,7 @@ export const ProfileForm: FC<Props> = ({ user }) => {
             <button type="submit" className="btn btn-primary">
               Сохранить
             </button>
+            {children}
           </div>
         </div>
       </form>

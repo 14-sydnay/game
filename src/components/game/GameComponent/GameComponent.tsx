@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useCallback } from 'react'
 
 import { Props } from './type'
-import { useFullscreenTrigger } from 'hooks'
+import { useFullscreenTrigger } from 'hooks/fullScreen'
 import { Game, KeysContoller, Scene } from 'modules/game'
 
 export const GameComponent: Props = ({ onEndOfGame: onEndOfGame }) => {
@@ -20,7 +20,12 @@ export const GameComponent: Props = ({ onEndOfGame: onEndOfGame }) => {
   //
 
   useEffect(() => {
-    const keyController = new KeysContoller('ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight')
+    const keyController = new KeysContoller(
+      'ArrowUp',
+      'ArrowDown',
+      'ArrowLeft',
+      'ArrowRight'
+    )
     if (canvasRef.current) {
       const scene = new Scene(canvasRef.current.width, canvasRef.current.height)
       const ctx = canvasRef.current.getContext('2d')!

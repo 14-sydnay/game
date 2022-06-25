@@ -2,3 +2,4 @@
 /dist
 /package-lock.json
 /src/components/Table
+/src/pages/Forum/cells.tsx

@@ -16,7 +16,12 @@ export default class KeysContoller {
 
   private _keys: ControlKeys
 
-  constructor(keyUp: KeyCode, keyDown: KeyCode, keyleft: KeyCode, keyRight: KeyCode) {
+  constructor(
+    keyUp: KeyCode,
+    keyDown: KeyCode,
+    keyleft: KeyCode,
+    keyRight: KeyCode
+  ) {
     this._keys = {
       up: { code: keyUp, pressed: false },
       down: { code: keyDown, pressed: false },

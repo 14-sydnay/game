@@ -12,4 +12,4 @@ export type Profile = {
 export type OwnProps = {
   user: Profile
 }
-export type Props = OwnProps
+export type Props = OwnProps & { children: JSX.Element }

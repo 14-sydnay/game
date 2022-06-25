@@ -1,4 +1,5 @@
 import GameElement from './GameElement'
+import { BBox } from './types'
 
 export default class MotionStrategy {
   private _scene: BBox
@@ -9,7 +10,12 @@ export default class MotionStrategy {
 
   private _verticalVelocity: number
 
-  constructor(scene: BBox, gravity: number, horizontalVelocity = 5, verticalVelocity = 10) {
+  constructor(
+    scene: BBox,
+    gravity: number,
+    horizontalVelocity = 5,
+    verticalVelocity = 10
+  ) {
     this._scene = { width: scene.width, height: scene.height }
     this._gravity = gravity
     this._horizontalVelocity = horizontalVelocity

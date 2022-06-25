@@ -14,7 +14,10 @@ export const userApi = {
     apiInstance.put<ChangePasswordRequest>('password', { ...data }),
 
   changeAvatar: (data: ChangeAvatarRequest) =>
-    apiInstance.put<ChangeAvatarRequest, ChangeAvatarResponse>('profile/avatar', data),
+    apiInstance.put<ChangeAvatarRequest, ChangeAvatarResponse>(
+      'profile/avatar',
+      data
+    ),
 
   changeProfile: (data: ChangeProfileRequest) =>
     apiInstance.put<ChangeProfileRequest, ChangeProfileResponse>('profile', {

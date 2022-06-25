@@ -7,7 +7,11 @@ export default class Player extends GameElement {
 
   private _skin: ISkin
 
-  constructor(initPosition: Position, skin: ISkin, motionStrategy: MotionStrategy) {
+  constructor(
+    initPosition: Position,
+    skin: ISkin,
+    motionStrategy: MotionStrategy
+  ) {
     super(initPosition, skin.image)
     this.bbox = { width: 170, height: 147 }
     this._motionStrategy = motionStrategy

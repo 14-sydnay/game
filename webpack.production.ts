@@ -1,4 +1,7 @@
-import { Configuration as WebpackConfig, optimize as WebpackOptimize } from 'webpack'
+import {
+  Configuration as WebpackConfig,
+  optimize as WebpackOptimize,
+} from 'webpack'
 import { merge } from 'webpack-merge'
 import baseConfig from './webpack.config'
 

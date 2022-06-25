@@ -1,2 +1,3 @@
 export { useAuth } from './useAuth'
-export { ProvideAuth } from './ProvideAuth'
+export { AuthProvider } from './AuthProvider'
+export { RequireAuth } from './RequireAuth'

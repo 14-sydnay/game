@@ -1,13 +1,26 @@
 import React, { useState } from 'react'
+import { useNavigate, useLocation, Link } from 'react-router-dom'
 
-import { authService } from 'services/auth'
+import { useAuth } from 'hooks/auth'
+import { LocationState } from './type'
 
 export const LoginPage: React.FC = () => {
+  const auth = useAuth()
+
   const [login, setLogin] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+  const navigate = useNavigate()
+  const location = useLocation()
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  const from = ((location.state as LocationState)?.from?.pathname ||
+    '/') as string
+
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
-    authService.signin(login, password)
+    void auth.signin(login, password).then(() => {
+      navigate(from, { replace: true })
+      return
+    })
   }
 
   const handleInputChange = (event: React.FormEvent<HTMLInputElement>) => {
@@ -58,6 +71,11 @@ export const LoginPage: React.FC = () => {
               Войти
             </button>
           </div>
+          <Link to="/registration">
+            <button type="button" className="btn btn-link w-full">
+              Регистрация
+            </button>
+          </Link>
         </div>
       </form>
     </main>

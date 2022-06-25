@@ -3,8 +3,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import { NavLinks } from './NavLinks'
+import { Avatar } from 'components/Avatar'
+import { useAuth } from 'hooks/auth'
 
 export const Navbar: React.FC<{}> = () => {
+  const auth = useAuth()
+  const avatarUrl = auth.user?.avatar || ''
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -29,7 +33,15 @@ export const Navbar: React.FC<{}> = () => {
         </ul>
       </nav>
       <div className="navbar-end">
-        <a className="btn btn-secondary">Войти</a>
+        {auth.user ? (
+          <Link to="/profile">
+            <Avatar url={avatarUrl} size="small" />
+          </Link>
+        ) : (
+          <Link to="/login" className="btn btn-secondary">
+            Войти
+          </Link>
+        )}
       </div>
     </div>
   )
