@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 import { withErrorBoundary, useErrorBoundary } from 'react-use-error-boundary'
 
 import { AuthProvider, RequireAuth } from 'hooks/auth'
@@ -50,7 +50,14 @@ export const App: React.FC<{}> = withErrorBoundary(() => {
               </RequireAuth>
             }
           />
-          <Route path="/leaderboard" element={<LeaderboardPage />} />
+          <Route
+            path="/leaderboard"
+            element={
+              <RequireAuth>
+                <LeaderboardPage />
+              </RequireAuth>
+            }
+          />
           <Route path="/forum">
             <Route
               index

@@ -104,7 +104,11 @@ const config: WebpackConfig = {
       patterns: [
         {
           from: path.resolve(__dirname, './src/assets/images/favicons'),
-          to: 'favicons',
+          to: '.',
+        },
+        {
+          from: path.resolve(__dirname, './manifest.json'),
+          to: '.',
         },
       ],
     }),
