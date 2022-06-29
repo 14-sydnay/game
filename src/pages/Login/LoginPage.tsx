@@ -16,6 +16,7 @@ export const LoginPage: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
+
     void auth.signin(login, password).then(() => {
       navigate(from, { replace: true })
       return

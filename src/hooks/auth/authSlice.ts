@@ -17,10 +17,10 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    signin: (state, action: PayloadAction<Nullable<User>>) => {
+    addUser: (state, action: PayloadAction<Nullable<User>>) => {
       state.user = action.payload
     },
-    logout: (state) => {
+    removeUser: (state) => {
       state.user = null
     },
     // todo: убрать в другой slice
@@ -33,6 +33,7 @@ export const authSlice = createSlice({
   },
 })
 
-export const { signin, logout } = authSlice.actions
+export const { addUser, removeUser, startLoading, stopLoading } =
+  authSlice.actions
 
 export default authSlice.reducer
