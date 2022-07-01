@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate, useLocation, Link } from 'react-router-dom'
 
-import { useAuth } from 'hooks/auth'
 import { LocationState } from './type'
+import { useAuth } from 'hooks/auth'
 
 export const LoginPage: React.FC = () => {
   const auth = useAuth()
@@ -11,30 +11,18 @@ export const LoginPage: React.FC = () => {
   const [password, setPassword] = useState<string>('')
   const navigate = useNavigate()
   const location = useLocation()
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  const from = ((location.state as LocationState)?.from?.pathname ||
-    '/') as string
+
+  const from = (location.state as LocationState)?.from?.pathname || '/'
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
+
     void auth.signin(login, password).then(() => {
       navigate(from, { replace: true })
       return
     })
   }
 
-  const handleInputChange = (event: React.FormEvent<HTMLInputElement>) => {
-    const target = event.currentTarget
-    const name = target.name
-    switch (name) {
-      case 'login':
-        setLogin(target.value)
-        break
-      case 'password':
-        setPassword(target.value)
-        break
-    }
-  }
   return (
     <main>
       <form
@@ -50,7 +38,7 @@ export const LoginPage: React.FC = () => {
               type="text"
               className="input input-bordered"
               value={login}
-              onChange={handleInputChange}
+              onChange={(e) => setLogin(e.currentTarget.value)}
               name="login"
             />
           </div>
@@ -62,7 +50,7 @@ export const LoginPage: React.FC = () => {
               type="password"
               className="input input-bordered"
               value={password}
-              onChange={handleInputChange}
+              onChange={(e) => setPassword(e.currentTarget.value)}
               name="password"
             />
           </div>

@@ -1,14 +1,11 @@
 import React, { FC } from 'react'
+import { useSelector } from 'react-redux'
 
-import { AuthContext } from './authContext'
 import { useAuthProvider } from './useAuthProvider'
+import { RootState } from 'src/store'
 
 export const AuthProvider: FC<{ children: JSX.Element }> = ({ children }) => {
-  const auth = useAuthProvider()
-
-  return auth.isLoading ? (
-    <>Загрузка...</>
-  ) : (
-    <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>
-  )
+  const auth = useSelector((state: RootState) => state.auth)
+  useAuthProvider()
+  return auth.isLoading ? <>Загрузка...</> : <>{children}</>
 }
