@@ -1,8 +1,8 @@
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import { withErrorBoundary, useErrorBoundary } from 'react-use-error-boundary'
 
-import { AuthProvider, RequireAuth } from 'hooks/auth'
+import { RequireAuth } from 'hooks/auth'
 import { NotFound } from 'pages/404'
 import { ForumPage } from 'pages/Forum'
 import { ThreadPage } from 'pages/Forum/Thread'
@@ -36,65 +36,61 @@ export const App: React.FC<{}> = withErrorBoundary(() => {
   }
 
   return (
-    <AuthProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="login" element={<LoginPage />} />
-          <Route path="/registration" element={<RegistrationPage />} />
-          <Route
-            path="/game"
-            element={
-              <RequireAuth>
-                <GamePage />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/leaderboard"
-            element={
-              <RequireAuth>
-                <LeaderboardPage />
-              </RequireAuth>
-            }
-          />
-          <Route path="/forum">
-            <Route
-              index
-              element={
-                <RequireAuth>
-                  <ForumPage />
-                </RequireAuth>
-              }
-            />
-            <Route
-              path=":id"
-              element={
-                <RequireAuth>
-                  <ThreadPage />
-                </RequireAuth>
-              }
-            />
-          </Route>
-          <Route
-            path="/profile"
-            element={
-              <RequireAuth>
-                <ProfilePage />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/changepassword"
-            element={
-              <RequireAuth>
-                <ChangePasswordPage />
-              </RequireAuth>
-            }
-          />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Router>
-    </AuthProvider>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="login" element={<LoginPage />} />
+      <Route path="/registration" element={<RegistrationPage />} />
+      <Route
+        path="/game"
+        element={
+          <RequireAuth>
+            <GamePage />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/leaderboard"
+        element={
+          <RequireAuth>
+            <LeaderboardPage />
+          </RequireAuth>
+        }
+      />
+      <Route path="/forum">
+        <Route
+          index
+          element={
+            <RequireAuth>
+              <ForumPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path=":id"
+          element={
+            <RequireAuth>
+              <ThreadPage />
+            </RequireAuth>
+          }
+        />
+      </Route>
+      <Route
+        path="/profile"
+        element={
+          <RequireAuth>
+            <ProfilePage />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/changepassword"
+        element={
+          <RequireAuth>
+            <ChangePasswordPage />
+          </RequireAuth>
+        }
+      />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   )
 })

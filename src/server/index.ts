@@ -1,11 +1,16 @@
 import express from 'express'
+import path from 'path'
 
 import { render } from './render/render'
 
 const app = express()
 
+app.use(express.static(path.resolve(__dirname, './public')))
+
 app.use(render)
 
-app.listen(8080, () => {
-  console.log('Server is started')
+const port = process.env.PORT || 8080
+
+app.listen(port, () => {
+  console.log('Application is started on localhost:', port)
 })

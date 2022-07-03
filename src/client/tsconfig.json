@@ -11,10 +11,11 @@
       "noImplicitThis": true,
       "resolveJsonModule": true,
       "esModuleInterop": true,
+      "moduleResolution": "node",
       "module": "commonjs",
       "target": "esnext",
       "jsx": "react",
-      "baseUrl": "./",
+      /* "baseUrl": "./",
       "paths": {
         "src/*":["../../src/*"],
         "types/*":["../../src/types/*"],
@@ -28,6 +29,22 @@
         "services/*": ["../../src/services/*"],
         "hooks/*": ["../../src/hooks/*"],
         "utils/*": ["../../src/utils/*"]
+      }, */
+      "baseUrl": "../../",
+      "paths": {
+        "src/*":["src/*"],
+        "types/*":["src/types/*"],
+        "images/*": ["src/assets/images/*"],
+        "components/*": ["src/components/*"],
+        "assets/*": ["src/assets/*"],
+        "pages/*": ["src/pages/*"],
+        "modules/*": ["src/modules/*"],
+        "models/*": ["src/models/*"],
+        "api/*": ["src/api/*"],
+        "services/*": ["src/services/*"],
+        "hooks/*": ["src/hooks/*"],
+        "utils/*": ["src/utils/*"]
       },
+      "lib": ["DOM", "ESNext"],
   }
 }

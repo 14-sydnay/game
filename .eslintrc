@@ -6,7 +6,9 @@
     "sourceType": "module",
     "project": [
       "./tsconfig.json",
-      "./tsconfig.root.json"
+      "./tsconfig.root.json",
+      "./src/server/tsconfig.json",
+      "./src/client/tsconfig.json"
     ]
   },
   "env": {

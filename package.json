@@ -12,8 +12,9 @@
     "lint:fix": "eslint src --ext .ts,.tsx --fix",
     "test": "jest",
     "test-coverage": "jest --coverage",
-    "build:server": "npx tsc --project ./src/server",
-    "start:server": "node ./dist/server/index.js"
+    "build:server": "cross-env TS_NODE_PROJECT=\"./src/server/tsconfig.json\" webpack --config ./webpack/server.config.ts",
+    "build:client": "cross-env TS_NODE_PROJECT=\"./src/client/tsconfig.json\" webpack --config ./webpack/client.config.ts",
+    "start:server": "node ./dist/server.js"
   },
   "devDependencies": {
     "@statoscope/webpack-plugin": "5.20.1",
@@ -32,6 +33,7 @@
     "@types/react-table": "7.7.12",
     "@types/tailwindcss": "3.0.10",
     "@types/webpack": "5.28.0",
+    "@types/webpack-node-externals": "2.5.3",
     "@typescript-eslint/eslint-plugin": "5.26.0",
     "@typescript-eslint/parser": "5.26.0",
     "autoprefixer": "10.4.7",
@@ -63,6 +65,7 @@
     "jsdom": "19.0.0",
     "jsdom-global": "3.0.2",
     "mini-css-extract-plugin": "2.6.0",
+    "null-loader": "4.0.1",
     "postcss": "8.4.14",
     "postcss-loader": "7.0.0",
     "prettier": "2.6.2",
@@ -74,10 +77,12 @@
     "ts-loader": "9.3.0",
     "ts-node": "10.8.0",
     "tsconfig-paths": "4.0.0",
+    "tsconfig-paths-webpack-plugin": "3.5.2",
     "typescript": "4.7.2",
     "webpack": "5.72.1",
     "webpack-cli": "4.9.2",
     "webpack-dev-server": "4.9.0",
+    "webpack-node-externals": "3.0.0",
     "workbox-webpack-plugin": "6.5.3"
   },
   "dependencies": {
