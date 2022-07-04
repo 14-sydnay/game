@@ -7,7 +7,6 @@ import { IS_DEV, DIST_DIR, SRC_DIR } from './env'
 import cssLoader from './loaders/css'
 import fileLoader from './loaders/file'
 import jsLoader from './loaders/js'
-import imageLoader from './loaders/image'
 
 const config: Configuration = {
   mode: 'development',
@@ -16,12 +15,7 @@ const config: Configuration = {
   node: { __dirname: false },
   entry: path.join(SRC_DIR, 'server'),
   module: {
-    rules: [
-      fileLoader.server,
-      cssLoader.server,
-      jsLoader.server,
-      imageLoader.server,
-    ],
+    rules: [fileLoader.server, cssLoader.server, jsLoader.server],
   },
   output: {
     filename: 'server.js',
