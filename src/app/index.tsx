@@ -13,6 +13,7 @@ import { LoginPage } from 'pages/Login'
 import { RegisterPage as RegistrationPage } from 'pages/Register'
 import { ChangePasswordPage } from 'pages/User/ChangePassword'
 import { ProfilePage } from 'pages/User/Profile'
+import 'regenerator-runtime/runtime'
 
 export const App: React.FC<{}> = withErrorBoundary(() => {
   const [error, resetError] = useErrorBoundary((error, errorInfo) => {

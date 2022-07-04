@@ -14,6 +14,7 @@
     "test-coverage": "jest --coverage",
     "build:server": "cross-env TS_NODE_PROJECT=\"./src/server/tsconfig.json\" webpack --config ./webpack/server.config.ts",
     "build:client": "cross-env TS_NODE_PROJECT=\"./src/client/tsconfig.json\" webpack --config ./webpack/client.config.ts",
+    "build:all": "npm-run-all --print-label build:*",
     "start:server": "node ./dist/server.js"
   },
   "devDependencies": {
@@ -66,6 +67,7 @@
     "jsdom": "19.0.0",
     "jsdom-global": "3.0.2",
     "mini-css-extract-plugin": "2.6.0",
+    "npm-run-all": "4.1.5",
     "null-loader": "4.0.1",
     "postcss": "8.4.14",
     "postcss-loader": "7.0.0",
@@ -112,5 +114,8 @@
     "workbox-strategies": "6.5.3",
     "workbox-window": "6.5.3",
     "yup": "0.32.11"
-  }
+  },
+  "browserslist": [
+    "last 2 Chrome versions"
+  ]
 }
