@@ -4,12 +4,13 @@ import { IS_DEV } from '../env'
 
 export default {
   client: {
-    test: /\.css$/,
+    test: /\.(sa|s?c)ss$/i,
     use: [
-      //IS_DEV && 'css-hot-loader',
       MiniCssExtractPlugin.loader,
       'css-loader',
-    ].filter(Boolean),
+      'postcss-loader',
+      'sass-loader',
+    ],
   },
   server: {
     test: /\.css$/,
