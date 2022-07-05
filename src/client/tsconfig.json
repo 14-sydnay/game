@@ -2,7 +2,7 @@
       "compilerOptions": {
         "typeRoots": [
           "../../node_modules/@types",
-          "../types"
+          "../../types"
         ],
       "rootDir": "../../",
       "outDir": "../../dist",
@@ -15,20 +15,20 @@
       "module": "commonjs",
       "target": "esnext",
       "jsx": "react",
-      "baseUrl": "../../",
+      "baseUrl": "./",
       "paths": {
-        "src/*":["src/*"],
-        "types/*":["types/*"],
-        "images/*": ["src/assets/images/*"],
-        "components/*": ["src/components/*"],
-        "assets/*": ["src/assets/*"],
-        "pages/*": ["src/pages/*"],
-        "modules/*": ["src/modules/*"],
-        "models/*": ["src/models/*"],
-        "api/*": ["src/api/*"],
-        "services/*": ["src/services/*"],
-        "hooks/*": ["src/hooks/*"],
-        "utils/*": ["src/utils/*"]
+        "src/*":["../../src/*"],
+        "types/*":["../../types/*"],
+        "images/*": ["../../src/assets/images/*"],
+        "components/*": ["../../src/components/*"],
+        "assets/*": ["../../src/assets/*"],
+        "pages/*": ["../../src/pages/*"],
+        "modules/*": ["../../src/modules/*"],
+        "models/*": ["../../src/models/*"],
+        "api/*": ["../../src/api/*"],
+        "services/*": ["../../src/services/*"],
+        "hooks/*": ["../../src/hooks/*"],
+        "utils/*": ["../../src/utils/*"]
       },
       "lib": ["DOM", "ESNext"],
   }

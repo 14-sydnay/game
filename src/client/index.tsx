@@ -8,7 +8,11 @@ import { AuthProvider } from 'hooks/auth'
 import { App } from 'src/app'
 //import { swInstance } from 'src/service-worker/swInstance'
 import { createStore } from 'src/store'
-const store = createStore()
+
+const state = window.__INITIAL_STATE__
+const store = createStore(state)
+delete window.__INITIAL_STATE__
+
 const container = document.getElementById('root')
 
 ReactDOM.hydrateRoot(

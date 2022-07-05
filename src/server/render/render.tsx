@@ -38,9 +38,12 @@ export const render = (req: Request, res: Response): void => {
       </StaticRouter>
     </Provider>
   )
+
+  const state = store.getState()
   const result = indexHTML.replace(
     `<div id="root"></div>`,
     `<div id="root">${reactHtml}</div>
+    <script>window.__INITIAL_STATE__=${JSON.stringify(state)}</script>
     <script src='main.js'></script>`
   )
   res.send(result)
