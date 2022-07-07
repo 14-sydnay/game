@@ -137,13 +137,13 @@
       },
       "typescript": {
         "alwaysTryTypes": true,
-        "project": "./tsconfig.json"
+        "project": "./tsconfig.json"        
       },
       "alias": {
         "map": [
           [
             "images",
-            "./src/assets/images"
+            "./src/assets/images/"
           ],
           [
             "components",
