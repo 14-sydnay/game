@@ -242,12 +242,14 @@ export default class Game {
 
   async start(): Promise<void> {
     await this.init()
+    document.body.requestPointerLock();
     const player = new AudioPlayer()
     player.play(bgSoundSrc)
     this.animate()
   }
 
   stop(playerStatus: PlayerStatus): void {
+    document.exitPointerLock();
     const audioElements = document.querySelectorAll('audio')
     audioElements.forEach((audioElement) => {
       audioElement.remove()
