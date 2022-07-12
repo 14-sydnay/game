@@ -248,6 +248,10 @@ export default class Game {
   }
 
   stop(playerStatus: PlayerStatus): void {
+    const audioElements = document.querySelectorAll('audio')
+    audioElements.forEach((audioElement) => {
+      audioElement.remove()
+    })
     this._handleEndOfGame({ playerStatus })
     //await this.restart()
   }
