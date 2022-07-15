@@ -3,6 +3,8 @@ import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 import { withErrorBoundary, useErrorBoundary } from 'react-use-error-boundary'
 
 import { AuthProvider, RequireAuth } from 'hooks/auth'
+import { OAuthProvider } from 'hooks/auth/oauth/OAuthProvider'
+import { NotFound } from 'pages/404'
 import { ForumPage } from 'pages/Forum'
 import { ThreadPage } from 'pages/Forum/Thread'
 import { GamePage } from 'pages/Game'
@@ -12,7 +14,6 @@ import { LoginPage } from 'pages/Login'
 import { RegisterPage as RegistrationPage } from 'pages/Register'
 import { ChangePasswordPage } from 'pages/User/ChangePassword'
 import { ProfilePage } from 'pages/User/Profile'
-import { NotFound } from 'pages/404'
 
 export const App: React.FC<{}> = withErrorBoundary(() => {
   const [error, resetError] = useErrorBoundary((error, errorInfo) => {
