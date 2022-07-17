@@ -7,3 +7,9 @@ export type AuthType = {
   signin: (login: string, password: string) => Promise<Nullable<User>>
   logout: () => Promise<void>
 }
+
+export type OAuthType = {
+  user: Nullable<User>
+  isLoading: boolean
+  redirectToOAuthProvider: () => Promise<void>
+}

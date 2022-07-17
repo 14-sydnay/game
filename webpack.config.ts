@@ -116,6 +116,7 @@ const config: WebpackConfig = {
     new StatoscopeWebpackPlugin(),
     new EnvironmentPlugin({
       API_ENDPOINT: 'https://ya-praktikum.tech/api/v2',
+      REDIRECT_URL: 'http://localhost:3000',
     }),
   ] as WebpackPluginInstance[],
 }
