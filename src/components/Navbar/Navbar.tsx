@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { NavLinks } from './NavLinks'
 import { Avatar } from 'components/Avatar'
 import { useAuth } from 'hooks/auth'
+import { ThemeToggler } from 'components/ThemeToggler'
 
 export const Navbar: React.FC<{}> = () => {
   const auth = useAuth()
@@ -32,6 +33,7 @@ export const Navbar: React.FC<{}> = () => {
           <NavLinks />
         </ul>
       </nav>
+      <ThemeToggler />
       <div className="navbar-end">
         {auth.user ? (
           <Link to="/profile">
