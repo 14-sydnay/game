@@ -1,0 +1,35 @@
+{
+      "compilerOptions": {
+        "typeRoots": [
+          "../../node_modules/@types",
+          "../../types"
+        ],
+      "rootDir": "../../",
+      "outDir": "../../dist",
+      "sourceMap": true,
+      "noImplicitAny": true,
+      "noImplicitThis": true,
+      "resolveJsonModule": true,
+      "esModuleInterop": true,
+      "moduleResolution": "node",
+      "module": "commonjs",
+      "target": "esnext",
+      "jsx": "react",
+      "baseUrl": "./",
+      "paths": {
+        "src/*":["../../src/*"],
+        //"types/*":["../../types/*"],
+        "images/*": ["../../src/assets/images/*"],
+        "components/*": ["../../src/components/*"],
+        "assets/*": ["../../src/assets/*"],
+        "pages/*": ["../../src/pages/*"],
+        "modules/*": ["../../src/modules/*"],
+        "models/*": ["../../src/models/*"],
+        "api/*": ["../../src/api/*"],
+        "services/*": ["../../src/services/*"],
+        "hooks/*": ["../../src/hooks/*"],
+        "utils/*": ["../../src/utils/*"]
+      },
+      "lib": ["DOM", "ESNext"],
+  }
+}

@@ -6,7 +6,9 @@
     "sourceType": "module",
     "project": [
       "./tsconfig.json",
-      "./tsconfig.root.json"
+      "./tsconfig.root.json",
+      "./src/server/tsconfig.json",
+      "./src/client/tsconfig.json"
     ]
   },
   "env": {
@@ -135,13 +137,13 @@
       },
       "typescript": {
         "alwaysTryTypes": true,
-        "project": "./tsconfig.json"
+        "project": "./tsconfig.json"        
       },
       "alias": {
         "map": [
           [
             "images",
-            "./src/assets/images"
+            "./src/assets/images/"
           ],
           [
             "components",

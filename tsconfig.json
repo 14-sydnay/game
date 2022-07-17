@@ -4,7 +4,7 @@
     "./src/**/*.tsx",
     "types/**/*.d.ts",
     "./src/models/**/*.d.ts",
-    "./node_modules/@types"
+    "./node_modules/@types",   
   ],
   "exclude": [
     "dist",
