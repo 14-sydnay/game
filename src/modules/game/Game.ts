@@ -1,4 +1,5 @@
 import { createImageAsync, KeysContoller } from '.'
+import AudioPlayer from './AudioPlayer'
 import GameElement from './GameElement'
 import MotionStrategy from './MotionStrategy'
 import MovableGameElement from './MovableGameElement'
@@ -8,6 +9,7 @@ import Scene from './Scene'
 import SimpleMotionStrategy from './SimpleMotionStrategy'
 import PlayerSkin, { PlayerIdleSpriteSkin, PlayerRunSpriteSkin } from './Skin'
 //import spriteCharacterJumpSrc from 'Assets/images/character/spriteJump.png'
+import bgSoundSrc from 'assets/audios/bg_sound.mp3'
 import smallCloud1Src from 'assets/images/background/clouds/128x128/cloud_1.png'
 import smallCloud2Src from 'assets/images/background/clouds/128x128/cloud_2.png'
 import bigCloud1Src from 'assets/images/background/clouds/256x256/cloud_1.png'
@@ -240,10 +242,18 @@ export default class Game {
 
   async start(): Promise<void> {
     await this.init()
+    document.body.requestPointerLock();
+    const player = new AudioPlayer()
+    player.play(bgSoundSrc)
     this.animate()
   }
 
   stop(playerStatus: PlayerStatus): void {
+    document.exitPointerLock();
+    const audioElements = document.querySelectorAll('audio')
+    audioElements.forEach((audioElement) => {
+      audioElement.remove()
+    })
     this._handleEndOfGame({ playerStatus })
     //await this.restart()
   }
