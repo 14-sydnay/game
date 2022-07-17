@@ -4,22 +4,22 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/store'
 
 export const ThemeToggler: React.FC<{}> = () => {
-  const theme = useSelector((state: RootState) => state.theme)
+  const themeName = useSelector((state: RootState) => state.theme.themeName)
   const dispatch = useDispatch()
 
   const handleThemeChange = (): void => {
-    theme.themeName === 'dark' ? dispatch(setLight) : dispatch(setDark)
+    themeName === 'dark' ? dispatch(setLight()) : dispatch(setDark())
   }
   let themeLabel = 'Светлая'
 
   useEffect(() => {
-    const newTheme = theme.themeName === 'dark' ? 'dracula' : 'light'
+    const newTheme = themeName === 'dark' ? 'dracula' : 'light'
     document.documentElement.dataset.theme = newTheme
-  }, [theme])
+  }, [themeName])
 
   useEffect(() => {
-    themeLabel = theme.themeName === 'dark' ? 'Темная' : 'Светлая'
-  }, [theme])
+    themeLabel = themeName === 'dark' ? 'Темная' : 'Светлая'
+  }, [themeName])
 
   return (
     <label className="label cursor-pointer">
