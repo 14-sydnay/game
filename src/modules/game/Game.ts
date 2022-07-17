@@ -1,4 +1,6 @@
 import { createImageAsync, KeysContoller } from '.'
+import AudioPlayer from './AudioPlayer'
+import AudioPlayer2 from './AudioPlayer'
 import GameElement from './GameElement'
 import MotionStrategy from './MotionStrategy'
 import MovableGameElement from './MovableGameElement'
@@ -8,6 +10,7 @@ import Scene from './Scene'
 import SimpleMotionStrategy from './SimpleMotionStrategy'
 import PlayerSkin, { PlayerIdleSpriteSkin, PlayerRunSpriteSkin } from './Skin'
 //import spriteCharacterJumpSrc from 'Assets/images/character/spriteJump.png'
+import bgSoundSrc from 'assets/audios/bg_sound.mp3'
 import smallCloud1Src from 'assets/images/background/clouds/128x128/cloud_1.png'
 import smallCloud2Src from 'assets/images/background/clouds/128x128/cloud_2.png'
 import bigCloud1Src from 'assets/images/background/clouds/256x256/cloud_1.png'
@@ -22,8 +25,9 @@ import {
   EndOfGameEvent,
   PlayerStatus,
 } from 'components/game/GameComponent/type'
+import { EventBus } from 'modules/eventBus'
 
-export default class Game {
+export default class Game extends EventBus {
   private _render: CanvasRenderingContext2D
 
   private _player!: Player
@@ -66,6 +70,7 @@ export default class Game {
     keysController: KeysContoller,
     handleEndOfGame: (e: EndOfGameEvent) => void // todo временно тут
   ) {
+    super()
     this._render = render
     this._scene = scene
     this._keysController = keysController
@@ -240,11 +245,22 @@ export default class Game {
 
   async start(): Promise<void> {
     await this.init()
+    const player = new AudioPlayer2()
+    await player.play(bgSoundSrc)
+    this.on('stop', () => {
+      player.destroy()
+    })
     this.animate()
   }
 
   stop(playerStatus: PlayerStatus): void {
+    document.exitPointerLock();
+    const audioElements = document.querySelectorAll('audio')
+    audioElements.forEach((audioElement) => {
+      audioElement.remove()
+    })
     this._handleEndOfGame({ playerStatus })
+    this.emit('stop')
     //await this.restart()
   }
 

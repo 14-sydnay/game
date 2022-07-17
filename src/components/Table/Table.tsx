@@ -9,6 +9,7 @@ import {
   ArrowSmDownIcon,
   SwitchVerticalIcon,
 } from '@heroicons/react/solid'
+//import 'regenerator-runtime/runtime'
 import React from 'react'
 import {
   useTable,
