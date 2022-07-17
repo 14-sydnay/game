@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import { useNavigate, useLocation, Link } from 'react-router-dom'
 
 import { LocationState } from './type'
-import { useAuth } from 'hooks/auth'
+import { useAuth, useOAuthYandex } from 'hooks/auth'
 
 export const LoginPage: React.FC = () => {
   const auth = useAuth()
+  const oauth = useOAuthYandex()
 
   const [login, setLogin] = useState<string>('')
   const [password, setPassword] = useState<string>('')
@@ -21,6 +22,10 @@ export const LoginPage: React.FC = () => {
       navigate(from, { replace: true })
       return
     })
+  }
+
+  const handleYandexAuth = () => {
+    void oauth.redirectToOAuthProvider()
   }
 
   return (
@@ -59,6 +64,16 @@ export const LoginPage: React.FC = () => {
               Войти
             </button>
           </div>
+          <div className="form-control mt-6">
+            <button
+              type="button"
+              onClick={handleYandexAuth}
+              className="btn btn-primary"
+            >
+              Войти через Яндекс
+            </button>
+          </div>
+
           <Link to="/registration">
             <button type="button" className="btn btn-link w-full">
               Регистрация

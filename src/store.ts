@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 
-import authReducer from './hooks/auth/authSlice'
+import authReducer, { AuthState } from './hooks/auth/authSlice'
 import themeReducer from './hooks/theme/themeSlice'
 
 export const store = configureStore({
@@ -13,3 +13,14 @@ export const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>
 
 export type AppDispatch = typeof store.dispatch
+
+export const createStore = (initialState?: {
+  auth: AuthState
+}): typeof store => {
+  return configureStore({
+    preloadedState: initialState,
+    reducer: {
+      auth: authReduser,
+    },
+  })
+}

@@ -3,7 +3,7 @@ import { RegisterData } from './types'
 import { authApi } from 'api/auth'
 import { apiHasError } from 'api/utils'
 import { User } from 'src/models/user'
-import { Nullable } from 'types/nullable'
+//import { Nullable } from 'types/nullable'
 
 export const logout = async (): Promise<void> => {
   await authApi.logout()
