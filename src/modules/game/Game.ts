@@ -254,6 +254,7 @@ export default class Game extends EventBus {
   }
 
   stop(playerStatus: PlayerStatus): void {
+    document.exitPointerLock();
     const audioElements = document.querySelectorAll('audio')
     audioElements.forEach((audioElement) => {
       audioElement.remove()
