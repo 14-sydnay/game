@@ -20,7 +20,8 @@ export const createStore = (initialState?: {
   return configureStore({
     preloadedState: initialState,
     reducer: {
-      auth: authReduser,
+      auth: authReducer,
+      theme: themeReducer,
     },
   })
 }

@@ -1,6 +1,5 @@
 import { createImageAsync, KeysContoller } from '.'
 import AudioPlayer from './AudioPlayer'
-import AudioPlayer2 from './AudioPlayer'
 import GameElement from './GameElement'
 import MotionStrategy from './MotionStrategy'
 import MovableGameElement from './MovableGameElement'
@@ -245,7 +244,7 @@ export default class Game extends EventBus {
 
   async start(): Promise<void> {
     await this.init()
-    const player = new AudioPlayer2()
+    const player = new AudioPlayer()
     await player.play(bgSoundSrc)
     this.on('stop', () => {
       player.destroy()
@@ -254,7 +253,7 @@ export default class Game extends EventBus {
   }
 
   stop(playerStatus: PlayerStatus): void {
-    document.exitPointerLock();
+    document.exitPointerLock()
     const audioElements = document.querySelectorAll('audio')
     audioElements.forEach((audioElement) => {
       audioElement.remove()

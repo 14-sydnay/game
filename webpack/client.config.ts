@@ -8,7 +8,7 @@ import {
   EnvironmentPlugin,
 } from 'webpack'
 
-import { IS_DEV, DIST_DIR, SRC_DIR, API_ENDPOINT } from './env'
+import { IS_DEV, DIST_DIR, SRC_DIR, API_ENDPOINT, REDIRECT_URL } from './env'
 import cssLoader from './loaders/css'
 import fileLoader from './loaders/file'
 import jsLoader from './loaders/js'
@@ -57,6 +57,7 @@ const config: Configuration = {
   plugins: [
     new EnvironmentPlugin({
       API_ENDPOINT: API_ENDPOINT,
+      REDIRECT_URL: REDIRECT_URL,
     }),
     new MiniCssExtractPlugin({ filename: '[name].css' }),
     // Plugin для HMR

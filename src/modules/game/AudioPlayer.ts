@@ -1,4 +1,4 @@
-export default class AudioPlayer2 {
+export default class AudioPlayer {
   private audioElement: HTMLAudioElement
 
   private mediaSource: MediaSource
@@ -37,7 +37,8 @@ export default class AudioPlayer2 {
   }
 
   public destroy(): void {
-    this.mediaSource.removeSourceBuffer(this.mediaSource.sourceBuffers[0])
+    this.mediaSource.sourceBuffers.length > 0 &&
+      this.mediaSource.removeSourceBuffer(this.mediaSource.sourceBuffers[0])
     this.audioElement.remove()
   }
 }
