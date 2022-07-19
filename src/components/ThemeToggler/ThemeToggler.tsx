@@ -1,13 +1,21 @@
-import { setLight, setDark } from 'hooks/theme'
+import { MoonIcon, SunIcon } from '@heroicons/react/solid'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+
+import { setLight, setDark, fetchUserTheme } from 'hooks/theme'
 import { RootState } from 'src/store'
-import { MoonIcon, SunIcon } from '@heroicons/react/solid'
 
 export const ThemeToggler: React.FC<{}> = () => {
   const dispatch = useDispatch()
 
   const themeName = useSelector((state: RootState) => state.theme.themeName)
+  const user = useSelector((state: RootState) => state.auth.user)
+
+  useEffect(() => {
+    if (user) {
+      dispatch(fetchUserTheme(user.id))
+    }
+  }, [user, dispatch])
 
   useEffect(() => {
     const newTheme = themeName === 'dark' ? 'dracula' : 'light'

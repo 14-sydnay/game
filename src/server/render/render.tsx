@@ -18,7 +18,7 @@ export const render = (req: Request, res: Response): void => {
   )
   const iniitAuthState: AuthState = {
     user: {
-      id: 1,
+      id: 0,
       firstName: 'Иван',
       secondName: 'Иванов',
       displayName: 'string',
