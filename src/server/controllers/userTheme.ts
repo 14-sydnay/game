@@ -1,3 +1,4 @@
+import { UserThemeDto } from 'api/userTheme'
 import { Request, Response, NextFunction } from 'express'
 export const getUserTheme = (
   req: Request,
@@ -12,9 +13,11 @@ export const getUserTheme = (
   }
 }
 export const saveUserTheme = (
-  res: Request,
-  req: Response,
+  req: Request,
+  res: Response,
   next: NextFunction
 ): void => {
-  //res.status
+  const body = req.body as UserThemeDto
+
+  res.status(200).json({ themeName: body.themeName, userId: req.params.id })
 }

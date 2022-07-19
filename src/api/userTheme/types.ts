@@ -1,15 +1,14 @@
-import { YandexApiError } from 'api/types'
+import { ApiError } from 'api/types'
 
-export type UserThemeResponse = UserThemeDto | YandexApiError
+export type UserThemeResponse = UserThemeDto | ApiError
 
 export type SaveUserThemeRequest = {
   userId: number
   themeName: string
 }
-export type SaveUserThemeResponse = UserThemeDto | YandexApiError
+export type SaveUserThemeResponse = { data: UserThemeDto } | ApiError
 
 export type UserThemeDto = {
-  id: number
   userId: number
   themeName: string
 }

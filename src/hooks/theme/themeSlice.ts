@@ -12,9 +12,18 @@ const initialState: ThemeState = {
 }
 
 export const fetchUserTheme = createAsyncThunk(
-  'users/fetchByIdStatus',
+  'users/fetchTheme',
   async (userId: number) => {
     const userTheme = await userThemeService.getUserTheme(userId)
+    return userTheme.themeName
+  }
+)
+
+export const saveUserTheme = createAsyncThunk(
+  'users/saveTheme',
+  async (payload: { userId: number; themeName: ThemeName }) => {
+    const { userId, themeName } = { ...payload }
+    const userTheme = await userThemeService.saveUserTheme(userId, themeName)
     return userTheme.themeName
   }
 )
@@ -31,11 +40,13 @@ export const themeSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // Add reducers for additional action types here, and handle loading state as needed
-    builder.addCase(fetchUserTheme.fulfilled, (state, action) => {
-      // Add user to the state array
-      state.themeName = action.payload
-    })
+    builder
+      .addCase(fetchUserTheme.fulfilled, (state, action) => {
+        state.themeName = action.payload
+      })
+      .addCase(saveUserTheme.fulfilled, (state, action) => {
+        state.themeName = action.payload
+      })
   },
 })
 

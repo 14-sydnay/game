@@ -1,25 +1,36 @@
 import { transformToUserTheme } from './apiTransformer'
-import { userThemeApi } from 'api/userTheme'
+import { userThemeApi, UserThemeResponse } from 'api/userTheme'
 import { apiHasServerError, apiHasUserError } from 'api/utils'
-import { getDefaultUserTheme, UserTheme } from 'models/theme'
+import { getDefaultUserTheme, ThemeName, UserTheme } from 'models/theme'
 
 export const getUserTheme = async (userId: number): Promise<UserTheme> => {
-  const userThemeDto = await userThemeApi.getUserTheme(userId)
-
-  if (apiHasUserError(userThemeDto.data)) {
+  const userThemeResponse = (await userThemeApi.getUserTheme(userId)).data
+  if (apiHasUserError(userThemeResponse)) {
     return getDefaultUserTheme(userId)
   }
-  if (apiHasServerError(userThemeDto.data)) {
-    throw new Error(userThemeDto.data.message)
+  if (apiHasServerError(userThemeResponse)) {
+    throw new Error(userThemeResponse.message)
   }
 
   //todo add validation theme name
-  return transformToUserTheme(userThemeDto.data)
+  return transformToUserTheme(userThemeResponse)
 }
 
-/* export const saveUserTheme = async (data: File) => {
-  const formData = new FormData()
-  formData.append('avatar', data)
+export const saveUserTheme = async (
+  userId: number,
+  themeName: ThemeName
+): Promise<UserTheme> => {
+  const userThemeResponse = await userThemeApi.saveUserTheme({
+    userId,
+    themeName,
+  })
+  if (apiHasUserError(userThemeResponse)) {
+    return getDefaultUserTheme(userId)
+  }
+  if (apiHasServerError(userThemeResponse)) {
+    throw new Error(userThemeResponse.message)
+  }
 
-  await userApi.changeAvatar(formData)
-} */
+  //todo add validation theme name
+  return transformToUserTheme(userThemeResponse.data)
+}
