@@ -29,5 +29,7 @@
         "hooks/*": ["../../src/hooks/*"],
         "utils/*": ["../../src/utils/*"]
       },
+      "experimentalDecorators":true,
+      "emitDecoratorMetadata": true
   }
 }
