@@ -5,7 +5,7 @@ import {
 } from './types'
 import createApi from 'api/api'
 
-const apiInstance = createApi('oauth')
+const apiInstance = createApi(`${process.env.API_ENDPOINT}/oauth`)
 
 export const oauthApi = {
   getServiceId: async (redirectUri: string): Promise<ServiceIdResponseData> => {

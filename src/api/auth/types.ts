@@ -1,11 +1,11 @@
-import { ApiError } from 'api/types'
+import { YandexApiError } from 'api/types'
 
 export type LoginRequestData = {
   login: string
   password: string
 }
 
-export type LoginResponseData = Record<string, unknown> | ApiError
+export type LoginResponseData = Record<string, unknown> | YandexApiError
 
 export type RegisterRequestData = {
   first_name: string
@@ -16,4 +16,4 @@ export type RegisterRequestData = {
   phone: string
 }
 
-export type RegisterResponseData = { id: number } | ApiError
+export type RegisterResponseData = { id: number } | YandexApiError

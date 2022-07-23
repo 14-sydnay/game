@@ -1,16 +1,25 @@
 import express from 'express'
 import path from 'path'
 
+import { dbConnect } from './db/init'
 import { render } from './render/render'
+import router from './routes'
 
-const app = express()
+dbConnect()
+  .then(() => {
+    const app = express()
 
-app.use(express.static(path.resolve(__dirname, './public')))
+    app.use(express.static(path.resolve(__dirname, './public')))
+    app.use(express.json())
+    app.use(router)
+    app.use(render)
 
-app.use(render)
+    const port = process.env.PORT || 3000
 
-const port = process.env.PORT || 3000
-
-app.listen(port, () => {
-  console.log('Application is started on localhost:', port)
-})
+    app.listen(port, () => {
+      console.log('Application is started on localhost:', port)
+    })
+  })
+  .catch((error) => {
+    console.log(error)
+  })

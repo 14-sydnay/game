@@ -1,6 +1,13 @@
-export type ApiError = {
+export type YandexApiError = {
   reason: string
 }
+export type UserApiError = {
+  message: string
+}
+export type ServerApiError = {
+  message: string
+}
+export type ApiError = UserApiError | ServerApiError
 
 export type UserDto = {
   id: number
