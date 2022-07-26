@@ -11,20 +11,18 @@ export const ThemeToggler: React.FC<{}> = () => {
   const themeName = useSelector((state: RootState) => state.theme.themeName)
   const user = useSelector((state: RootState) => state.auth.user)
 
-  const handleSunClick=()=>{
-    if(user && user.id===0){
+  const handleSunClick = () => {
+    if (user && user.id === 0) {
       dispatch(setDark())
-    }
-    else{
-      dispatch(saveUserTheme({userId:user!.id, themeName:'dark'))
+    } else {
+      dispatch(saveUserTheme({ userId: user!.id, themeName: 'dark' }))
     }
   }
-  const handleMoonClick=()=>{
-    if(user && user.id===0){
+  const handleMoonClick = () => {
+    if (user && user.id === 0) {
       dispatch(setLight())
-    }
-    else{
-      dispatch(saveUserTheme({userId:user!.id, themeName:'light'))
+    } else {
+      dispatch(saveUserTheme({ userId: user!.id, themeName: 'light' }))
     }
   }
 

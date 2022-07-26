@@ -1,10 +1,10 @@
 import dayjs from 'dayjs'
 import React, { useState } from 'react'
 
+import { Avatar } from 'components/Avatar'
 import { Footer } from 'components/Footer'
 import { Navbar } from 'components/Navbar'
 import { TextArea } from 'components/TextArea'
-import { Avatar } from 'components/Avatar'
 
 export const ThreadPage: React.FC<{}> = () => {
   const [data, setData] = useState({

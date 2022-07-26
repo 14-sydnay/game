@@ -1,11 +1,11 @@
 import { transformToUserTheme } from './apiTransformer'
-import { userThemeApi, UserThemeResponse } from 'api/userTheme'
-import { apiHasServerError, apiHasUserError } from 'api/utils'
+import { userThemeApi } from 'api/userTheme'
+import { apiHasServerError, apiHasClientError } from 'api/utils'
 import { getDefaultUserTheme, ThemeName, UserTheme } from 'models/theme'
 
 export const getUserTheme = async (userId: number): Promise<UserTheme> => {
   const userThemeResponse = (await userThemeApi.getUserTheme(userId)).data
-  if (apiHasUserError(userThemeResponse)) {
+  if (apiHasClientError(userThemeResponse)) {
     return getDefaultUserTheme(userId)
   }
   if (apiHasServerError(userThemeResponse)) {
@@ -24,7 +24,7 @@ export const saveUserTheme = async (
     userId,
     themeName,
   })
-  if (apiHasUserError(userThemeResponse)) {
+  if (apiHasClientError(userThemeResponse)) {
     return getDefaultUserTheme(userId)
   }
   if (apiHasServerError(userThemeResponse)) {

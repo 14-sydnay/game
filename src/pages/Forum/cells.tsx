@@ -7,6 +7,7 @@ import { Cell } from 'react-table'
 import { Avatar } from 'components/Avatar'
 
 export const AvatarCell: React.FC<any> = ({ value, column, row }: Cell) => {
+  const threadId: number = row.original.id
   const src: string = row.original[column.imgAccessor]
   const date: string = row.original[column.threadDateTimeAccessor]
   const name: string = row.original[column.nameAccessor]
@@ -15,7 +16,7 @@ export const AvatarCell: React.FC<any> = ({ value, column, row }: Cell) => {
     <div className="flex items-center">
       <Avatar url={src} size="small" />
       <div className="ml-4">
-        <Link to={row.id} className="text-sm font-medium text-gray-900">
+        <Link to={`${threadId}`} className="text-sm font-medium text-gray-900">
           {title}
         </Link>
         <div className="flex flex-row">

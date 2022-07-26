@@ -1,5 +1,5 @@
 export {
   hasYandexError as apiHasError,
-  hasUserError as apiHasUserError,
+  hasClientError as apiHasClientError,
   hasServerError as apiHasServerError,
 } from './apiHasError'

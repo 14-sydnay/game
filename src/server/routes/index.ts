@@ -1,11 +1,11 @@
 import { Router } from 'express'
 
+import { threadRoutes } from './threadRoutes'
 import { userThemeRoutes } from './userThemeRoutes'
-//import { forumRoutes } from './forumRoutes'
 
 const router: Router = Router()
 
 userThemeRoutes(router)
-//forumRoutes(router)
+threadRoutes(router)
 
 export default router

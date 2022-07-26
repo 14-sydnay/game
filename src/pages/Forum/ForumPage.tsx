@@ -1,7 +1,8 @@
 import { PlusIcon } from '@heroicons/react/solid'
 import { yupResolver } from '@hookform/resolvers/yup'
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router'
 import * as yup from 'yup'
 
 import { AvatarCell, LastMessageCell } from './cells'
@@ -9,6 +10,9 @@ import { FormValues } from './type'
 import { Footer } from 'components/Footer'
 import { Navbar } from 'components/Navbar'
 import { Table } from 'components/Table'
+import { useAuth } from 'hooks/auth'
+import { threadService } from 'services/forum'
+import { Thread } from 'src/server/models/thread'
 
 yup.setLocale({
   mixed: {
@@ -24,7 +28,8 @@ const schema = yup.object().shape({
 })
 
 export const ForumPage: React.FC<{}> = () => {
-  const [data, setData] = useState([
+  const auth = useAuth()
+  /* const [data, setData] = useState([
     {
       id: 1,
       name: 'Ванесса Пупкина',
@@ -36,43 +41,32 @@ export const ForumPage: React.FC<{}> = () => {
       imgUrl:
         'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
     },
-    {
-      id: 2,
-      name: 'Петя Шишкин',
-      title: 'Предложения и пожелания',
-      totalMessages: 3,
-      threadDateTime: '2022-03-01T13:22:00.000Z',
-      lastMessageAuthor: 'Дмитрий Лебедев',
-      lastMessageDateTime: '2022-04-22T18:22:00.000Z',
-      imgUrl:
-        'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-    },
-    {
-      id: 3,
-      name: 'Иван Иванов',
-      title: 'Флудилка',
-      totalMessages: 100500,
-      threadDateTime: '2022-04-05T10:48:00.000Z',
-      lastMessageAuthor: 'Евгений Добровольский',
-      lastMessageDateTime: '2022-05-15T14:52:00.000Z',
-      imgUrl:
-        'https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-    },
-  ])
+    
+  ]) */
+  const navigate = useNavigate()
+  const [data, setData] = useState([] as Thread[])
+  useEffect(() => {
+    void threadService.getThreads().then((threads) => setData(threads))
+  }, [])
 
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<FormValues>({
     resolver: yupResolver(schema),
   })
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log(data)
-    document.getElementById('new-post')?.click()
-    reset()
+  const onSubmit: SubmitHandler<FormValues> = (threadData) => {
+    if (auth.user)
+      void threadService
+        .createThread(
+          auth.user?.id,
+          auth.user.displayName,
+          auth.user.avatar,
+          threadData.title
+        )
+        .then((thread) => navigate(`/forum/${thread.id}`))
   }
 
   const columns = useMemo(
@@ -81,9 +75,9 @@ export const ForumPage: React.FC<{}> = () => {
         Header: 'Посты',
         Cell: AvatarCell,
         accessor: 'title',
-        imgAccessor: 'imgUrl',
-        nameAccessor: 'name',
-        threadDateTimeAccessor: 'threadDateTime',
+        imgAccessor: 'avatarUrl',
+        nameAccessor: 'authorName',
+        threadDateTimeAccessor: 'created',
       },
       {
         Header: 'Количество сообщений',
