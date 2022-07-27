@@ -1,9 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
 import * as yup from 'yup'
 
-import { FormValues } from './type'
+import { FormValues, Props } from './type'
+import { addThreadMessage } from 'features/messages/messagesSlice'
+import { useAuth } from 'hooks/auth'
 
 yup.setLocale({
   mixed: {
@@ -18,7 +21,9 @@ const schema = yup.object().shape({
   comment: yup.string().min(1),
 })
 
-export const TextArea: React.FC<{}> = () => {
+export const CreateMessageForm: React.FC<Props> = ({ threadId }) => {
+  const dispatch = useDispatch()
+  const { user } = useAuth()
   const {
     register,
     handleSubmit,
@@ -29,6 +34,17 @@ export const TextArea: React.FC<{}> = () => {
   })
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
+    if (user) {
+      dispatch(
+        addThreadMessage({
+          text: data.comment,
+          threadId: threadId,
+          userId: user.id,
+          avatarUrl: user.avatar,
+          authorName: user.displayName,
+        })
+      )
+    }
     console.log(data)
     reset()
   }

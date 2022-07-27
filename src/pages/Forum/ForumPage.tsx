@@ -1,14 +1,19 @@
 import { PlusIcon } from '@heroicons/react/solid'
 import { yupResolver } from '@hookform/resolvers/yup'
-import React, { useState, useMemo } from 'react'
+import React, { useMemo, useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router'
 import * as yup from 'yup'
 
-import { AvatarCell, LastMessageCell } from './cells'
+import { ThreadInfoCell, LastMessageCell } from './cells'
 import { FormValues } from './type'
 import { Footer } from 'components/Footer'
 import { Navbar } from 'components/Navbar'
 import { Table } from 'components/Table'
+import { selectAllThreads, fetchThreads } from 'features/threads/threadsSlice'
+import { useAuth } from 'hooks/auth'
+import { threadService } from 'services/forum'
 
 yup.setLocale({
   mixed: {
@@ -24,66 +29,44 @@ const schema = yup.object().shape({
 })
 
 export const ForumPage: React.FC<{}> = () => {
-  const [data, setData] = useState([
-    {
-      id: 1,
-      name: 'Ванесса Пупкина',
-      title: 'Помощь и поддержка',
-      totalMessages: 5,
-      threadDateTime: '2022-05-15T14:52:00.000Z',
-      lastMessageAuthor: 'Генадий Васильев',
-      lastMessageDateTime: '2022-05-19T10:25:00.000Z',
-      imgUrl:
-        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-    },
-    {
-      id: 2,
-      name: 'Петя Шишкин',
-      title: 'Предложения и пожелания',
-      totalMessages: 3,
-      threadDateTime: '2022-03-01T13:22:00.000Z',
-      lastMessageAuthor: 'Дмитрий Лебедев',
-      lastMessageDateTime: '2022-04-22T18:22:00.000Z',
-      imgUrl:
-        'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-    },
-    {
-      id: 3,
-      name: 'Иван Иванов',
-      title: 'Флудилка',
-      totalMessages: 100500,
-      threadDateTime: '2022-04-05T10:48:00.000Z',
-      lastMessageAuthor: 'Евгений Добровольский',
-      lastMessageDateTime: '2022-05-15T14:52:00.000Z',
-      imgUrl:
-        'https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-    },
-  ])
+  const dispatch = useDispatch()
+  const threads = useSelector(selectAllThreads)
+
+  const auth = useAuth()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    dispatch(fetchThreads())
+  }, [dispatch])
 
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<FormValues>({
     resolver: yupResolver(schema),
   })
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log(data)
-    document.getElementById('new-post')?.click()
-    reset()
+  const onSubmit: SubmitHandler<FormValues> = (threadData) => {
+    if (auth.user)
+      void threadService
+        .createThread(
+          auth.user?.id,
+          auth.user.displayName,
+          auth.user.avatar,
+          threadData.title
+        )
+        .then((thread) => navigate(`/forum/${thread.id}`))
   }
 
   const columns = useMemo(
     () => [
       {
         Header: 'Посты',
-        Cell: AvatarCell,
+        Cell: ThreadInfoCell,
         accessor: 'title',
-        imgAccessor: 'imgUrl',
-        nameAccessor: 'name',
-        threadDateTimeAccessor: 'threadDateTime',
+        authorId: 'authorId',
+        threadDateTimeAccessor: 'created',
       },
       {
         Header: 'Количество сообщений',
@@ -119,7 +102,7 @@ export const ForumPage: React.FC<{}> = () => {
               <h1 className="text-center text-2xl font-medium">Посты</h1>
             </div>
             <div className="mt-6 flex flex-col">
-              <Table columns={columns} data={data} />
+              <Table columns={columns} data={threads} />
             </div>
           </main>
         </div>

@@ -28,7 +28,8 @@
         "api/*": ["../../src/api/*"],
         "services/*": ["../../src/services/*"],
         "hooks/*": ["../../src/hooks/*"],
-        "utils/*": ["../../src/utils/*"]
+        "utils/*": ["../../src/utils/*"],
+        "features/*": ["../../src/features/*"]
       },
       "lib": ["DOM", "ESNext"],
   }
