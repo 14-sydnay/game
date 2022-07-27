@@ -4,7 +4,7 @@
     "./src/**/*.tsx",
     "types/**/*.d.ts",
     "./src/models/**/*.d.ts",
-    "./node_modules/@types",   
+    "./node_modules/@types",
   ],
   "exclude": [
     "dist",
@@ -22,6 +22,7 @@
     "lib": ["DOM", "ESNext"],
     "baseUrl": "./",
     "paths": {
+      "src/*":["src/*"],
       "images/*": ["src/assets/images/*"],
       "components/*": ["src/components/*"],
       "assets/*": ["src/assets/*"],
@@ -50,6 +51,5 @@
     "noImplicitReturns": true,
     "experimentalDecorators":true,
     "emitDecoratorMetadata": true
-
   }
 }

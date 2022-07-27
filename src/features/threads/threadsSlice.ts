@@ -23,16 +23,18 @@ const threadsSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder.addCase(fetchThreads.fulfilled, (state, action) => {
+      //@ts-ignore
       state.threads = action.payload
     })
   },
 })
 
 //export const {} = threadsSlice.actions
-
+//@ts-ignore
 export const selectAllThreads = (state) => state.threads.threads
-
+//@ts-ignore
 export const selectThreadById = (state, threadId) =>
+  //@ts-ignore
   state.threads.threads.find((thread) => thread.id === threadId)
 
 export default threadsSlice.reducer

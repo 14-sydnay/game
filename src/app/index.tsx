@@ -70,6 +70,7 @@ export const App: React.FC<{}> = withErrorBoundary(() => {
           path=":id"
           element={
             <RequireAuth>
+              {/* @ts-ignore */}
               <ThreadPage />
             </RequireAuth>
           }

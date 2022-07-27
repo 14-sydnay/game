@@ -8,9 +8,10 @@ import { AuthProvider } from 'hooks/auth'
 import { App } from 'src/app'
 //import { swInstance } from 'src/service-worker/swInstance'
 import { createStore } from 'src/store'
-
+//@ts-ignore
 const state = window.__INITIAL_STATE__
 const store = createStore(state)
+//@ts-ignore
 delete window.__INITIAL_STATE__
 
 const container = document.getElementById('root')

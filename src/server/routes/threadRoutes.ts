@@ -20,4 +20,4 @@ export const threadRoutes = (router: Router): void => {
 
   router.use('/api/v1/threads', threadRouter)
 }
-http://localhost:3000/forum/api/v1/threads/2/messages
+//http://localhost:3000/forum/api/v1/threads/2/messages

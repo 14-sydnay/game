@@ -1,3 +1,4 @@
+// @ts-nocheck
 import dayjs from 'dayjs'
 import React, { useState } from 'react'
 import { useEffect } from 'react'

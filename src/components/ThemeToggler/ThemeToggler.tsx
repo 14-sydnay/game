@@ -15,6 +15,7 @@ export const ThemeToggler: React.FC<{}> = () => {
     if (user && user.id === 0) {
       dispatch(setDark())
     } else {
+      //@ts-ignore
       dispatch(saveUserTheme({ userId: user!.id, themeName: 'dark' }))
     }
   }
@@ -22,12 +23,14 @@ export const ThemeToggler: React.FC<{}> = () => {
     if (user && user.id === 0) {
       dispatch(setLight())
     } else {
+      //@ts-ignore
       dispatch(saveUserTheme({ userId: user!.id, themeName: 'light' }))
     }
   }
 
   useEffect(() => {
     if (user) {
+      //@ts-ignore
       dispatch(fetchUserTheme(user.id))
     }
   }, [user, dispatch])

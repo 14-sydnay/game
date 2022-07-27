@@ -52,7 +52,7 @@ const messagesSlice = createSlice({
       })
   },
 })
-
+//@ts-ignore
 export const selectAllMessages = (state): Message[] => state.messages.messages
 
 export default messagesSlice.reducer
