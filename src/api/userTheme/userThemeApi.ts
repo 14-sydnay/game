@@ -7,7 +7,7 @@ import {
   SaveUserThemeResponse,
 } from './types'
 
-const apiInstance = createApi(`api/v1/users`)
+const apiInstance = createApi(`/api/v1/users`)
 
 export const userThemeApi = {
   getUserTheme: (

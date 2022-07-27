@@ -1,7 +1,7 @@
-import { transformToThread } from './apiTransformer'
+import { transformToMessage, transformToThread } from './apiTransformer'
 import { threadApi } from 'api/forum'
 import { apiHasServerError, apiHasClientError } from 'api/utils'
-import { Thread, ThreadInfo } from 'src/server/models/thread'
+import { Message, Thread, ThreadInfo } from 'src/server/models/thread'
 
 export const getThreads = async (): Promise<Thread[]> => {
   const response = (await threadApi.getAll()).data
@@ -36,7 +36,7 @@ export const createThread = async (
   avatarUrl: string,
   title: string
 ): Promise<ThreadInfo> => {
-  const response = await threadApi.newThread({
+  const response = await threadApi.createThread({
     title,
     userId,
     authorName,
@@ -52,4 +52,39 @@ export const createThread = async (
   //todo add validation theme name
   const threadInfo = transformToThread(response.data)
   return threadInfo
+}
+
+export const getMessages = async (threadId: number): Promise<Message[]> => {
+  const response = (await threadApi.getMessages(threadId)).data
+  if (apiHasClientError(response)) {
+    alert(response.message)
+  }
+  if (apiHasServerError(response)) {
+    throw new Error(response.message)
+  }
+  const messages = response.map((dto) => transformToMessage(dto))
+  return messages
+}
+
+export const addMessage = async (
+  threadId: number,
+  userId: number,
+  text: string,
+  authorName: string,
+  avatarUrl: string
+): Promise<Message> => {
+  const response = await threadApi.addMessage({
+    threadId,
+    text,
+    userId,
+    authorName,
+    avatarUrl,
+  })
+  if (apiHasClientError(response)) {
+    alert(response.message)
+  }
+  if (apiHasServerError(response)) {
+    throw new Error(response.message)
+  }
+  return transformToMessage(response.data)
 }

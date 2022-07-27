@@ -2,8 +2,7 @@ export type ThreadInfo = {
   id: number
   title: string
   created: Date
-  authorName: string
-  avatarUrl: string
+  authorId: number
   messageCount: number
   lastMessage: string
 }

@@ -1,18 +1,19 @@
 import { PlusIcon } from '@heroicons/react/solid'
 import { yupResolver } from '@hookform/resolvers/yup'
-import React, { useState, useMemo, useEffect } from 'react'
+import React, { useMemo, useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import * as yup from 'yup'
 
-import { AvatarCell, LastMessageCell } from './cells'
+import { ThreadInfoCell, LastMessageCell } from './cells'
 import { FormValues } from './type'
 import { Footer } from 'components/Footer'
 import { Navbar } from 'components/Navbar'
 import { Table } from 'components/Table'
+import { selectAllThreads, fetchThreads } from 'features/threads/threadsSlice'
 import { useAuth } from 'hooks/auth'
 import { threadService } from 'services/forum'
-import { Thread } from 'src/server/models/thread'
 
 yup.setLocale({
   mixed: {
@@ -28,26 +29,15 @@ const schema = yup.object().shape({
 })
 
 export const ForumPage: React.FC<{}> = () => {
+  const dispatch = useDispatch()
+  const threads = useSelector(selectAllThreads)
+
   const auth = useAuth()
-  /* const [data, setData] = useState([
-    {
-      id: 1,
-      name: 'Ванесса Пупкина',
-      title: 'Помощь и поддержка',
-      totalMessages: 5,
-      threadDateTime: '2022-05-15T14:52:00.000Z',
-      lastMessageAuthor: 'Генадий Васильев',
-      lastMessageDateTime: '2022-05-19T10:25:00.000Z',
-      imgUrl:
-        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-    },
-    
-  ]) */
   const navigate = useNavigate()
-  const [data, setData] = useState([] as Thread[])
+
   useEffect(() => {
-    void threadService.getThreads().then((threads) => setData(threads))
-  }, [])
+    dispatch(fetchThreads())
+  }, [dispatch])
 
   const {
     register,
@@ -73,10 +63,9 @@ export const ForumPage: React.FC<{}> = () => {
     () => [
       {
         Header: 'Посты',
-        Cell: AvatarCell,
+        Cell: ThreadInfoCell,
         accessor: 'title',
-        imgAccessor: 'avatarUrl',
-        nameAccessor: 'authorName',
+        authorId: 'authorId',
         threadDateTimeAccessor: 'created',
       },
       {
@@ -113,7 +102,7 @@ export const ForumPage: React.FC<{}> = () => {
               <h1 className="text-center text-2xl font-medium">Посты</h1>
             </div>
             <div className="mt-6 flex flex-col">
-              <Table columns={columns} data={data} />
+              <Table columns={columns} data={threads} />
             </div>
           </main>
         </div>

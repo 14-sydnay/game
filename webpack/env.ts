@@ -6,5 +6,6 @@ const DIST_DIR = path.join(__dirname, '../dist')
 
 const API_ENDPOINT = 'https://ya-praktikum.tech/api/v2'
 const REDIRECT_URL = 'http://localhost:3000'
+const PORT = 3000
 
-export { IS_DEV, SRC_DIR, DIST_DIR, API_ENDPOINT, REDIRECT_URL }
+export { IS_DEV, SRC_DIR, DIST_DIR, API_ENDPOINT, REDIRECT_URL, PORT }

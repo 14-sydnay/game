@@ -95,6 +95,7 @@
     "@reduxjs/toolkit": "1.8.2",
     "axios": "0.27.2",
     "daisyui": "2.15.1",
+    "date-fns": "2.29.1",
     "dayjs": "1.11.3",
     "pg": "8.7.3",
     "react": "18.1.0",

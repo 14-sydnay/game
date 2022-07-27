@@ -7,16 +7,17 @@ import { Provider } from 'react-redux'
 import { StaticRouter } from 'react-router-dom/server'
 
 import { App } from '../../client/ssr'
+import { fetchAuthors } from '../../features/authors/authorsSlice'
 import { AuthState } from '../../hooks/auth/authSlice'
 import { createStore } from 'src/store'
 //import { addUser, removeUser, startLoading, stopLoading } from './authSlice'
 
-export const render = (req: Request, res: Response): void => {
+export const render = async (req: Request, res: Response): Promise<void> => {
   const indexHTML = fs.readFileSync(
     path.resolve(__dirname, '../src/index.html'),
     { encoding: 'utf8' }
   )
-  const iniitAuthState: AuthState = {
+  const initAuthState: AuthState = {
     user: {
       id: 0,
       firstName: 'Иван',
@@ -29,7 +30,9 @@ export const render = (req: Request, res: Response): void => {
     },
     isLoading: false,
   }
-  const store = createStore({ auth: iniitAuthState })
+  const store = createStore({ auth: initAuthState })
+
+  await store.dispatch(fetchAuthors()).unwrap()
 
   const reactHtml = renderToString(
     <Provider store={store}>

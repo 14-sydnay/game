@@ -10,11 +10,18 @@ export type NewThreadResponse = { data: ThreadDto } | ApiError
 
 export type GetThreadsResponse = ThreadDto[] | ApiError
 
-/* export type GetThreadRequest = {
-  id: number
-} */
-//export type GetThreadResponse = { data: ThreadDto } | ApiError
 export type GetThreadResponse = ThreadDto | ApiError
+
+export type NewThreadMessageRequest = {
+  threadId: number
+  userId: number
+  text: string
+  authorName: string
+  avatarUrl: string
+}
+export type NewThreadMessageResponse = { data: MessageDto } | ApiError
+
+export type GerThreadMessagesResponse = MessageDto[] | ApiError
 
 export type NewThreadDto = {
   title: string
@@ -26,9 +33,22 @@ export type NewThreadDto = {
 export type ThreadDto = {
   id: number
   title: string
-  author: {
-    authorName: string
-    avatarUrl: string
-  }
+  authorId: number
+  createdAt: Date
+}
+
+export type NewThreadMessageDto = {
+  threadId: number
+  userId: number
+  authorName: string
+  avatarUrl: string
+  text: string
+}
+
+export type MessageDto = {
+  id: number
+  threadId: number
+  authorId: number
+  text: string
   createdAt: Date
 }
