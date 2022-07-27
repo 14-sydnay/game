@@ -1,8 +1,9 @@
-import { setLight, setDark } from 'hooks/theme'
+import { MoonIcon, SunIcon } from '@heroicons/react/solid'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+
+import { setLight, setDark } from 'hooks/theme'
 import { RootState } from 'src/store'
-import { MoonIcon, SunIcon } from '@heroicons/react/solid'
 
 export const ThemeToggler: React.FC<{}> = () => {
   const dispatch = useDispatch()

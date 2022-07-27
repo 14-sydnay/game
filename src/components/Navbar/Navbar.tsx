@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 
 import { NavLinks } from './NavLinks'
 import { Avatar } from 'components/Avatar'
-import { useAuth } from 'hooks/auth'
 import { ThemeToggler } from 'components/ThemeToggler'
+import { useAuth } from 'hooks/auth'
 
 export const Navbar: React.FC<{}> = () => {
   const auth = useAuth()
