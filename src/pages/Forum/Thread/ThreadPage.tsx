@@ -1,6 +1,5 @@
 import dayjs from 'dayjs'
-import React, { useState } from 'react'
-import { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
@@ -15,11 +14,18 @@ import {
   selectAllMessages,
 } from 'features/messages/messagesSlice'
 import { ThreadInfo } from 'features/threads/ThreadInfo'
+import { Message } from 'src/server/models/thread'
 
 export const ThreadPage: React.FC<Props> = () => {
   const { id } = useParams()
   const threadId = Number.parseInt(id as string)
-  const messages = useSelector((state) => selectAllMessages(state, threadId))
+  const messages = useSelector(
+    (state: {
+      messages: {
+        messages: Message[]
+      }
+    }) => selectAllMessages(state)
+  )
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(fetchMessages(threadId))

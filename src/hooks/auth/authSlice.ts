@@ -1,7 +1,7 @@
+/// <reference types="../../../types/nullable" />
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { User } from 'models/user'
-import { Nullable } from 'types/nullable'
 
 export interface AuthState {
   isLoading: boolean

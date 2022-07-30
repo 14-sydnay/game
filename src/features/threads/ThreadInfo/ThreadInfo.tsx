@@ -1,19 +1,24 @@
 import dayjs from 'dayjs'
-import React, { FC } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
-import { selectThreadById } from '../threadsSlice'
+import { selectThreadById, ThreadsState } from '../threadsSlice'
 import { Props } from './types'
 import { AuthorAvatar } from 'features/authors/AuthorAvatar'
 import { AuthorName } from 'features/authors/AuthorName'
 import { Thread } from 'src/server/models/thread'
 
 export const ThreadInfo: FC<Props> = ({ threadId }) => {
-  const thread = useSelector((state) =>
+  const [thread, setThread] = useState<Thread>()
+  const threadData = useSelector((state: { threads: ThreadsState }) =>
     selectThreadById(state, threadId)
   ) as Thread
 
-  return (
+  useEffect(() => {
+    setThread(threadData)
+  }, [threadData])
+
+  return thread ? (
     <div className="mt-10 flex items-center">
       <AuthorAvatar authorId={thread.authorId} />
       <div className="ml-4">
@@ -27,5 +32,7 @@ export const ThreadInfo: FC<Props> = ({ threadId }) => {
         </div>
       </div>
     </div>
+  ) : (
+    <div>Тема не найдена</div>
   )
 }

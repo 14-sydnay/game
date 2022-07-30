@@ -1,10 +1,10 @@
+/// <reference types="../../../types/nullable" />
 import { transformToServiceId } from './apiTransformer'
 import { authApi } from 'api/auth'
 import { oauthApi } from 'api/authYandex'
 import { apiHasError } from 'api/utils'
 import { User } from 'models/user'
 import { transformToUser } from 'services/auth/apiTransformer'
-import { Nullable } from 'types/nullable'
 
 export const redirectToYandex = async (): Promise<void> => {
   // eslint-disable-next-line @typescript-eslint/restrict-template-expressions

@@ -1,3 +1,5 @@
+/// <reference types="../../../types/sound" />
+/// <reference types="../../../types/image" />
 import { createImageAsync, KeysContoller } from '.'
 import AudioPlayer from './AudioPlayer'
 import GameElement from './GameElement'

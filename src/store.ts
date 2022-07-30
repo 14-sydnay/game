@@ -6,6 +6,10 @@ import threadsReducer from './features/threads/threadsSlice'
 import authReducer, { AuthState } from './hooks/auth/authSlice'
 import themeReducer from './hooks/theme/themeSlice'
 
+declare module 'react-redux' {
+  export function useDispatch(): AppDispatch
+}
+
 export const store = configureStore({
   reducer: {
     auth: authReducer,

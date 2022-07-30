@@ -22,12 +22,14 @@ export type Thread = {
   title: string
   created: Date
   authorId: number
+  messageCount: number
+  lastMessage: string
 }
 
 export type Message = {
   id: number
   threadId: number
-  created: Date
+  createdAt: Date
   authorId: number
   replyMessageId?: number
   text: string

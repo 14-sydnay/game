@@ -53,6 +53,8 @@ const messagesSlice = createSlice({
   },
 })
 
-export const selectAllMessages = (state): Message[] => state.messages.messages
+export const selectAllMessages = (state: {
+  messages: { messages: Message[] }
+}): Message[] => state.messages.messages
 
 export default messagesSlice.reducer

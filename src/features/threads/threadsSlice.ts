@@ -30,9 +30,12 @@ const threadsSlice = createSlice({
 
 //export const {} = threadsSlice.actions
 
-export const selectAllThreads = (state) => state.threads.threads
+export const selectAllThreads = (state: { threads: ThreadsState }) =>
+  state.threads.threads
 
-export const selectThreadById = (state, threadId) =>
-  state.threads.threads.find((thread) => thread.id === threadId)
+export const selectThreadById = (
+  state: { threads: ThreadsState },
+  threadId: number
+) => state.threads.threads.find((thread: { id: any }) => thread.id === threadId)
 
 export default threadsSlice.reducer

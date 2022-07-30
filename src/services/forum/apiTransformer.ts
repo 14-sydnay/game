@@ -28,6 +28,6 @@ export const transformToMessage = (data: MessageDto): Message => {
     threadId: data.threadId,
     text: data.text,
     authorId: data.authorId,
-    created: data.createdAt,
+    createdAt: data.createdAt,
   }
 }
