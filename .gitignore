@@ -6,6 +6,7 @@ node_modules/
 .idea/
 .vscode/
 *.log
+postgresdata/
 
 # OS generated files
 .DS_Store

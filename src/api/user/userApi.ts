@@ -7,7 +7,7 @@ import {
   ChangeProfileResponse,
 } from './types'
 
-const apiInstance = createApi('user')
+const apiInstance = createApi(`${process.env.API_ENDPOINT}/user`)
 
 export const userApi = {
   changePassword: (data: ChangePasswordRequest) =>

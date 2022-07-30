@@ -1,1 +1,5 @@
-export { hasError as apiHasError } from './apiHasError'
+export {
+  hasYandexError as apiHasError,
+  hasClientError as apiHasClientError,
+  hasServerError as apiHasServerError,
+} from './apiHasError'
