@@ -4,13 +4,13 @@ services:
     image: postgres:12
     ports:
       - "5432:5432"
-    volumes: 
+    volumes:
       - ./postgresdata:/var/lib/postgresql/data
     restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: game
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     networks:
       - awesome
   pgadmin:
@@ -18,9 +18,9 @@ services:
     image: dpage/pgadmin4:4.18
     restart: always
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: secret
-      PGADMIN_LISTEN_PORT: 80
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      PGADMIN_LISTEN_PORT: ${PGADMIN_LISTEN_PORT}
     ports:
       - "8080:80"
     volumes:
@@ -36,4 +36,3 @@ volumes:
 networks:
     awesome:
         driver: bridge
- 

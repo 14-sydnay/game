@@ -97,6 +97,7 @@
     "daisyui": "2.15.1",
     "date-fns": "2.29.1",
     "dayjs": "1.11.3",
+    "dotenv": "16.0.1",
     "pg": "8.7.3",
     "react": "18.1.0",
     "react-cookie": "4.1.1",
