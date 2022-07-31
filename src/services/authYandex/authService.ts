@@ -1,10 +1,9 @@
 /// <reference types="../../../types/nullable" />
 import { transformToServiceId } from './apiTransformer'
-import { authApi } from 'api/auth'
+import { authApi } from 'api/auth/authApi'
 import { oauthApi } from 'api/authYandex'
 import { apiHasError } from 'api/utils'
 import { User } from 'models/user'
-import { transformToUser } from 'services/auth/apiTransformer'
 
 export const redirectToYandex = async (): Promise<void> => {
   // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
@@ -22,15 +21,6 @@ export const redirectToYandex = async (): Promise<void> => {
   window.location.href = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${serviceId}&redirect_uri=${redirectUri}`
 }
 
-const getCurrentUser = async (): Promise<User> => {
-  const userDto = await authApi.getCurrentUser()
-
-  if (apiHasError(userDto.data)) {
-    throw new Error('User not found')
-  }
-  return transformToUser(userDto.data)
-}
-
 export const signin = async (
   code: string,
   redirectUri: string
@@ -45,7 +35,6 @@ export const signin = async (
     return null
   }
 
-  /*   const user = await getCurrentUser()
-  return user */
+  await authApi.signin()
   return null
 }
