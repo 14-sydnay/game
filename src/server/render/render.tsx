@@ -20,13 +20,13 @@ export const render = async (req: Request, res: Response): Promise<void> => {
   const initAuthState: AuthState = {
     user: {
       id: 0,
-      firstName: 'Иван',
-      secondName: 'Иванов',
-      displayName: 'string',
-      login: 'string',
-      email: 'string',
-      phone: 'string',
-      avatar: 'string',
+      firstName: 'Неавторизованный пользователь',
+      secondName: '',
+      displayName: '',
+      login: '',
+      email: '',
+      phone: '',
+      avatar: '',
     },
     isLoading: false,
   }
