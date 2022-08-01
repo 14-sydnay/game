@@ -5,6 +5,7 @@ import {
   Configuration,
   WebpackPluginInstance,
   Entry,
+  EnvironmentPlugin,
 } from 'webpack'
 
 import cssLoader from './loaders/css'
@@ -53,6 +54,10 @@ const config: Configuration = {
     },
   },
   plugins: [
+    new EnvironmentPlugin({
+      API_ENDPOINT: process.env.API_ENDPOINT,
+      REDIRECT_URL: process.env.REDIRECT_URL,
+    }),
     new MiniCssExtractPlugin({ filename: '[name].css' }),
     // Plugin для HMR
     //new webpack.HotModuleReplacementPlugin(),
