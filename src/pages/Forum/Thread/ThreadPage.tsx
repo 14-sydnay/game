@@ -15,6 +15,7 @@ import {
 } from 'features/messages/messagesSlice'
 import { ThreadInfo } from 'features/threads/ThreadInfo'
 import { Message } from 'src/server/models/thread'
+import { ReplyModal } from 'components/ReplyModal'
 
 export const ThreadPage: React.FC<Props> = () => {
   const { id } = useParams()
@@ -84,7 +85,11 @@ export const ThreadPage: React.FC<Props> = () => {
                   }
                   <div className="flex items-center justify-between">
                     <span>#{message.id}</span>
-                    <button className="btn btn-ghost">Ответить</button>
+                    <ReplyModal
+                      messageText={message.text}
+                      threadId={threadId}
+                      messageId={message.id}
+                    />
                   </div>
                 </div>
               ))}

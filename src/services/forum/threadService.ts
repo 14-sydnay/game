@@ -68,6 +68,7 @@ export const getMessages = async (threadId: number): Promise<Message[]> => {
 
 export const addMessage = async (
   threadId: number,
+  replyMessageId: number | null,
   userId: number,
   text: string,
   authorName: string,
@@ -75,6 +76,7 @@ export const addMessage = async (
 ): Promise<Message> => {
   const response = await threadApi.addMessage({
     threadId,
+    replyMessageId,
     text,
     userId,
     authorName,

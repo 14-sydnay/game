@@ -21,7 +21,10 @@ const schema = yup.object().shape({
   comment: yup.string().min(1),
 })
 
-export const CreateMessageForm: React.FC<Props> = ({ threadId }) => {
+export const CreateMessageForm: React.FC<Props> = ({
+  threadId,
+  replyMessageId,
+}) => {
   const dispatch = useDispatch()
   const { user } = useAuth()
   const {
@@ -38,7 +41,8 @@ export const CreateMessageForm: React.FC<Props> = ({ threadId }) => {
       dispatch(
         addThreadMessage({
           text: data.comment,
-          threadId: threadId,
+          threadId,
+          replyMessageId,
           userId: user.id,
           avatarUrl: user.avatar,
           authorName: user.displayName,
