@@ -1,5 +1,5 @@
+/// <reference types="../../../types/globals" />
 import { User } from 'src/models/user'
-//import { Nullable } from 'types/nullable'
 
 export type AuthType = {
   user: Nullable<User>

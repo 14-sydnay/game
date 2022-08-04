@@ -1,3 +1,4 @@
+/// <reference types="../../../../types/image" />
 import React, { FC } from 'react'
 
 import { Props } from './type'

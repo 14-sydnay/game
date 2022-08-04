@@ -1,7 +1,7 @@
 import { transformToLeaders } from '.'
-import { LeaderData, LeadersParams } from 'models/forum'
 import { forumApi } from 'api/forum'
 import { apiHasError } from 'api/utils'
+import { LeaderData, LeadersParams } from 'models/forum'
 
 export const getLeaders = async (
   teamName: string,

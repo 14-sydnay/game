@@ -1,3 +1,5 @@
+/// <reference types="../../../types/sound" />
+/// <reference types="../../../types/image" />
 import { createImageAsync, KeysContoller } from '.'
 import AudioPlayer from './AudioPlayer'
 import GameElement from './GameElement'
@@ -9,7 +11,8 @@ import Scene from './Scene'
 import SimpleMotionStrategy from './SimpleMotionStrategy'
 import PlayerSkin, { PlayerIdleSpriteSkin, PlayerRunSpriteSkin } from './Skin'
 //import spriteCharacterJumpSrc from 'Assets/images/character/spriteJump.png'
-import bgSoundSrc from 'assets/audios/bg_sound.mp3'
+import birdsSrc from 'assets/audios/birds.mp3'
+import windSrc from 'assets/audios/wind.mp3'
 import smallCloud1Src from 'assets/images/background/clouds/128x128/cloud_1.png'
 import smallCloud2Src from 'assets/images/background/clouds/128x128/cloud_2.png'
 import bigCloud1Src from 'assets/images/background/clouds/256x256/cloud_1.png'
@@ -18,8 +21,14 @@ import hillsSrc from 'assets/images/background/hills.png'
 import skySrc from 'assets/images/background/sky.png'
 import spriteCharacterIdleSrc from 'assets/images/character/spriteIdleBlink.png'
 import spriteCharacterRunSrc from 'assets/images/character/spriteRun.png'
+import bushSrc from 'assets/images/objects/bush.png'
+import chestSrc from 'assets/images/objects/chest.png'
+import flowerSrc from 'assets/images/objects/flower.png'
+import rockSrc from 'assets/images/objects/rock.png'
+import treeSrc from 'assets/images/objects/tree.png'
 import platformSrc from 'assets/images/platform/dirt.png'
 import groundSrc from 'assets/images/platform/grassMid.png'
+import waterSrc from 'assets/images/water/water.png'
 import {
   EndOfGameEvent,
   PlayerStatus,
@@ -34,6 +43,12 @@ export default class Game extends EventBus {
   private _platforms: Platform[] = []
 
   private _groundTiles: MovableGameElement[] = []
+
+  private _water: MovableGameElement[] = []
+
+  private _chest: MovableGameElement[] = []
+
+  private _objects: MovableGameElement[] = []
 
   private _scrollOffset = 0
 
@@ -82,6 +97,9 @@ export default class Game extends EventBus {
     await this.makeBackground()
     await this.makeClouds()
     await this.makeGround()
+    await this.makeWater()
+    await this.makeChest()
+    await this.makeObjects()
     await this.makePlatforms()
     await this.makePlayer(this._keysController)
   }
@@ -194,8 +212,8 @@ export default class Game extends EventBus {
     const motionStrategy = new SimpleMotionStrategy(10, 0)
     const groundTileImg = await createImageAsync(groundSrc)
 
-    for (let i = -3; i < 10; i++) {
-      if (i == 5 || i == 8) continue // создаем колодцы
+    for (let i = -3; i < 20; i++) {
+      if (i == 5 || i == 8 || i == 12 || i == 13 || i == 15 || i == 16) continue // создаем колодцы
 
       this._groundTiles.push(
         new MovableGameElement(
@@ -210,6 +228,130 @@ export default class Game extends EventBus {
     }
   }
 
+  private async makeWater() {
+    const motionStrategy = new SimpleMotionStrategy(10, 0)
+    const waterImg = await createImageAsync(waterSrc)
+
+    for (let i = -3; i < 60; i++) {
+      if (
+        i == 10 ||
+        i == 11 ||
+        i == 16 ||
+        i == 17 ||
+        i == 24 ||
+        i == 25 ||
+        i == 26 ||
+        i == 27 ||
+        i == 30 ||
+        i == 31 ||
+        i == 32 ||
+        i == 33 ||
+        i >= 40
+      ) {
+        this._water.push(
+          new MovableGameElement(
+            {
+              x: waterImg.width * i,
+              y: this._scene.height - waterImg.height,
+            },
+            waterImg,
+            motionStrategy
+          )
+        )
+      }
+    }
+  }
+
+  private async makeChest() {
+    const motionStrategy = new SimpleMotionStrategy(10, 0)
+    const chestImg = await createImageAsync(chestSrc)
+
+    this._chest.push(
+      new MovableGameElement(
+        {
+          x: chestImg.width * 19,
+          y: this._scene.height - chestImg.height * 2,
+        },
+        chestImg,
+        motionStrategy
+      )
+    )
+  }
+
+  private async makeObjects() {
+    const motionStrategy = new SimpleMotionStrategy(10, 0)
+    const treeImg = await createImageAsync(treeSrc)
+    const bushImg = await createImageAsync(bushSrc)
+    const rockImg = await createImageAsync(rockSrc)
+    const flowerImg = await createImageAsync(flowerSrc)
+
+    this._objects.push(
+      new MovableGameElement(
+        {
+          x: treeImg.width * 2,
+          y: this._scene.height - 500,
+        },
+        treeImg,
+        motionStrategy
+      )
+    )
+
+    this._objects.push(
+      new MovableGameElement(
+        {
+          x: bushImg.width * 9,
+          y: this._scene.height - 360,
+        },
+        bushImg,
+        motionStrategy
+      )
+    )
+
+    this._objects.push(
+      new MovableGameElement(
+        {
+          x: rockImg.width * 6,
+          y: this._scene.height - 330,
+        },
+        rockImg,
+        motionStrategy
+      )
+    )
+
+    this._objects.push(
+      new MovableGameElement(
+        {
+          x: flowerImg.width * 11,
+          y: this._scene.height - 330,
+        },
+        flowerImg,
+        motionStrategy
+      )
+    )
+
+    this._objects.push(
+      new MovableGameElement(
+        {
+          x: rockImg.width * 23,
+          y: this._scene.height - 330,
+        },
+        rockImg,
+        motionStrategy
+      )
+    )
+
+    this._objects.push(
+      new MovableGameElement(
+        {
+          x: flowerImg.width * 30,
+          y: this._scene.height - 330,
+        },
+        flowerImg,
+        motionStrategy
+      )
+    )
+  }
+
   private async makePlatforms() {
     const motionStrategy = new SimpleMotionStrategy(this._playerSpeed, 0)
     const platformImg = await createImageAsync(platformSrc)
@@ -217,7 +359,7 @@ export default class Game extends EventBus {
     this._platforms = [
       new MovableGameElement(
         {
-          x: 500,
+          x: 1400,
           y: this._scene.height - 500,
         },
         platformImg,
@@ -225,16 +367,8 @@ export default class Game extends EventBus {
       ),
       new MovableGameElement(
         {
-          x: 900,
-          y: this._scene.height - 800,
-        },
-        platformImg,
-        motionStrategy
-      ),
-      new MovableGameElement(
-        {
-          x: 1300,
-          y: this._scene.height - 700,
+          x: 3300,
+          y: this._scene.height - 600,
         },
         platformImg,
         motionStrategy
@@ -244,10 +378,13 @@ export default class Game extends EventBus {
 
   async start(): Promise<void> {
     await this.init()
-    const player = new AudioPlayer()
-    await player.play(bgSoundSrc)
+    const birdsSound = new AudioPlayer()
+    const windSound = new AudioPlayer()
+    await birdsSound.play(birdsSrc)
+    await windSound.play(windSrc)
     this.on('stop', () => {
-      player.destroy()
+      birdsSound.destroy()
+      windSound.destroy()
     })
     this.animate()
   }
@@ -277,6 +414,18 @@ export default class Game extends EventBus {
 
   private drawGroundTiles() {
     this._groundTiles.forEach((tile) => tile.draw(this._render))
+  }
+
+  private drawWater() {
+    this._water.forEach((water) => water.draw(this._render))
+  }
+
+  private drawChest() {
+    this._chest.forEach((chest) => chest.draw(this._render))
+  }
+
+  private drawObjects() {
+    this._objects.forEach((objects) => objects.draw(this._render))
   }
 
   private drawPlatforms() {
@@ -324,6 +473,30 @@ export default class Game extends EventBus {
     }
   }
 
+  private updateWaterPosition() {
+    if (this._moveRight) {
+      this._water.forEach((water) => water.moveBack())
+    } else if (this._moveLeft) {
+      this._water.forEach((water) => water.moveForward())
+    }
+  }
+
+  private updateChestPosition() {
+    if (this._moveRight) {
+      this._chest.forEach((chest) => chest.moveBack())
+    } else if (this._moveLeft) {
+      this._chest.forEach((chest) => chest.moveForward())
+    }
+  }
+
+  private updateObjectsPosition() {
+    if (this._moveRight) {
+      this._objects.forEach((object) => object.moveBack())
+    } else if (this._moveLeft) {
+      this._objects.forEach((object) => object.moveForward())
+    }
+  }
+
   private updatePlatformsPosition() {
     if (this._moveRight) {
       this._scrollOffset += this._playerSpeed
@@ -366,6 +539,9 @@ export default class Game extends EventBus {
     const requestId = requestAnimationFrame(this.animate)
     this.drawBackground()
     this.drawGroundTiles()
+    this.drawWater()
+    this.drawChest()
+    this.drawObjects()
     this.drawPlatforms()
     this.drawPlayer()
 
@@ -373,13 +549,16 @@ export default class Game extends EventBus {
       this.updatePlatformsPosition()
       this.updateCloudsPosition()
       this.updateGrounTilesPosition()
+      this.updateWaterPosition()
+      this.updateChestPosition()
+      this.updateObjectsPosition()
     }
 
     this.collisionDetectWithPlatforms()
 
     this.collisionDetectWithGround()
 
-    if (this._scrollOffset > 2000) {
+    if (this._scrollOffset > 4400) {
       this.stop('win')
       cancelAnimationFrame(requestId)
     }

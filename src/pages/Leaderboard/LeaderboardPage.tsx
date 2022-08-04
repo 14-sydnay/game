@@ -5,8 +5,8 @@ import { AvatarCell } from './AvatarCell'
 import { Footer } from 'components/Footer'
 import { Navbar } from 'components/Navbar'
 import { Table } from 'components/Table'
-import { forumService } from 'services/forum'
 import { LeaderData } from 'models/forum'
+import { forumService } from 'services/forum'
 
 export const LeaderboardPage: React.FC<{}> = () => {
   const [leaders, setLeaders] = useState<LeaderData[]>([])

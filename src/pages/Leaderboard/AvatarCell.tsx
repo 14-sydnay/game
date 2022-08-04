@@ -1,8 +1,9 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import { Avatar } from 'components/Avatar'
 import React from 'react'
 import { Cell } from 'react-table'
+
+import { Avatar } from 'components/Avatar'
 
 export const AvatarCell: React.FC<any> = ({ value, column, row }: Cell) => {
   const src: string = row.original[column.imgAccessor]

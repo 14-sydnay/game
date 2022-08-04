@@ -1,12 +1,22 @@
 import { configureStore } from '@reduxjs/toolkit'
 
+import authorsReducer from './features/authors/authorsSlice'
+import messagesReducer from './features/messages/messagesSlice'
+import threadsReducer from './features/threads/threadsSlice'
 import authReducer, { AuthState } from './hooks/auth/authSlice'
 import themeReducer from './hooks/theme/themeSlice'
+
+declare module 'react-redux' {
+  export function useDispatch(): AppDispatch
+}
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     theme: themeReducer,
+    threads: threadsReducer,
+    authors: authorsReducer,
+    messages: messagesReducer,
   },
 })
 
@@ -22,6 +32,9 @@ export const createStore = (initialState?: {
     reducer: {
       auth: authReducer,
       theme: themeReducer,
+      threads: threadsReducer,
+      authors: authorsReducer,
+      messages: messagesReducer,
     },
   })
 }

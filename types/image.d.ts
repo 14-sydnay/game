@@ -5,7 +5,3 @@ declare module '*.png' {
 }
 declare module '*.jpeg'
 declare module '*.gif'
-declare module '*.mp3' {
-  const audioSrc: string
-  export default audioSrc
-}

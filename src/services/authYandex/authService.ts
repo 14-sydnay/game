@@ -1,9 +1,9 @@
+/// <reference types="../../../types/nullable" />
 import { transformToServiceId } from './apiTransformer'
+import { authApi } from 'api/auth'
 import { oauthApi } from 'api/authYandex'
 import { apiHasError } from 'api/utils'
 import { User } from 'models/user'
-import { Nullable } from 'types/nullable'
-import { authApi } from 'api/auth'
 import { transformToUser } from 'services/auth/apiTransformer'
 
 export const redirectToYandex = async (): Promise<void> => {
