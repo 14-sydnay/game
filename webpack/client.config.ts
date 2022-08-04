@@ -1,14 +1,12 @@
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import Dotenv from 'dotenv-webpack'
 import path from 'path'
-import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin'
 import {
   Configuration,
   WebpackPluginInstance,
   Entry,
-  EnvironmentPlugin,
 } from 'webpack'
 
-import { IS_DEV, DIST_DIR, SRC_DIR, API_ENDPOINT, REDIRECT_URL } from './env'
 import cssLoader from './loaders/css'
 import fileLoader from './loaders/file'
 import jsLoader from './loaders/js'
@@ -18,17 +16,17 @@ const config: Configuration = {
   target: 'web',
   stats: { errorDetails: true },
   entry: [
-    //IS_DEV && 'react-hot-loader/patch',
+    //process.env.NODE_ENV !== 'production' && 'react-hot-loader/patch',
     // Entry для работы HMR
-    //IS_DEV && 'webpack-hot-middleware/client',
-    //IS_DEV && 'css-hot-loader/hotModuleReplacement',
-    path.join(SRC_DIR, 'client'),
+    //process.env.NODE_ENV !== 'production' && 'webpack-hot-middleware/client',
+    //process.env.NODE_ENV !== 'production' && 'css-hot-loader/hotModuleReplacement',
+    path.join(path.join(__dirname, '../src'), 'client'),
   ].filter(Boolean) as unknown as Entry,
   module: {
     rules: [fileLoader.client, cssLoader.client, jsLoader.client],
   },
   output: {
-    path: path.resolve(DIST_DIR, 'public'),
+    path: path.resolve(path.join(__dirname, '../dist'), 'public'),
     filename: '[name].js',
     publicPath: '/',
   },
@@ -55,9 +53,8 @@ const config: Configuration = {
     },
   },
   plugins: [
-    new EnvironmentPlugin({
-      API_ENDPOINT: API_ENDPOINT,
-      REDIRECT_URL: REDIRECT_URL,
+    new Dotenv({
+      path: '../.env.dev',
     }),
     new MiniCssExtractPlugin({ filename: '[name].css' }),
     // Plugin для HMR
@@ -67,7 +64,7 @@ const config: Configuration = {
   devtool: 'source-map',
 
   performance: {
-    hints: IS_DEV ? false : 'warning',
+    hints: process.env.NODE_ENV !== 'production' ? false : 'warning',
   },
 }
 

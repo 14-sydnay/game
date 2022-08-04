@@ -11,7 +11,7 @@ const config: WebpackConfig = merge(baseConfig, {
     static: {
       directory: path.resolve(__dirname, 'dist'),
     },
-    port: 3000,
+    port: process.env.PORT || 3000,
     hot: true,
     open: false,
     compress: true,

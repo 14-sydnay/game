@@ -3,7 +3,6 @@ import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin'
 import { Configuration } from 'webpack'
 import nodeExternals from 'webpack-node-externals'
 
-import { IS_DEV, DIST_DIR, SRC_DIR } from './env'
 import cssLoader from './loaders/css'
 import fileLoader from './loaders/file'
 import jsLoader from './loaders/js'
@@ -13,14 +12,14 @@ const config: Configuration = {
   name: 'server',
   target: 'node',
   node: { __dirname: false },
-  entry: path.join(SRC_DIR, 'server'),
+  entry: path.join(path.join(__dirname, '../src'), 'server'),
   module: {
     rules: [fileLoader.server, cssLoader.server, jsLoader.server],
   },
   output: {
     filename: 'server.js',
     libraryTarget: 'commonjs2',
-    path: DIST_DIR,
+    path: path.join(__dirname, '../dist'),
     publicPath: '/static/',
   },
   resolve: {
@@ -48,7 +47,7 @@ const config: Configuration = {
   devtool: 'source-map',
 
   performance: {
-    hints: IS_DEV ? false : 'warning',
+    hints: process.env.NODE_ENV !== 'production' ? false : 'warning',
   },
 
   externals: [nodeExternals({ allowlist: [/\.(?!(?:tsx?|json)$).{1,5}$/i] })],
