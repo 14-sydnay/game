@@ -2,7 +2,6 @@ import path from 'path'
 import {
   Configuration as WebpackConfig,
   WebpackPluginInstance,
-  EnvironmentPlugin,
 } from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import CspHtmlWebpackPlugin from 'csp-html-webpack-plugin'
@@ -114,10 +113,6 @@ const config: WebpackConfig = {
     }),
     new ForkTsCheckerWebpackPlugin(),
     new StatoscopeWebpackPlugin(),
-    new EnvironmentPlugin({
-      API_ENDPOINT: 'https://ya-praktikum.tech/api/v2',
-      REDIRECT_URL: 'http://localhost:3000',
-    }),
   ] as WebpackPluginInstance[],
 }
 

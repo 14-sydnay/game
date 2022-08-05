@@ -1,6 +1,9 @@
 import cookieParser from 'cookie-parser'
-import express from 'express'
+// eslint-disable-next-line import/order
 import path from 'path'
+import * as dotenv from 'dotenv'
+dotenv.config({ path: path.resolve(__dirname, '../.env.dev') })
+import express from 'express'
 
 import { dbConnect } from './db/init'
 import { render } from './render/render'
