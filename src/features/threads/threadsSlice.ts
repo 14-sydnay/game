@@ -28,14 +28,14 @@ const threadsSlice = createSlice({
   },
 })
 
-//export const {} = threadsSlice.actions
-
-export const selectAllThreads = (state: { threads: ThreadsState }) =>
-  state.threads.threads
+export const selectAllThreads = (state: {
+  threads: ThreadsState
+}): ThreadInfo[] => state.threads.threads
 
 export const selectThreadById = (
   state: { threads: ThreadsState },
   threadId: number
-) => state.threads.threads.find((thread: { id: any }) => thread.id === threadId)
+): Nullable<ThreadInfo> =>
+  state.threads.threads.find((thread) => thread.id === threadId) || null
 
 export default threadsSlice.reducer

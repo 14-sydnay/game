@@ -7,10 +7,9 @@ import { UserThemeDto } from 'api/userTheme'
 const getUserThemeFromDb = async (
   userId: number
 ): Promise<Nullable<UserTheme>> => {
-  const userTheme = await UserThemeModel.findOne({
+  return await UserThemeModel.findOne({
     where: { userId: userId },
   })
-  return userTheme
 }
 
 export const getUserTheme = async (

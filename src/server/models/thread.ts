@@ -1,36 +1,24 @@
-export type ThreadInfo = {
+export type ForumElement = {
   id: number
-  title: string
   created: Date
   authorId: number
+}
+
+export type Thread = ForumElement & {
+  title: string
+  authorId: number
+}
+
+export type Message = ForumElement & {
+  threadId: number
+  replyMessageId?: number
+  text: string
+}
+export type ThreadInfo = Thread & {
   messageCount: number
   lastMessage: string
 }
 
-export type MessageInfo = {
-  id: number
-  threadId: number
-  created: Date
-  authorId: number
+export type MessageInfo = Message & {
   authorName: string
-  replyMessageId?: number
-  text: string
-}
-
-export type Thread = {
-  id: number
-  title: string
-  created: Date
-  authorId: number
-  messageCount: number
-  lastMessage: string
-}
-
-export type Message = {
-  id: number
-  threadId: number
-  createdAt: Date
-  authorId: number
-  replyMessageId?: number
-  text: string
 }

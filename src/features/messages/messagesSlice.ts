@@ -54,7 +54,15 @@ const messagesSlice = createSlice({
 })
 
 export const selectAllMessages = (state: {
-  messages: { messages: Message[] }
+  messages: MessagesState
 }): Message[] => state.messages.messages
+
+export const selectMessageById = (
+  state: {
+    messages: MessagesState
+  },
+  messageId: number
+): Nullable<Message> =>
+  state.messages.messages.find((m) => m.id == messageId) ?? null
 
 export default messagesSlice.reducer

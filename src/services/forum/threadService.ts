@@ -3,7 +3,7 @@ import { threadApi } from 'api/forum'
 import { apiHasServerError, apiHasClientError } from 'api/utils'
 import { Message, Thread, ThreadInfo } from 'src/server/models/thread'
 
-export const getThreads = async (): Promise<Thread[]> => {
+export const getThreads = async (): Promise<ThreadInfo[]> => {
   const response = (await threadApi.getAll()).data
   if (apiHasClientError(response)) {
     alert(response.message)
