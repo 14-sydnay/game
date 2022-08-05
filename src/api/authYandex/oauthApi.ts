@@ -22,6 +22,7 @@ export const oauthApi = {
     const response = await apiInstance.post<LoginResponseData>('yandex', {
       ...data,
     })
+
     return response.data
   },
 }

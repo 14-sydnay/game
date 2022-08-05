@@ -1,0 +1,1 @@
+export { authPracticumApi } from './authPracticumApi'

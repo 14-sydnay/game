@@ -1,18 +1,29 @@
 import { Request, Response, NextFunction } from 'express'
 
+import { UserTheme } from '../../models/theme'
 import { UserThemeModel } from '../db/init'
 import { UserThemeDto } from 'api/userTheme'
 
-export const getUserTheme = (
+const getUserThemeFromDb = async (
+  userId: number
+): Promise<Nullable<UserTheme>> => {
+  return await UserThemeModel.findOne({
+    where: { userId: userId },
+  })
+}
+
+export const getUserTheme = async (
   req: Request,
   res: Response,
   _: NextFunction
-): void => {
+): Promise<void> => {
   //todo временно тут
-  if (+req.params.id === 0) {
+  const userId = +req.params.id
+  if (userId === 0) {
     res.status(401).json({ message: 'User not authentificate.' })
   } else {
-    res.status(200).json({ themeName: 'dark', userId: req.params.id })
+    const userTheme = await getUserThemeFromDb(userId)
+    res.status(200).json(userTheme)
   }
 }
 export const saveUserTheme = async (
@@ -21,9 +32,7 @@ export const saveUserTheme = async (
   next: NextFunction
 ): Promise<void> => {
   const body = req.body as UserThemeDto
-  const userTheme = await UserThemeModel.findOne({
-    where: { userId: body.userId },
-  })
+  const userTheme = await getUserThemeFromDb(body.userId)
   if (userTheme) {
     await UserThemeModel.update(body, { where: { userId: body.userId } })
   } else {

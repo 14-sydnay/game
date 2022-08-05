@@ -1,11 +1,7 @@
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import Dotenv from 'dotenv-webpack'
 import path from 'path'
-import {
-  Configuration,
-  WebpackPluginInstance,
-  Entry,
-} from 'webpack'
+import { Configuration, WebpackPluginInstance, Entry } from 'webpack'
 
 import cssLoader from './loaders/css'
 import fileLoader from './loaders/file'
@@ -54,7 +50,7 @@ const config: Configuration = {
   },
   plugins: [
     new Dotenv({
-      path: '../.env.dev',
+      path: path.resolve(__dirname, '../.env.dev'),
     }),
     new MiniCssExtractPlugin({ filename: '[name].css' }),
     // Plugin для HMR

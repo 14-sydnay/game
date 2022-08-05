@@ -22,14 +22,6 @@ export const threadModel: ModelAttributes<Model, Thread> = {
     type: DataType.DATE,
     field: 'createdAt',
   },
-  messageCount: {
-    type: DataType.INTEGER,
-    allowNull: false,
-  },
-  lastMessage: {
-    type: DataType.STRING,
-    allowNull: false,
-  },
 }
 
 export const messageModel: ModelAttributes<Model, Message> = {
@@ -47,11 +39,15 @@ export const messageModel: ModelAttributes<Model, Message> = {
     type: DataType.INTEGER,
     allowNull: false,
   },
-  createdAt: {
+  created: {
     type: DataType.DATE,
     field: 'createdAt',
   },
   text: {
     type: DataType.STRING,
+  },
+  replyMessageId: {
+    type: DataType.INTEGER,
+    allowNull: true,
   },
 }

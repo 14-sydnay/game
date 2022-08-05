@@ -1,5 +1,5 @@
 import { RegisterData } from './types'
-import { RegisterRequestData } from 'api/auth/types'
+import { RegisterRequestData } from 'api/authPracticum/types'
 import { UserDto } from 'api/types'
 import { User } from 'src/models/user'
 

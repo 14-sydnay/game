@@ -25,14 +25,18 @@ export const addThreadMessage = createAsyncThunk(
     authorName: string
     avatarUrl: string
     text: string
+    replyMessageId?: number
   }) => {
-    const { threadId, text, userId, authorName, avatarUrl } = { ...payload }
+    const { threadId, replyMessageId, text, userId, authorName, avatarUrl } = {
+      ...payload,
+    }
     const response = await threadService.addMessage(
       threadId,
       userId,
       text,
       authorName,
-      avatarUrl
+      avatarUrl,
+      replyMessageId
     )
     return response
   }
@@ -54,7 +58,15 @@ const messagesSlice = createSlice({
 })
 
 export const selectAllMessages = (state: {
-  messages: { messages: Message[] }
+  messages: MessagesState
 }): Message[] => state.messages.messages
+
+export const selectMessageById = (
+  state: {
+    messages: MessagesState
+  },
+  messageId: number
+): Nullable<Message> =>
+  state.messages.messages.find((m) => m.id == messageId) ?? null
 
 export default messagesSlice.reducer

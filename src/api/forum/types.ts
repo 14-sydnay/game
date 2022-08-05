@@ -18,6 +18,7 @@ export type NewThreadMessageRequest = {
   text: string
   authorName: string
   avatarUrl: string
+  replyMessageId?: number
 }
 export type NewThreadMessageResponse = { data: MessageDto } | ApiError
 
@@ -43,6 +44,7 @@ export type NewThreadMessageDto = {
   authorName: string
   avatarUrl: string
   text: string
+  replyMessageId?: number
 }
 
 export type MessageDto = {
@@ -51,4 +53,5 @@ export type MessageDto = {
   authorId: number
   text: string
   createdAt: Date
+  replyMessageId?: number
 }

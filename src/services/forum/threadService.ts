@@ -3,7 +3,7 @@ import { threadApi } from 'api/forum'
 import { apiHasServerError, apiHasClientError } from 'api/utils'
 import { Message, Thread, ThreadInfo } from 'src/server/models/thread'
 
-export const getThreads = async (): Promise<Thread[]> => {
+export const getThreads = async (): Promise<ThreadInfo[]> => {
   const response = (await threadApi.getAll()).data
   if (apiHasClientError(response)) {
     alert(response.message)
@@ -71,7 +71,8 @@ export const addMessage = async (
   userId: number,
   text: string,
   authorName: string,
-  avatarUrl: string
+  avatarUrl: string,
+  replyMessageId?: number
 ): Promise<Message> => {
   const response = await threadApi.addMessage({
     threadId,
@@ -79,6 +80,7 @@ export const addMessage = async (
     userId,
     authorName,
     avatarUrl,
+    replyMessageId,
   })
   if (apiHasClientError(response)) {
     alert(response.message)

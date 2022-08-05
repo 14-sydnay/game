@@ -79,7 +79,14 @@ export const getThreadMesssages = async (
   const threadId = +req.params.id
   const messages = await MessageModel.findAll({
     where: { threadId: threadId },
-    attributes: ['id', 'threadId', 'text', 'createdAt', 'authorId'],
+    attributes: [
+      'id',
+      'threadId',
+      'text',
+      'createdAt',
+      'authorId',
+      'replyMessageId',
+    ],
   })
   res.status(200).json(messages)
 }
@@ -103,6 +110,7 @@ export const createThreadMessage = async (
       threadId: body.threadId,
       authorId: author.id,
       text: body.text,
+      replyMessageId: body.replyMessageId,
     })
     res.status(200).json(message)
   }
