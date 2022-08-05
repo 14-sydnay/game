@@ -21,20 +21,22 @@ export const addThreadMessage = createAsyncThunk(
   'messages/addMessage',
   async (payload: {
     threadId: number
-    replyMessageId: number | null
     userId: number
     authorName: string
     avatarUrl: string
     text: string
+    replyMessageId?: number
   }) => {
-    const { threadId, replyMessageId, text, userId, authorName, avatarUrl } = { ...payload }
+    const { threadId, replyMessageId, text, userId, authorName, avatarUrl } = {
+      ...payload,
+    }
     const response = await threadService.addMessage(
       threadId,
-      replyMessageId,
       userId,
       text,
       authorName,
-      avatarUrl
+      avatarUrl,
+      replyMessageId
     )
     return response
   }

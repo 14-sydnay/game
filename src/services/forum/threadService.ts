@@ -68,19 +68,19 @@ export const getMessages = async (threadId: number): Promise<Message[]> => {
 
 export const addMessage = async (
   threadId: number,
-  replyMessageId: number | null,
   userId: number,
   text: string,
   authorName: string,
-  avatarUrl: string
+  avatarUrl: string,
+  replyMessageId?: number
 ): Promise<Message> => {
   const response = await threadApi.addMessage({
     threadId,
-    replyMessageId,
     text,
     userId,
     authorName,
     avatarUrl,
+    replyMessageId,
   })
   if (apiHasClientError(response)) {
     alert(response.message)

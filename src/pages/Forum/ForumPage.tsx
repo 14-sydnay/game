@@ -36,7 +36,7 @@ export const ForumPage: React.FC<{}> = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    dispatch(fetchThreads())
+    void dispatch(fetchThreads())
   }, [dispatch])
 
   const {

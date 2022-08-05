@@ -3,18 +3,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 import { Props } from './types'
-import { CreateMessageForm } from 'components/CreateMessageForm'
 import { Footer } from 'components/Footer'
 import { Navbar } from 'components/Navbar'
 import { Message } from 'features/messages'
+import { CreateMessageForm } from 'features/messages/CreateMessageForm'
 import {
   fetchMessages,
   MessagesState,
   selectAllMessages,
 } from 'features/messages/messagesSlice'
 import { ThreadInfo } from 'features/threads/ThreadInfo'
-import { Message } from 'src/server/models/thread'
-import { ReplyModal } from 'components/ReplyModal'
 
 export const ThreadPage: React.FC<Props> = () => {
   const { id } = useParams()
@@ -24,8 +22,8 @@ export const ThreadPage: React.FC<Props> = () => {
   )
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(fetchMessages(threadId))
-  }, [dispatch])
+    void dispatch(fetchMessages(threadId))
+  }, [threadId, dispatch])
 
   return (
     <div className="flex h-screen w-full flex-col items-center">
@@ -39,38 +37,6 @@ export const ThreadPage: React.FC<Props> = () => {
             <div className=" flex flex-col items-center">
               {messages.map((message) => (
                 <Message message={message} key={message.id} />
-                <div
-                  key={message.id}
-                  className="mt-10 w-full rounded-xl border bg-white p-5 shadow-md"
-                >
-                  <div className="flex w-full items-center justify-between border-b pb-3">
-                    <div className="flex items-center space-x-3">
-                      <div className="avatar">
-                        <AuthorAvatar authorId={message.authorId} />
-                      </div>
-                      <AuthorName authorId={message.authorId} />
-                    </div>
-                    <div className="flex items-center space-x-8">
-                      <div className="text-neutral-500">
-                        {dayjs(message.createdAt).format('DD.MM.YYYY HH:mm')}
-                      </div>
-                    </div>
-                  </div>
-                  {
-                    <div className="mt-4 mb-6">
-                      
-                      <p className="text-neutral-600">{message.text}</p>
-                    </div>
-                  }
-                  <div className="flex items-center justify-between">
-                    <span>#{message.id}</span>
-                    <ReplyModal
-                      messageText={message.text}
-                      threadId={threadId}
-                      messageId={message.id}
-                    />
-                  </div>
-                </div>
               ))}
             </div>
             <CreateMessageForm threadId={threadId} />

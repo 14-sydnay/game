@@ -18,6 +18,7 @@ export type NewThreadMessageRequest = {
   text: string
   authorName: string
   avatarUrl: string
+  replyMessageId?: number
 }
 export type NewThreadMessageResponse = { data: MessageDto } | ApiError
 

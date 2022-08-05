@@ -1,9 +1,6 @@
-export type FormValues = {
-  comment: string
-}
-
 export type OwnProps = {
+  messageText: string
   threadId: number
-  replyMessageId?: number
+  replyMessageId: number
 }
 export type Props = OwnProps
