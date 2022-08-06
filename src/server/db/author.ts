@@ -23,3 +23,9 @@ export const authorModel: ModelAttributes<Model, Author> = {
     allowNull: true,
   },
 }
+export const authorIndex = [
+  {
+    unique: true,
+    fields: ['userId'],
+  },
+]

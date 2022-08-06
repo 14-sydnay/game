@@ -1,8 +1,8 @@
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript'
 
-import { userThemeModel } from '../../models/db/theme'
-import { authorModel } from './author'
-import { messageModel, threadModel } from './thread'
+import { authorModel, authorIndex } from './author'
+import { userThemeModel, userThemeIndex } from './theme'
+import { messageModel, threadModel, messageIndex } from './thread'
 
 const sequelizeOptions: SequelizeOptions = {
   host: 'localhost',
@@ -17,11 +17,17 @@ const sequelizeOptions: SequelizeOptions = {
 export const sequelize = new Sequelize(sequelizeOptions)
 
 // Инициализируем модели
-export const UserThemeModel = sequelize.define('userTheme', userThemeModel, {})
+export const UserThemeModel = sequelize.define('userTheme', userThemeModel, {
+  indexes: [...userThemeIndex],
+})
 
 export const ThreadModel = sequelize.define('thread', threadModel, {})
-export const MessageModel = sequelize.define('message', messageModel, {})
-export const AuthorModel = sequelize.define('author', authorModel, {})
+export const MessageModel = sequelize.define('message', messageModel, {
+  indexes: [...messageIndex],
+})
+export const AuthorModel = sequelize.define('author', authorModel, {
+  indexes: [...authorIndex],
+})
 ThreadModel.hasMany(MessageModel, { foreignKey: 'threadId' })
 ThreadModel.belongsTo(AuthorModel, { foreignKey: 'authorId' })
 MessageModel.belongsTo(AuthorModel, { foreignKey: 'authorId' })
