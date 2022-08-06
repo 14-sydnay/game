@@ -1,8 +1,5 @@
 import path from 'path'
-import {
-  Configuration as WebpackConfig,
-  WebpackPluginInstance,
-} from 'webpack'
+import { Configuration as WebpackConfig, WebpackPluginInstance } from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import CspHtmlWebpackPlugin from 'csp-html-webpack-plugin'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'

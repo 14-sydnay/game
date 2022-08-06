@@ -15,7 +15,8 @@
     "build:server": "cross-env TS_NODE_PROJECT=\"./src/server/tsconfig.json\" webpack --config ./webpack/server.config.ts",
     "build:client": "cross-env TS_NODE_PROJECT=\"./src/client/tsconfig.json\" webpack --config ./webpack/client.config.ts",
     "build:all": "npm-run-all -c --print-label build:server build:client",
-    "start:server": "node ./dist/server.js"
+    "start:server": "node ./dist/server.js",
+    "docker:compose": "docker compose --env-file ./.env.dev up -d"
   },
   "devDependencies": {
     "@statoscope/webpack-plugin": "5.20.1",
