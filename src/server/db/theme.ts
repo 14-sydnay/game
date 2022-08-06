@@ -1,7 +1,7 @@
 import { DataType, Model, Table, Column } from 'sequelize-typescript'
 import { ModelAttributes } from 'sequelize/types'
 
-import { UserTheme } from '../theme'
+import { UserTheme } from '../models/theme'
 
 export const userThemeModel: ModelAttributes<Model, UserTheme> = {
   userId: {
@@ -13,3 +13,10 @@ export const userThemeModel: ModelAttributes<Model, UserTheme> = {
     allowNull: false,
   },
 }
+
+export const userThemeIndex = [
+  {
+    unique: true,
+    fields: ['userId'],
+  },
+]

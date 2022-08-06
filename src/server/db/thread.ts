@@ -51,3 +51,9 @@ export const messageModel: ModelAttributes<Model, Message> = {
     allowNull: true,
   },
 }
+export const messageIndex = [
+  {
+    unique: true,
+    fields: ['threadId'],
+  },
+]
