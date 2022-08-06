@@ -2,6 +2,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import Dotenv from 'dotenv-webpack'
 import path from 'path'
 import { Configuration, WebpackPluginInstance, Entry } from 'webpack'
+import CopyWebpackPlugin from 'copy-webpack-plugin'
 
 import cssLoader from './loaders/css'
 import fileLoader from './loaders/file'
@@ -49,6 +50,18 @@ const config: Configuration = {
     },
   },
   plugins: [
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, '../src/assets/images/favicons'),
+          to: path.join(__dirname, '../dist/public'),
+        },
+        {
+          from: path.resolve(__dirname, '../manifest.json'),
+          to: path.join(__dirname, '../dist/public'),
+        },
+      ],
+    }),
     new Dotenv({
       path: path.resolve(__dirname, '../.env.dev'),
     }),

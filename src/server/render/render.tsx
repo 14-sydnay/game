@@ -7,10 +7,11 @@ import { Provider } from 'react-redux'
 import { StaticRouter } from 'react-router-dom/server'
 
 import { App } from '../../client/ssr'
-import { fetchAuthors } from '../../features/authors/authorsSlice'
-import { AuthState } from '../../hooks/auth/authSlice'
+import { fetchAuthors } from 'features/authors/authorsSlice'
+import { fetchMessages } from 'features/messages/messagesSlice'
+import { fetchThreads } from 'features/threads/threadsSlice'
+import { AuthState } from 'hooks/auth/authSlice'
 import { createStore } from 'src/store'
-//import { addUser, removeUser, startLoading, stopLoading } from './authSlice'
 
 export const render = async (req: Request, res: Response): Promise<void> => {
   const indexHTML = fs.readFileSync(
@@ -34,6 +35,14 @@ export const render = async (req: Request, res: Response): Promise<void> => {
 
   await store.dispatch(fetchAuthors()).unwrap()
 
+  const forumRouteRegex = /\/forum\/(\d+)/
+  if (forumRouteRegex.test(req.url)) {
+    const match = req.url.match(/\d+/)
+    const threadId = +match[0]
+    await store.dispatch(fetchMessages(threadId)).unwrap()
+    await store.dispatch(fetchThreads()).unwrap()
+  }
+
   const reactHtml = renderToString(
     <Provider store={store}>
       <StaticRouter location={req.url}>
@@ -47,7 +56,7 @@ export const render = async (req: Request, res: Response): Promise<void> => {
     `<div id="root"></div>`,
     `<div id="root">${reactHtml}</div>
     <script>window.__INITIAL_STATE__=${JSON.stringify(state)}</script>
-    <script src='main.js'></script>`
+    <script src='/main.js'></script>`
   )
   res.send(result)
 }

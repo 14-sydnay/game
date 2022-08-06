@@ -10,8 +10,9 @@ import {
   NewThreadResponse,
   GerThreadMessagesResponse as GetThreadMessagesResponse,
 } from './types'
+import { getUrl } from 'src/client/utils'
 
-const apiInstance = createApi(`/api/v1/threads`)
+const apiInstance = createApi(getUrl(`/api/v1/threads`))
 
 export const threadApi = {
   getAll: (): Promise<AxiosResponse<GetThreadsResponse, unknown>> =>
