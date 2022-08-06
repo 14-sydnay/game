@@ -6,6 +6,7 @@ import { Props } from './types'
 import { AuthorAvatar } from 'features/authors/AuthorAvatar'
 import { AuthorName } from 'features/authors/AuthorName'
 import { ReplyModal } from 'features/messages/ReplyModal'
+import { Reaction } from 'features/messages/Reaction'
 
 export const Message: React.FC<Props> = ({ message }) => {
   return (
@@ -35,7 +36,10 @@ export const Message: React.FC<Props> = ({ message }) => {
         </div>
       }
       <div className="flex items-center justify-between">
-        <span>#{message.id}</span>
+        <div className={'flex items-center gap-x-10'}>
+          <span>#{message.id}</span>
+          <Reaction messageId={message.id} />
+        </div>
         <ReplyModal
           messageText={message.text}
           threadId={message.threadId}
