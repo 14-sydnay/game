@@ -17,13 +17,13 @@ export default {
   clearMocks: true,
 
   // Indicates whether the coverage information should be collected while executing the test
-  collectCoverage: true,
+  // collectCoverage: true,
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   // collectCoverageFrom: undefined,
 
   // The directory where Jest should output its coverage files
-  coverageDirectory: 'coverage',
+  // coverageDirectory: 'coverage',
 
   // An array of regexp pattern strings used to skip coverage collection
   // coveragePathIgnorePatterns: [
@@ -31,7 +31,7 @@ export default {
   // ],
 
   // Indicates which provider should be used to instrument code for coverage
-  coverageProvider: 'v8',
+  // coverageProvider: 'v8',
 
   // A list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [
@@ -88,7 +88,19 @@ export default {
   // ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
-  // moduleNameMapper: {},
+  moduleNameMapper: {
+    '^images/(.*)': ['<rootDir>/src/assets/images/$1'],
+    '^components/(.*)': ['<rootDir>/src/components/$1'],
+    '^assets/(.*)': ['<rootDir>/src/assets/$1'],
+    '^pages/(.*)': ['<rootDir>/src/pages/$1'],
+    '^modules/(.*)': ['<rootDir>/src/modules/$1'],
+    '^models/(.*)': ['<rootDir>/src/models/$1'],
+    '^api/(.*)': ['<rootDir>/src/api/$1'],
+    '^services/(.*)': ['<rootDir>/src/services/$1'],
+    '^hooks/(.*)': ['<rootDir>/src/hooks/$1'],
+    '^utils/(.*)': ['<rootDir>/src/utils/$1'],
+    '^features/(.*)': ['<rootDir>/src/features/$1'],
+  },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],
@@ -142,7 +154,7 @@ export default {
   // snapshotSerializers: [],
 
   // The test environment that will be used for testing
-  // testEnvironment: "jest-environment-node",
+  testEnvironment: 'jsdom',
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},
