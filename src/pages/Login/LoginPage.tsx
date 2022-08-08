@@ -36,11 +36,12 @@ export const LoginPage: React.FC = () => {
       >
         <div className="card-body">
           <div className="form-control">
-            <label className="label">
+            <label className="label" htmlFor="login">
               <span className="label-text">Логин</span>
             </label>
             <input
               type="text"
+              id="login"
               className="input input-bordered"
               value={login}
               onChange={(e) => setLogin(e.currentTarget.value)}
@@ -48,11 +49,12 @@ export const LoginPage: React.FC = () => {
             />
           </div>
           <div className="form-control">
-            <label className="label">
+            <label className="label" htmlFor="password">
               <span className="label-text">Пароль</span>
             </label>
             <input
               type="password"
+              id="password"
               className="input input-bordered"
               value={password}
               onChange={(e) => setPassword(e.currentTarget.value)}
