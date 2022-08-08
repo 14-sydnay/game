@@ -8,7 +8,11 @@ import {
   NewThreadMessageResponse,
   NewThreadRequest,
   NewThreadResponse,
-  GerThreadMessagesResponse as GetThreadMessagesResponse,
+  GetThreadMessagesResponse as GetThreadMessagesResponse,
+  AddMessageReactionResponse,
+  AddMessageReactionRequest,
+  RemoveMessageReactionRequest,
+  RemoveMessageReactionResponse,
 } from './types'
 import { getUrl } from 'src/client/utils'
 
@@ -36,4 +40,20 @@ export const threadApi = {
       `/${data.threadId}/messages`,
       data
     ),
+
+  addMessageReaction: (
+    data: AddMessageReactionRequest
+  ): Promise<AddMessageReactionResponse> =>
+    apiInstance.post<AddMessageReactionRequest, AddMessageReactionResponse>(
+      `/${data.threadId}/messages/${data.messageId}/add`,
+      data
+    ),
+
+  removeMessageReaction: (
+    data: RemoveMessageReactionRequest
+  ): Promise<RemoveMessageReactionResponse> =>
+    apiInstance.post<
+      RemoveMessageReactionRequest,
+      RemoveMessageReactionResponse
+    >(`/${data.threadId}/messages/${data.messageId}/remove`, data),
 }

@@ -1,8 +1,14 @@
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript'
 
 import { authorModel, authorIndex } from './author'
+import {
+  messageModel,
+  messageIndex,
+  messageReactionModel,
+  messageReactionIndex,
+} from './message'
 import { userThemeModel, userThemeIndex } from './theme'
-import { messageModel, threadModel, messageIndex } from './thread'
+import { threadModel } from './thread'
 
 const sequelizeOptions: SequelizeOptions = {
   host: 'localhost',
@@ -25,12 +31,24 @@ export const ThreadModel = sequelize.define('thread', threadModel, {})
 export const MessageModel = sequelize.define('message', messageModel, {
   indexes: [...messageIndex],
 })
+export const MessageReactionModel = sequelize.define(
+  'messageReaction',
+  messageReactionModel,
+  {
+    indexes: [...messageReactionIndex],
+  }
+)
 export const AuthorModel = sequelize.define('author', authorModel, {
   indexes: [...authorIndex],
 })
 ThreadModel.hasMany(MessageModel, { foreignKey: 'threadId' })
 ThreadModel.belongsTo(AuthorModel, { foreignKey: 'authorId' })
 MessageModel.belongsTo(AuthorModel, { foreignKey: 'authorId' })
+MessageModel.hasMany(MessageReactionModel, {
+  as: 'reactions',
+  foreignKey: 'messageId',
+})
+MessageReactionModel.belongsTo(MessageModel, { foreignKey: 'messageId' })
 
 export async function dbConnect(): Promise<void> {
   try {

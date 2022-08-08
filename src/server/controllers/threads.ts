@@ -1,9 +1,19 @@
 import { Request, Response, NextFunction } from 'express'
 import { Sequelize } from 'sequelize-typescript'
 
-import { NewThreadDto, NewThreadMessageDto } from '../../api/forum/types'
-import { AuthorModel, MessageModel, ThreadModel } from '../db/init'
+import {
+  AddMessageReactionDto,
+  NewThreadDto,
+  NewThreadMessageDto,
+} from '../../api/forum/types'
+import {
+  AuthorModel,
+  MessageModel,
+  MessageReactionModel,
+  ThreadModel,
+} from '../db/init'
 import { Author } from '../models/author'
+import { Message } from '../models/thread'
 
 const createAuthorIfNotExist = async (
   userId: number,
@@ -20,6 +30,18 @@ const createAuthorIfNotExist = async (
   }
 
   return { id: author.id as number, userId, name, avatarUrl }
+}
+
+const getMessageFromDb = async (messageId: number): Promise<Message> => {
+  const message = await MessageModel.findOne({
+    where: { id: messageId },
+    include: {
+      model: MessageReactionModel,
+      as: 'reactions',
+      attributes: ['id', 'userId', 'createdAt', 'messageId'],
+    },
+  })
+  return message as unknown as Message
 }
 export const getThreads = async (
   req: Request,
@@ -87,6 +109,12 @@ export const getThreadMesssages = async (
       'authorId',
       'replyMessageId',
     ],
+
+    include: {
+      model: MessageReactionModel,
+      as: 'reactions',
+      attributes: ['id', 'userId', 'createdAt', 'messageId'],
+    },
   })
   res.status(200).json(messages)
 }
@@ -112,6 +140,74 @@ export const createThreadMessage = async (
       text: body.text,
       replyMessageId: body.replyMessageId,
     })
+    res.status(200).json(message)
+  }
+}
+
+export const addMessageReaction = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  const body = req.body as AddMessageReactionDto
+  /*   let message = await MessageModel.findOne({
+    where: { id: body.messageId },
+    include: {
+      model: MessageReactionModel,
+      as: 'reactions',
+      attributes: ['id', 'userId', 'createAt', 'messageId'],
+    },
+  }) */
+
+  let message = await getMessageFromDb(body.messageId)
+  if (!message) {
+    res.status(404).json({ message: 'Message not found.' })
+  } else {
+    await MessageReactionModel.create({
+      ...body,
+    })
+
+    /* message = await MessageModel.findOne({
+      where: { id: body.messageId },
+      include: {
+        model: MessageReactionModel,
+        as: 'reactions',
+        attributes: ['id', 'userId', 'createAt', 'messageId'],
+      },
+    }) */
+
+    message = await getMessageFromDb(body.messageId)
+    res.status(200).json(message)
+  }
+}
+
+export const removeMessageReaction = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  const body = req.body as AddMessageReactionDto
+  /* let message = await MessageModel.findOne({ where: { id: body.messageId } })
+  if (!message) {
+    res.status(404).json({ message: 'Message not found.' })
+  } else {
+    await MessageReactionModel.destroy({
+      where: { messageId: body.messageId, userId: body.userId },
+    })
+
+    message = await MessageModel.findOne({ where: { id: body.messageId } })
+    res.status(200).json(message)
+  } */
+
+  let message = await getMessageFromDb(body.messageId)
+  if (!message) {
+    res.status(404).json({ message: 'Message not found.' })
+  } else {
+    await MessageReactionModel.destroy({
+      where: { messageId: body.messageId, userId: body.userId },
+    })
+
+    message = await getMessageFromDb(body.messageId)
     res.status(200).json(message)
   }
 }

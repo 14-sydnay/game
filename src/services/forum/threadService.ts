@@ -90,3 +90,41 @@ export const addMessage = async (
   }
   return transformToMessage(response.data)
 }
+
+export const addMessageReaction = async (
+  threadId: number,
+  messageId: number,
+  userId: number
+): Promise<Message> => {
+  const response = await threadApi.addMessageReaction({
+    threadId,
+    messageId,
+    userId,
+  })
+  if (apiHasClientError(response)) {
+    alert(response.message)
+  }
+  if (apiHasServerError(response)) {
+    throw new Error(response.message)
+  }
+  return transformToMessage(response.data)
+}
+
+export const removeMessageReaction = async (
+  threadId: number,
+  messageId: number,
+  userId: number
+): Promise<Message> => {
+  const response = await threadApi.removeMessageReaction({
+    threadId,
+    messageId,
+    userId,
+  })
+  if (apiHasClientError(response)) {
+    alert(response.message)
+  }
+  if (apiHasServerError(response)) {
+    throw new Error(response.message)
+  }
+  return transformToMessage(response.data)
+}
