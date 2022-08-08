@@ -5,8 +5,8 @@ import { ReplyMessage } from '../ReplyMessage'
 import { Props } from './types'
 import { AuthorAvatar } from 'features/authors/AuthorAvatar'
 import { AuthorName } from 'features/authors/AuthorName'
-import { ReplyModal } from 'features/messages/ReplyModal'
 import { Reaction } from 'features/messages/Reaction'
+import { ReplyModal } from 'features/messages/ReplyModal'
 
 export const Message: React.FC<Props> = ({ message }) => {
   return (
