@@ -24,7 +24,7 @@ const config: Configuration = {
   },
   output: {
     path: path.resolve(path.join(__dirname, '../dist'), 'public'),
-    filename: '[name].js',
+    filename: '[name].[contenthash].js',
     publicPath: '/',
   },
   resolve: {

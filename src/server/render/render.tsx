@@ -18,6 +18,20 @@ export const render = async (req: Request, res: Response): Promise<void> => {
     path.resolve(__dirname, '../src/index.html'),
     { encoding: 'utf8' }
   )
+  const dirPath = path.resolve(__dirname, './public')
+
+  const files = fs.readdirSync(dirPath)
+  let mainJsFileName = ''
+  for (let i = 0; i < files.length; i++) {
+    const filename = path.join(dirPath, files[i])
+    const stat = fs.lstatSync(filename)
+
+    if (!stat.isDirectory() && filename.match(/main\..+\.js/g)) {
+      mainJsFileName = path.basename(filename)
+      console.log('FILE', mainJsFileName)
+      break
+    }
+  }
   const initAuthState: AuthState = {
     user: {
       id: 0,
@@ -56,7 +70,7 @@ export const render = async (req: Request, res: Response): Promise<void> => {
     `<div id="root"></div>`,
     `<div id="root">${reactHtml}</div>
     <script>window.__INITIAL_STATE__=${JSON.stringify(state)}</script>
-    <script src='/main.js'></script>`
+    <script src='/${mainJsFileName}'></script>`
   )
   res.send(result)
 }
