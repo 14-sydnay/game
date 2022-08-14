@@ -11,7 +11,7 @@ import { userThemeModel, userThemeIndex } from './theme'
 import { threadModel } from './thread'
 
 const sequelizeOptions: SequelizeOptions = {
-  host: 'localhost',
+  host: 'postgres', //process.env.POSTGRES_HOST,
   port: 5432,
   username: 'postgres',
   password: 'password',
@@ -56,6 +56,8 @@ export async function dbConnect(): Promise<void> {
     await sequelize.sync() // Синхронизация базы данных
     console.log('Connection has been established successfully.')
   } catch (error) {
+    console.log('OPTIONS', sequelizeOptions)
+
     console.error('Unable to connect to the database:', error)
   }
 }

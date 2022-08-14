@@ -1,5 +1,17 @@
 version: "3"
 services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    #volumes:
+    #  - ./dist:/app/dist
+    depends_on:
+      - postgres
+    networks:
+      - awesome
   postgres:
     image: postgres:12
     ports:

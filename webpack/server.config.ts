@@ -8,7 +8,7 @@ import fileLoader from './loaders/file'
 import jsLoader from './loaders/js'
 
 const config: Configuration = {
-  mode: 'development',
+  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   name: 'server',
   target: 'node',
   node: { __dirname: false },

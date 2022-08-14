@@ -28,7 +28,7 @@
         "services/*": ["../../src/services/*"],
         "hooks/*": ["../../src/hooks/*"],
         "utils/*": ["../../src/utils/*"],
-        "features/*": ["../../src/features/*"]
+        "features/*": ["../../src/features/*"],        
       },
       "experimentalDecorators":true,
       "emitDecoratorMetadata": true

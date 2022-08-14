@@ -9,7 +9,7 @@ import fileLoader from './loaders/file'
 import jsLoader from './loaders/js'
 
 const config: Configuration = {
-  mode: 'development',
+  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   target: 'web',
   stats: { errorDetails: true },
   entry: [
