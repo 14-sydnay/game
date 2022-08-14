@@ -11,7 +11,7 @@ import { userThemeModel, userThemeIndex } from './theme'
 import { threadModel } from './thread'
 
 const sequelizeOptions: SequelizeOptions = {
-  host: 'postgres', //process.env.POSTGRES_HOST,
+  host: process.env.POSTGRES_HOST,
   port: 5432,
   username: 'postgres',
   password: 'password',

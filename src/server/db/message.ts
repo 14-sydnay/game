@@ -31,7 +31,7 @@ export const messageModel: ModelAttributes<Model> = {
 
 export const messageIndex = [
   {
-    unique: true,
+    unique: false,
     fields: ['threadId'],
   },
 ]
