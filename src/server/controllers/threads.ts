@@ -150,14 +150,6 @@ export const addMessageReaction = async (
   next: NextFunction
 ): Promise<void> => {
   const body = req.body as AddMessageReactionDto
-  /*   let message = await MessageModel.findOne({
-    where: { id: body.messageId },
-    include: {
-      model: MessageReactionModel,
-      as: 'reactions',
-      attributes: ['id', 'userId', 'createAt', 'messageId'],
-    },
-  }) */
 
   let message = await getMessageFromDb(body.messageId)
   if (!message) {
@@ -166,15 +158,6 @@ export const addMessageReaction = async (
     await MessageReactionModel.create({
       ...body,
     })
-
-    /* message = await MessageModel.findOne({
-      where: { id: body.messageId },
-      include: {
-        model: MessageReactionModel,
-        as: 'reactions',
-        attributes: ['id', 'userId', 'createAt', 'messageId'],
-      },
-    }) */
 
     message = await getMessageFromDb(body.messageId)
     res.status(200).json(message)
@@ -187,17 +170,6 @@ export const removeMessageReaction = async (
   next: NextFunction
 ): Promise<void> => {
   const body = req.body as AddMessageReactionDto
-  /* let message = await MessageModel.findOne({ where: { id: body.messageId } })
-  if (!message) {
-    res.status(404).json({ message: 'Message not found.' })
-  } else {
-    await MessageReactionModel.destroy({
-      where: { messageId: body.messageId, userId: body.userId },
-    })
-
-    message = await MessageModel.findOne({ where: { id: body.messageId } })
-    res.status(200).json(message)
-  } */
 
   let message = await getMessageFromDb(body.messageId)
   if (!message) {

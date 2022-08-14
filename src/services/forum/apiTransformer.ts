@@ -40,6 +40,8 @@ export const transformToMessage = (data: MessageDto): Message => {
     authorId: data.authorId,
     created: data.createdAt,
     replyMessageId: data.replyMessageId,
-    reactions: data.reactions.map(transformToMessageReaction),
+    reactions: data.reactions
+      ? data.reactions.map(transformToMessageReaction)
+      : [],
   }
 }
