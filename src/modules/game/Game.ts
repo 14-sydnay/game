@@ -396,7 +396,7 @@ export default class Game extends EventBus {
       audioElement.remove()
     })
     this._handleEndOfGame({ playerStatus })
-    this.emit('stop')
+    this.emit('stop', playerStatus)
     //await this.restart()
   }
 

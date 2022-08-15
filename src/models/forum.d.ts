@@ -11,3 +11,7 @@ export type LeadersParams = {
   cursor: number
   limit: number
 }
+export type NewLeaderParams = {
+  ratingFieldName: string
+  teamName: string
+}
