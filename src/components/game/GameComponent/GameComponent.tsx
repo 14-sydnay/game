@@ -30,11 +30,13 @@ export const GameComponent: Props = ({ onEndOfGame: onEndOfGame }) => {
       const scene = new Scene(canvasRef.current.width, canvasRef.current.height)
       const ctx = canvasRef.current.getContext('2d')!
       const game = new Game(scene, ctx, keyController, onEndOfGame)
-      game.start()
+      void game.start()
     }
     return () => {
       keyController.destroy()
     }
   }, [canvasRef, onEndOfGame])
-  return <canvas ref={canvasRef} width="1920" height="1080"></canvas>
+  const width = window.innerWidth
+  const height = window.innerHeight
+  return <canvas ref={canvasRef} width={width} height={height}></canvas>
 }
