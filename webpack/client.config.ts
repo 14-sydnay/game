@@ -63,7 +63,10 @@ const config: Configuration = {
       ],
     }),
     new Dotenv({
-      path: path.resolve(__dirname, '../.env.dev'),
+      path: path.resolve(
+        __dirname,
+        process.env.NODE_ENV === 'production' ? '../.env.prod' : '../.env.dev'
+      ),
     }),
     new MiniCssExtractPlugin({ filename: '[name].css' }),
     // Plugin для HMR
