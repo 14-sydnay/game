@@ -10,6 +10,7 @@ services:
       POSTGRES_HOST: ${POSTGRES_HOST}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      API_ENDPOINT: ${API_ENDPOINT}
     #volumes:
     #  - ./dist:/app/dist
     depends_on:
