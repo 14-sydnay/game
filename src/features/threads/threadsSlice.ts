@@ -17,14 +17,41 @@ export const fetchThreads = createAsyncThunk(
   }
 )
 
+export const addThread = createAsyncThunk(
+  'threads/addThread',
+  async (payload: {
+    userId: number
+    authorName: string
+    avatarUrl: string
+    title: string
+  }) => {
+    const { userId, authorName, avatarUrl, title } = {
+      ...payload,
+    }
+
+    const newThread = await threadService.createThread(
+      userId,
+      authorName,
+      avatarUrl,
+      title
+    )
+
+    return newThread
+  }
+)
+
 const threadsSlice = createSlice({
   name: 'threads',
   initialState,
   reducers: {},
   extraReducers(builder) {
-    builder.addCase(fetchThreads.fulfilled, (state, action) => {
-      state.threads = action.payload
-    })
+    builder
+      .addCase(fetchThreads.fulfilled, (state, action) => {
+        state.threads = action.payload
+      })
+      .addCase(addThread.fulfilled, (state, action) => {
+        state.threads.push(action.payload)
+      })
   },
 })
 

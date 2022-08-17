@@ -11,7 +11,11 @@ import { FormValues } from './type'
 import { Footer } from 'components/Footer'
 import { Navbar } from 'components/Navbar'
 import { Table } from 'components/Table'
-import { selectAllThreads, fetchThreads } from 'features/threads/threadsSlice'
+import {
+  selectAllThreads,
+  fetchThreads,
+  addThread,
+} from 'features/threads/threadsSlice'
 import { useAuth } from 'hooks/auth'
 import { threadService } from 'services/forum'
 
@@ -32,7 +36,7 @@ export const ForumPage: React.FC<{}> = () => {
   const dispatch = useDispatch()
   const threads = useSelector(selectAllThreads)
 
-  const auth = useAuth()
+  const { user } = useAuth()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -48,14 +52,16 @@ export const ForumPage: React.FC<{}> = () => {
   })
 
   const onSubmit: SubmitHandler<FormValues> = (threadData) => {
-    if (auth.user)
-      void threadService
-        .createThread(
-          auth.user?.id,
-          auth.user.displayName,
-          auth.user.avatar,
-          threadData.title
-        )
+    if (user)
+      void dispatch(
+        addThread({
+          userId: user.id,
+          authorName: user.displayName,
+          avatarUrl: user.avatar,
+          title: threadData.title,
+        })
+      )
+        .unwrap()
         .then((thread) => navigate(`/forum/${thread.id}`))
   }
 
