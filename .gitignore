@@ -1,6 +1,6 @@
 
 .cache/
-.env
+.env.*
 dist/
 !dist/index.html
 node_modules/

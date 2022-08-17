@@ -13,9 +13,9 @@ import { threadModel } from './thread'
 const sequelizeOptions: SequelizeOptions = {
   host: process.env.POSTGRES_HOST,
   port: 5432,
-  username: 'postgres',
-  password: 'password',
-  database: 'game',
+  username: process.env.POSTGRES_USER,
+  password: process.env.POSTGRES_PASSWORD,
+  database: process.env.POSTGRES_DB,
   dialect: 'postgres',
 }
 
